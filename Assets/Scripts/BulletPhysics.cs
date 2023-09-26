@@ -7,8 +7,6 @@ public class BulletPhysics : MonoBehaviour
     public float bulletDespawnTime = 10f;
     private float _bulletDespawnTimer;
 
-    private Rigidbody _playerRigidbody;
-    private PlayerMovement _playerMovement;
     private Rigidbody _bulletRigidbody;
     public Health _healthScript;
     
@@ -17,8 +15,6 @@ public class BulletPhysics : MonoBehaviour
     void Start()
     {
         _bulletDespawnTimer = bulletDespawnTime;
-        _playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-        _playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         _bulletRigidbody = GetComponent<Rigidbody>();
         _healthScript = GameObject.FindObjectOfType<Health>();
     }
@@ -47,7 +43,11 @@ public class BulletPhysics : MonoBehaviour
             Destroy(gameObject);
             // _healthScript.health -= 0.2f;
 
-            _playerMovement.takeDamage();
+            PlayerController pc = collision.gameObject.GetComponentInChildren<PlayerController>();
+            if (pc != null)
+            {
+                pc.takeDamage();
+            }
         }
     }
 }
