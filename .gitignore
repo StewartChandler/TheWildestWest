@@ -2,6 +2,8 @@ Library
 Logs
 obj
 UserSettings
+Temp
+UpgradeLog.htm
 
 # visual studio files
 .vs
