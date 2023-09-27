@@ -2,9 +2,14 @@ Library
 Logs
 obj
 UserSettings
+Temp
+UpgradeLog.htm
 
 # visual studio files
 .vs
 .vsconfig
 *.csproj
 *.sln
+
+# vscode
+.vscode
