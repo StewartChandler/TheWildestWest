@@ -8,7 +8,6 @@ public class BulletPhysics : MonoBehaviour
     private float _bulletDespawnTimer;
 
     private Rigidbody _bulletRigidbody;
-    public Health _healthScript;
     
 
     // Start is called before the first frame update
@@ -16,7 +15,6 @@ public class BulletPhysics : MonoBehaviour
     {
         _bulletDespawnTimer = bulletDespawnTime;
         _bulletRigidbody = GetComponent<Rigidbody>();
-        _healthScript = GameObject.FindObjectOfType<Health>();
     }
 
     // Update is called once per frame

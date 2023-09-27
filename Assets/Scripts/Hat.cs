@@ -69,7 +69,7 @@ public class Hat : MonoBehaviour
                 {
                     timeStill += Time.fixedDeltaTime;
 
-                    if (timeStill > 1.0f)
+                    if (timeStill > 0.1f)
                     {
                         pos = transform.localPosition;
                         scale = transform.localScale;
