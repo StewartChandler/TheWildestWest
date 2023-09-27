@@ -7,6 +7,9 @@ public class CameraMovement : MonoBehaviour
     private Vector3 Offset = new Vector3(0, 10, -15);
     public GameObject player;
     private GameObject[] players;
+    public float smoothSpeed = 5f; // Adjust this value to control the smoothness
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +25,9 @@ public class CameraMovement : MonoBehaviour
         Vector3 targetPosition = CalculateCameraTargetPosition();
         targetPosition += Offset;
 
-        gameObject.transform.position = targetPosition;
-
+        // Use Lerp to smoothly interpolate the camera's position
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+        transform.position = smoothedPosition;
     }
 
     Vector3 CalculateCameraTargetPosition()

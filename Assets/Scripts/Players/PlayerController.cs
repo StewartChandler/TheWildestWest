@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float pickupRange = 5f;
     private Transform pickedObject;
     private Rigidbody pickedRigidbody;
-    private Vector3 pickUpOffset = new Vector3(0.0f, 2f, 0.0f);
+    private Vector3 pickUpOffset = new Vector3(1.0f, 2f, 0.0f);
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
@@ -45,19 +45,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.fixedDeltaTime * playerSpeed);
 
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+        controller.Move(playerVelocity * Time.fixedDeltaTime);
 
         // Moving the object around with the player if it's picked up
         if (pickedObject != null)
@@ -66,12 +65,13 @@ public class PlayerController : MonoBehaviour
             Vector3 desiredPosition = transform.position + transform.forward * pickUpOffset.z + transform.right * pickUpOffset.x + transform.up * pickUpOffset.y;
 
             // Lerp the object's position to the desired position for smooth movement.
-            pickedObject.position = Vector3.Lerp(pickedObject.position, desiredPosition, Time.deltaTime * 10f);
+            pickedObject.position = Vector3.Lerp(pickedObject.position, desiredPosition, Time.fixedDeltaTime * 10f);
 
             // Match the rotation of the picked-up object to the player's rotation.
             pickedObject.rotation = transform.rotation;
         }
     }
+
     void PickUpClosestObject()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, pickupRange);
@@ -117,7 +117,8 @@ public class PlayerController : MonoBehaviour
         if (hatStack.getNumHats() > 0)
         {
             hatStack.popHat();
-        } else
+        }
+        else
         {
             // TODO: u ded
         }
