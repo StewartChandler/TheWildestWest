@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
+    private HatStack hatStack;
     private Vector3 playerVelocity;
     private float playerSpeed = 6.5f;
     private float throwingSpeed = 30f;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        hatStack = gameObject.GetComponentInChildren<HatStack>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -107,6 +109,17 @@ public class PlayerController : MonoBehaviour
             pickedRigidbody.isKinematic = false;
             pickedRigidbody.velocity = (transform.forward * throwingSpeed); // Adjust the throw force as needed.
             pickedObject = null;
+        }
+    }
+
+    public void takeDamage()
+    {
+        if (hatStack.getNumHats() > 0)
+        {
+            hatStack.popHat();
+        } else
+        {
+            // TODO: u ded
         }
     }
 }
