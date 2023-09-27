@@ -33,6 +33,13 @@ public class Hat : MonoBehaviour
 
         colliders = GetComponentsInChildren<Collider>();
         renderers = GetComponentsInChildren<Renderer>();
+
+        state = State.Atop;
+        foreach (Collider c in colliders)
+        {
+            c.isTrigger = true;
+            c.enabled = false;
+        }
     }
 
     public void launch()

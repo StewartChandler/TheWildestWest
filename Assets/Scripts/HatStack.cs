@@ -24,20 +24,14 @@ public class HatStack : MonoBehaviour
 
     private void addHat()
     {
-        GameObject newHat = Instantiate(hatPrefab, transform);
-        newHat.transform.position += new Vector3(0, 0.5f * hats.Count, 0);
-        newHat.transform.rotation = Quaternion.Euler(
-            Random.Range(-15.0f, 15.0f),
-            Random.Range(-15.0f, 15.0f),
-            Random.Range(-15.0f, 15.0f)
-        );
-        hats.Push(newHat);
+        GameObject newHat = Instantiate(hatPrefab);
+        pushHat(newHat);
     }
 
     public void pushHat(GameObject hat)
     {
         hat.transform.SetParent(transform, false);
-        hat.transform.position += new Vector3(0, 0.7f * hats.Count, 0);
+        hat.transform.position += new Vector3(0, 0.4f * hats.Count, 0);
         hat.transform.rotation = Quaternion.Euler(
             Random.Range(-15.0f, 15.0f),
             Random.Range(-15.0f, 15.0f),
