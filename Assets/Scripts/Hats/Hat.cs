@@ -62,7 +62,7 @@ public class Hat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -117,7 +117,8 @@ public class Hat : MonoBehaviour
                 transform.localScale = scale * scalingFactor;
                 transform.localPosition = pos + new Vector3(0.0f, heightFactor * height, 0.0f);
 
-                if (timeCollectable > 3.0f) {
+                if (timeCollectable > 3.0f)
+                {
                     if (timeCollectable > 5.0f) Destroy(gameObject);
 
                     foreach (Renderer renderer in renderers)
