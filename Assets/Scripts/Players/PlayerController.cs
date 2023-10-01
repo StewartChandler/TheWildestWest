@@ -117,10 +117,25 @@ public class PlayerController : MonoBehaviour
         if (hatStack.getNumHats() > 0)
         {
             hatStack.popHat();
+            if (pickedObject != null)
+            {
+                pickedRigidbody.isKinematic = false;
+                pickedObject = null;
+            }
         }
         else
         {
             // TODO: u ded
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject collisionObject = collision.gameObject;
+        Rigidbody collisionRigidbody = collisionObject.GetComponent<Rigidbody>();
+        if (collision.gameObject.tag == "Throwable" && collisionRigidbody.velocity.magnitude >= throwingSpeed / 3)
+        {
+            takeDamage();
         }
     }
 }

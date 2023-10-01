@@ -82,6 +82,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8086853
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5626398
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.z
+      value: 1.8409499
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0031433105
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0058388114
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.028743923
+      objectReference: {fileID: 0}
     - target: {fileID: 5152921064110987516, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -136,7 +160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7441707541863260960, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
       propertyPath: m_Name
-      value: Throwable Variant
+      value: Throwable Barrel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

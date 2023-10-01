@@ -8,6 +8,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.x
+      value: 5.1893377
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7143427
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Size.z
+      value: 5.0011587
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0035262108
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.y
+      value: -0.017785206
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244619848814959063, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
+      propertyPath: m_Center.z
+      value: -0.024079084
+      objectReference: {fileID: 0}
     - target: {fileID: 5152921064110987516, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -62,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7441707541863260960, guid: 80c79315ab22c4e07b1a7ee66880477c, type: 3}
       propertyPath: m_Name
-      value: Throwable (2) Variant
+      value: Throwable Candle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
