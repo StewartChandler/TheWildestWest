@@ -6,8 +6,9 @@ public class EnemyAI : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float bulletSpeed = 3f;
-
-    private Transform _playerTransform;
+    private string playerTag = "Player";
+    public Transform[] _playerTransforms;
+    public GameObject[] _playerObjects;
 
     private float _timeInterval = 3f;
     private float _timer = 0f;
@@ -15,7 +16,12 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerObjects = GameObject.FindGameObjectsWithTag(playerTag);
+        _playerTransforms = new Transform[_playerObjects.Length];
+        for (int i = 0; i < _playerObjects.Length; i++)
+        {
+            _playerTransforms[i] = _playerObjects[i].transform;
+        }
         _timer = Random.Range(0f, 3f);
     }
 
@@ -27,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         if (_timer >= _timeInterval)
         {
             ShootAtPlayer();
-            _timer = 0f; 
+            _timer = 0f;
         }
 
     }
@@ -35,7 +41,8 @@ public class EnemyAI : MonoBehaviour
 
     void ShootAtPlayer()
     {
-        Vector3 playerPosition = _playerTransform.position;
+        int randomIndex = Random.Range(0, _playerTransforms.Length);
+        Vector3 playerPosition = _playerTransforms[randomIndex].position;
         Vector3 enemyPosition = transform.position;
 
         Vector3 directionToPlayer = (playerPosition - enemyPosition).normalized;
@@ -44,7 +51,7 @@ public class EnemyAI : MonoBehaviour
 
         Quaternion bulletRotation = Quaternion.Euler(90f, angleToPlayer, 0f);
 
-        GameObject bullet = Instantiate(bulletPrefab, enemyPosition + directionToPlayer , bulletRotation);
+        GameObject bullet = Instantiate(bulletPrefab, enemyPosition + directionToPlayer, bulletRotation);
 
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
 
