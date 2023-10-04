@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fe0d31bd11c624e87a2009432d8a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToThrow: {fileID: 1442118378938094620, guid: 3fec57db458cd284a9593e41b4881b89, type: 3}
+  itemToThrow: {fileID: 4597949963894319976, guid: 060fa94ff16f1d24b835d2c2e6b4f543, type: 3}
   spawnOn: 1
   spawnTime: 3
   spawnDelay: 5
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fe0d31bd11c624e87a2009432d8a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToThrow: {fileID: 7390784142658986544, guid: ad538efc39e22fb4893646d730a08955, type: 3}
+  itemToThrow: {fileID: 8676364360234307893, guid: e72c54b39b162b04cb6feb5b5ad55e96, type: 3}
   spawnOn: 1
   spawnTime: 5
   spawnDelay: 7

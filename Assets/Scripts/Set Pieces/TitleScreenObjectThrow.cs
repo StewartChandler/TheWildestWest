@@ -24,7 +24,7 @@ public class TitleScreenObjectThrow : MonoBehaviour
             GameObject newObject = Instantiate(itemToThrow, transform.position, Quaternion.identity);
             Vector3 throwVector = transform.rotation * throwAngle;
             throwVector = throwVector.normalized * throwSpeed;
-            newObject.GetComponent<Rigidbody>().velocity = throwVector;
+            newObject.GetComponentInChildren<Rigidbody>().velocity = throwVector;
         }
     }
 }
