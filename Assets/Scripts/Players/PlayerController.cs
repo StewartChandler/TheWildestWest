@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     public float pickupRange = 5f;
     private Transform pickedObject;
     private Rigidbody pickedRigidbody;
-    private Vector3 pickUpOffset = new Vector3(1.0f, 2f, 0.0f);
+    private Vector3 pickUpOffset = Vector3.Normalize(new Vector3(1.0f, 2f, 0.0f));
+    private float distAway;
+    private float playerRadius;
+    private float objMass;
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
@@ -23,6 +26,9 @@ public class PlayerController : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
+        Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
+        Vector2 psizexy = new Vector2(psize.x, psize.y);
+        playerRadius = 0.5f * psizexy.magnitude;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -48,7 +54,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.fixedDeltaTime * playerSpeed);
+        float speedMul = 1.0f;
+        if (pickedObject != null) {
+            speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
+        }
+        controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
 
         if (move != Vector3.zero)
         {
@@ -62,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (pickedObject != null)
         {
             // Calculate the desired position based on player's position and forward direction.
-            Vector3 desiredPosition = transform.position + transform.forward * pickUpOffset.z + transform.right * pickUpOffset.x + transform.up * pickUpOffset.y;
+            Vector3 desiredPosition = transform.position + (playerRadius + distAway) * (transform.forward * pickUpOffset.z + transform.right * pickUpOffset.x) + transform.up * pickUpOffset.y;
 
             // Lerp the object's position to the desired position for smooth movement.
             pickedObject.position = Vector3.Lerp(pickedObject.position, desiredPosition, Time.fixedDeltaTime * 10f);
@@ -86,8 +96,13 @@ public class PlayerController : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 if (distance < closestDistance)
                 {
-                    closestDistance = distance;
-                    closestCollider = collider;
+                    float colMass = collider.GetComponent<Rigidbody>().mass;
+                    if (colMass <= hatStack.getNumHats() + 1)
+                    {
+                        closestDistance = distance;
+                        closestCollider = collider;
+                        objMass = colMass;
+                    }
                 }
             }
         }
@@ -98,8 +113,14 @@ public class PlayerController : MonoBehaviour
             pickedRigidbody = pickedObject.GetComponent<Rigidbody>();
             pickedRigidbody.isKinematic = true;
 
+            // makes the object be futher away for larger objects
+            distAway = 0;
+            foreach (Collider collider in closestCollider.gameObject.GetComponents<Collider>()) { 
+                distAway = Mathf.Max(distAway, Vector3.Magnitude(collider.bounds.size));
+            }
+
             // Move the object closer to the player.
-            pickedObject.position = transform.position + pickUpOffset;
+            pickedObject.position = transform.position + (playerRadius + distAway) * pickUpOffset;
         }
     }
     void ThrowObject()
