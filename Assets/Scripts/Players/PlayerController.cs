@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private HatStack hatStack;
     private Vector3 playerVelocity;
-    private float playerSpeed = 6.5f;
+    private float playerSpeed = 13f;
     private float throwingSpeed = 30f;
     private float gravityValue = -9.81f;
     public float pickupRange = 5f;
@@ -111,7 +111,9 @@ public class PlayerController : MonoBehaviour
         {
             pickedObject = closestCollider.transform;
             pickedRigidbody = pickedObject.GetComponent<Rigidbody>();
-            pickedRigidbody.isKinematic = true;
+            pickedRigidbody.isKinematic = false;
+            pickedRigidbody.mass = 0;
+            pickedRigidbody.useGravity = false;
 
             // makes the object be futher away for larger objects
             distAway = 0;
@@ -128,6 +130,8 @@ public class PlayerController : MonoBehaviour
         if (pickedObject != null)
         {
             pickedRigidbody.isKinematic = false;
+            pickedRigidbody.mass = objMass;
+            pickedRigidbody.useGravity = true;
             pickedRigidbody.velocity = (transform.forward * throwingSpeed); // Adjust the throw force as needed.
             pickedObject = null;
         }
