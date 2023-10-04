@@ -145,6 +145,8 @@ public class PlayerController : MonoBehaviour
             if (pickedObject != null)
             {
                 pickedRigidbody.isKinematic = false;
+                pickedRigidbody.mass = objMass;
+                pickedRigidbody.useGravity = true;
                 pickedObject = null;
             }
         }
