@@ -10,6 +10,13 @@ public class Highlight : MonoBehaviour
     public Material originalMaterial; // Store the original material of the closest object.
     public Collider closestCollider;
 
+    private HatStack hatStack;
+
+    private void Start()
+    {
+        hatStack = GetComponentInChildren<HatStack>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -29,8 +36,12 @@ public class Highlight : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, collider.transform.position);
                 if (distance < closestDistance)
                 {
-                    closestDistance = distance;
-                    closestCollider = collider;
+                    float colMass = collider.GetComponent<Rigidbody>().mass;
+                    if (colMass <= hatStack.getNumHats() + 1)
+                    {
+                        closestDistance = distance;
+                        closestCollider = collider;
+                    }
                 }
             }
         }
