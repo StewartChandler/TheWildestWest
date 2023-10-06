@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396488942335910066}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Candle
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -85,6 +85,10 @@ PrefabInstance:
       value: PR_Candle_T
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
       propertyPath: m_TagString
       value: Throwable
       objectReference: {fileID: 0}
@@ -102,6 +106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6771282538578894734}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2245200863944763015}
   m_SourcePrefab: {fileID: 100100000, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
 --- !u!1 &8309846791111985759 stripped
 GameObject:
@@ -157,6 +164,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2245200863944763015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309846791111985759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b043c54fb89e2141bc8f455d223477c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatReq: 1
 --- !u!4 &8654037277671297253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}

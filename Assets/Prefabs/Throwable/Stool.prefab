@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3843927957845298626}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stool
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -45,7 +45,8 @@ GameObject:
   - component: {fileID: 8173728319314203248}
   - component: {fileID: 1538922322444239291}
   - component: {fileID: 2617385736229712432}
-  m_Layer: 0
+  - component: {fileID: 283581825480233489}
+  m_Layer: 3
   m_Name: PR_Stool:pCylinder9
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -166,3 +167,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2535351800373892213, guid: 9242f54bfc0b6aa41a8e7a1f3545b1dc, type: 3}
+--- !u!114 &283581825480233489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594941836672607176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b043c54fb89e2141bc8f455d223477c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatReq: 2
