@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 5028605419982577755}
   - component: {fileID: 6526265231708932193}
   - component: {fileID: 7045773617624765778}
+  - component: {fileID: 1753264060134066849}
   m_Layer: 0
   m_Name: PlayerSpawn
   m_TagString: Untagged
@@ -1326,7 +1327,7 @@ Transform:
   m_GameObject: {fileID: 7091989969988016280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 6, z: 0}
+  m_LocalPosition: {x: -1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1431,7 +1432,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!114 &6526265231708932193
 MonoBehaviour:
@@ -1495,8 +1496,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d01d2fcb0108c45bce7dce68c4270b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ready: 1
   redMaterial: {fileID: 2100000, guid: f73473e54081c8247ac9ae1c4820ce2f, type: 2}
   greenMaterial: {fileID: 2100000, guid: 952f586ec6c5ba64398c9b2ca585e817, type: 2}
+--- !u!114 &1753264060134066849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091989969988016280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcb0aaadcb0a47348b37bd355e745a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7471233035824427981
 GameObject:
   m_ObjectHideFlags: 0
