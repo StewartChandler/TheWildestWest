@@ -64,8 +64,23 @@ public class PlayerController : MonoBehaviour
     {
         if (currentScene.name != "PlayerSelect")
         {
-        playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
+            Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+            float speedMul = 1.0f;
+            if (pickedObject != null)
+            {
+                speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
+            }
+            controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
+
+            if (move != Vector3.zero)
+            {
+                gameObject.transform.forward = move;
+            }
+
+            playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+            controller.Move(playerVelocity * Time.fixedDeltaTime);
+
+        }
     }
 
     void PickUpClosestObject()
@@ -104,4 +119,5 @@ public class PlayerController : MonoBehaviour
             // TODO: u ded
         }
     }
+
 }

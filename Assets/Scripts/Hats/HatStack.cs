@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HatStack : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class HatStack : MonoBehaviour
     private int startingNumHats = 3;
 
     private Stack<GameObject> hats = new Stack<GameObject>();
+    Scene currentScene;
 
     // Start is called before the first frame update
     void Start()
@@ -19,11 +21,13 @@ public class HatStack : MonoBehaviour
             // Debug.Log("adding hat");
             addHat();
         }
+        currentScene = SceneManager.GetActiveScene();
 
     }
 
     private void addHat()
     {
+        currentScene = SceneManager.GetActiveScene();
         GameObject newHat = Instantiate(hatPrefab);
         pushHat(newHat);
     }
@@ -31,7 +35,14 @@ public class HatStack : MonoBehaviour
     public void pushHat(GameObject hat)
     {
         hat.transform.SetParent(transform, false);
-        hat.transform.position += new Vector3(0, 0.004f * hats.Count, 0);
+        if (currentScene.name == "PlayerSelect")
+        {
+            hat.transform.position += new Vector3(0, 0.004f * hats.Count, 0);
+        }
+        else
+        {
+            hat.transform.position += new Vector3(0, 0.22f * hats.Count, 0);
+        }
         hat.transform.rotation = Quaternion.Euler(
             Random.Range(-15.0f, 15.0f),
             Random.Range(-15.0f, 15.0f),
