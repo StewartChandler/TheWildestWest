@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5472436747164560858}
   - component: {fileID: 3935364165704718607}
   - component: {fileID: 8568942330984037732}
-  m_Layer: 0
+  - component: {fileID: 3877133495022219611}
+  m_Layer: 3
   m_Name: PR_Table:Table
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -134,6 +135,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3877133495022219611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864460774659457086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b043c54fb89e2141bc8f455d223477c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatReq: 5
 --- !u!1 &5239258575410603198
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140755760032421033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Table
   m_TagString: Throwable
   m_Icon: {fileID: 0}

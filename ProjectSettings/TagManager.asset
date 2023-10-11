@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - SpawnPlatform
+  - Throwable
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Throwable
   - Water
   - UI
   - 
