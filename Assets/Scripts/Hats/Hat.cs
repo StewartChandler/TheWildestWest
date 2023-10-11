@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hat : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Hat : MonoBehaviour
 
     private Collider[] colliders;
     private Renderer[] renderers;
+    Scene currentScene;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,14 @@ public class Hat : MonoBehaviour
         {
             c.isTrigger = true;
             c.enabled = false;
+        }
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "PlayerSelect")
+        {
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.enabled = false;
+            }
         }
     }
 
@@ -67,9 +77,18 @@ public class Hat : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+
         switch (state)
         {
             case State.Atop:
+                if (currentScene.name != "PlayerSelect")
+                {
+                    foreach (Renderer renderer in renderers)
+                    {
+                        renderer.enabled = true;
+                    }
+                }
                 break;
             case State.Launched:
                 if (rb.velocity.magnitude < 0.001f || rb.angularVelocity.magnitude < 0.001f)

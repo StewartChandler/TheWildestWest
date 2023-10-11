@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Highlight : MonoBehaviour
 {
@@ -12,15 +13,21 @@ public class Highlight : MonoBehaviour
 
     private HatStack hatStack;
 
+    Scene currentScene;
+
     private void Start()
     {
         hatStack = GetComponentInChildren<HatStack>();
+        currentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HighlightClosestObject();
+        if (currentScene.name != "PlayerSelect")
+        {
+            HighlightClosestObject();
+        }
     }
     void HighlightClosestObject()
     {

@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1403023737}
-  sceneName: DemoArena
+  sceneName: PlayerSelect
 --- !u!114 &1501289879
 MonoBehaviour:
   m_ObjectHideFlags: 0
