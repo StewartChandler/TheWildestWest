@@ -7,7 +7,7 @@ public class RotationOscillator : MonoBehaviour
 
     private void Start()
     {
-        rotationX = Random.Range(5, 40);
+        rotationX = Random.Range(20, 40);
         initialRotation = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(rotationX, initialRotation.y, initialRotation.z);
 

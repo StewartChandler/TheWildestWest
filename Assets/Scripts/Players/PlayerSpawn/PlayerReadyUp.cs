@@ -2,31 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerReadyUp : MonoBehaviour
 {
     // create a private variable to store ready state
-    public bool ready = true;
+    public bool ready;
     public Material redMaterial;
     public Material greenMaterial;
 
+    private GameManager gameManager;
+
     Renderer spawnPlatform;
+    Scene currentScene;
+
+    void Start()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnPlatform = FindStartPlatform();
+        spawnPlatform.material = redMaterial;
+        ready = false;
+    }
 
     public void OnReady(InputAction.CallbackContext context)
     {
-        spawnPlatform = FindStartPlatform();
         if (context.performed)
         {
-            ready = !ready;
-            if (!ready)
+            if (currentScene.name == "PlayerSelect")
             {
-                // Change the object's material to red when touched by the player.
-                spawnPlatform.material = redMaterial;
-            }
-            else
-            {
-                // Change the object's material to green when touched by the player.
-                spawnPlatform.material = greenMaterial;
+                ready = !ready;
+                if (!ready)
+                {
+                    // Change the object's material to red when touched by the player.
+                    spawnPlatform.material = redMaterial;
+                    gameManager.playersReady--;
+
+                }
+                else
+                {
+                    // Change the object's material to green when touched by the player.
+                    gameManager.playersReady++;
+                    spawnPlatform.material = greenMaterial;
+                }
             }
         }
     }

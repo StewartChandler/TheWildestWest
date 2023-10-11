@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -21,9 +23,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
 
+    Scene currentScene;
 
     private void Start()
     {
+        currentScene = SceneManager.GetActiveScene();
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
@@ -33,52 +37,64 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementInput = context.ReadValue<Vector2>();
+        if (currentScene.name != "PlayerSelect")
+        {
+            movementInput = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnThrow(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (currentScene.name != "PlayerSelect")
         {
-            if (pickedObject == null)
+            if (context.performed)
             {
-                PickUpClosestObject();
-            }
-            else
-            {
-                ThrowObject();
+                if (pickedObject == null)
+                {
+                    PickUpClosestObject();
+                }
+                else
+                {
+                    ThrowObject();
+                }
             }
         }
     }
 
     void FixedUpdate()
     {
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        float speedMul = 1.0f;
-        if (pickedObject != null) {
-            speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
-        }
-        controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
-
-        if (move != Vector3.zero)
+        if (currentScene.name != "PlayerSelect")
         {
-            gameObject.transform.forward = move;
-        }
 
-        playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-        controller.Move(playerVelocity * Time.fixedDeltaTime);
 
-        // Moving the object around with the player if it's picked up
-        if (pickedObject != null)
-        {
-            // Calculate the desired position based on player's position and forward direction.
-            Vector3 desiredPosition = transform.position + (playerRadius + distAway) * (transform.forward * pickUpOffset.z + transform.right * pickUpOffset.x) + transform.up * pickUpOffset.y;
+            Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+            float speedMul = 1.0f;
+            if (pickedObject != null)
+            {
+                speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
+            }
+            controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
 
-            // Lerp the object's position to the desired position for smooth movement.
-            pickedObject.position = Vector3.Lerp(pickedObject.position, desiredPosition, Time.fixedDeltaTime * 10f);
+            if (move != Vector3.zero)
+            {
+                gameObject.transform.forward = move;
+            }
 
-            // Match the rotation of the picked-up object to the player's rotation.
-            pickedObject.rotation = transform.rotation;
+            playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+            controller.Move(playerVelocity * Time.fixedDeltaTime);
+
+            // Moving the object around with the player if it's picked up
+            if (pickedObject != null)
+            {
+                // Calculate the desired position based on player's position and forward direction.
+                Vector3 desiredPosition = transform.position + (playerRadius + distAway) * (transform.forward * pickUpOffset.z + transform.right * pickUpOffset.x) + transform.up * pickUpOffset.y;
+
+                // Lerp the object's position to the desired position for smooth movement.
+                pickedObject.position = Vector3.Lerp(pickedObject.position, desiredPosition, Time.fixedDeltaTime * 10f);
+
+                // Match the rotation of the picked-up object to the player's rotation.
+                pickedObject.rotation = transform.rotation;
+            }
         }
     }
 
@@ -117,7 +133,8 @@ public class PlayerController : MonoBehaviour
 
             // makes the object be futher away for larger objects
             distAway = 0;
-            foreach (Collider collider in closestCollider.gameObject.GetComponents<Collider>()) { 
+            foreach (Collider collider in closestCollider.gameObject.GetComponents<Collider>())
+            {
                 distAway = Mathf.Max(distAway, Vector3.Magnitude(collider.bounds.size));
             }
 

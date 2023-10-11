@@ -4,17 +4,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
+
+
 public class PlayerSelect : MonoBehaviour
 {
     // Create 4 public spawn platform objects
     public GameObject[] spawnPlatforms = new GameObject[4];
     private int numPlayers = 0;
-    float scale = 0.0f;
+    float scale = 0.01f;
     private float scaleSpeed = 2f;
     private bool isScaling = false;
     private Vector3 initialScale = new Vector3(0f, 0f, 0f);
     private Vector3 targetScale = new Vector3(0.8f, 0.8f, 0.8f);
+    private GameManager gameManager;
+    private PlayerInput[] playerInputs = new PlayerInput[4];
 
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         SetPlayerPositionAndColor(playerInput.transform);
@@ -22,6 +30,11 @@ public class PlayerSelect : MonoBehaviour
         {
             StartCoroutine(ScaleObject(playerInput.transform));
         }
+        playerInputs[numPlayers - 1] = playerInput;
+        playerInput.name = "Player" + numPlayers;
+        gameManager.numPlayers = numPlayers;
+        gameManager.players = playerInputs;
+        playerInput.transform.parent = transform;
     }
 
     void SetPlayerPositionAndColor(Transform player)
@@ -42,5 +55,7 @@ public class PlayerSelect : MonoBehaviour
             yield return null;
         }
         isScaling = false;
+        scale = 0.01f;
     }
+
 }
