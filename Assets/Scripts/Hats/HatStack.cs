@@ -37,7 +37,7 @@ public class HatStack : MonoBehaviour
         hat.transform.SetParent(transform, false);
         if (currentScene.name == "PlayerSelect")
         {
-            hat.transform.position += new Vector3(0, 0.004f * hats.Count, 0);
+            hat.transform.position += new Vector3(0, 0.006f * hats.Count, 0);
         }
         else
         {
