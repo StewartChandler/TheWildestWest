@@ -17,10 +17,10 @@ public class Managers : MonoBehaviour
             // If no instance exists, set this as the instance and don't destroy it on scene load
             instance = this;
             DontDestroyOnLoad(gameObject);
-            foreach (Transform child in transform)
-            {
-                DontDestroyOnLoad(child.gameObject);
-            }
+            // foreach (Transform child in transform)
+            // {
+            //     DontDestroyOnLoad(child.gameObject);
+            // }
         }
     }
 }
