@@ -4,14 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     public PlayerInput[] players = new PlayerInput[4];
+    public bool[] isPlayerAlive = {false, false, false, false};
+    public int[] playerScores = {0, 0, 0, 0};
     public int playersReady = 0;
     public int numPlayers = 0;
     private static GameManager instance;
+    // currentScene does not keep track of the actual current scene and should be refactored
     Scene currentScene;
     public Transform[] playerSpawns = new Transform[4];
     public GameObject playerPrefab;
@@ -24,13 +27,65 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        // refresh currentScene on scene change
         if (currentScene.name == "PlayerSelect")
         {
             if (numPlayers >= 1 && numPlayers == playersReady)
             {
+                for (int i = 0; i < playersReady; i++)
+                {
+                    isPlayerAlive[i] = true;
+                }
                 Debug.Log("Starting Game");
                 _onGameStart.Invoke();
 
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "DemoArena")
+        {
+            if (isPlayerAlive.Count(x => x) <= 1)
+            {
+                // add a point to the player(s) alive at end of round
+                bool someoneWon = false;
+                for (int i = 0; i < playersReady; i++)
+                {
+                    if (isPlayerAlive[i])
+                    {
+                        playerScores[i]++;
+                        // see if a player has won
+                        if (playerScores[i] >= 3)
+                        {
+                            someoneWon = true;
+                        }
+                    }
+                    else
+                    {
+                        isPlayerAlive[i] = true;
+                    }
+                }
+                // manage the hats
+                ManageHats();
+
+                // if someone has won, go to the end screen, else reset the game arena
+                GameObject playerManager = GameObject.Find("PlayerManager");
+                PlayerInput[] playerInputs = playerManager.GetComponentsInChildren<PlayerInput>();
+                if (!someoneWon)
+                {
+                    // activate playerinput and reset the scene
+                    foreach (PlayerInput playerInput in playerInputs)
+                    {
+                        playerInput.ActivateInput();
+                    }
+                    SwitchScene();
+                }
+                else
+                {
+                    foreach (PlayerInput playerInput in playerInputs)
+                    {
+                        playerInput.DeactivateInput();
+                    }
+                    SceneManager.LoadScene("EndScene");
+                }
             }
         }
     }
@@ -40,7 +95,38 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("DemoArena");
     }
 
+    private void ManageHats()
+    {
+        GameObject playerManager = GameObject.Find("PlayerManager");
+        // deal with all the hats safely by getting them all off first
+        PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
+        foreach (PlayerController playerController in playerControllers)
+        {
+            HatStack hatStack = playerController.GetComponentInChildren<HatStack>();
+            if (hatStack != null)
+            {
+                hatStack.popAllHats();
+                Debug.Log(hatStack.getNumHats());
+            }
+        }
 
+        // destroy all the hats
+        GameObject[] hats = GameObject.FindGameObjectsWithTag("Hat");
+        foreach (GameObject hat in hats)
+        {
+            Destroy(hat);
+        }
+
+        // regenerate new hats for each player
+        foreach (PlayerController playerController in playerControllers)
+        {
+            HatStack hatStack = playerController.GetComponentInChildren<HatStack>();
+            if (hatStack != null)
+            {
+                hatStack.resetHats();
+            }
+        }
+    }
 
     public void StartGame()
     {
