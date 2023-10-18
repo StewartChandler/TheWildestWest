@@ -95,7 +95,7 @@ public class Hat : MonoBehaviour
                 {
                     timeStill += Time.fixedDeltaTime;
 
-                    if (timeStill > 0.1f)
+                    if (timeStill > 0.05f)
                     {
                         pos = transform.localPosition;
                         scale = transform.localScale;
@@ -160,6 +160,39 @@ public class Hat : MonoBehaviour
             if (hs != null && state == State.Collectable)
             {
                 transform.localScale = scale;
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+
+                timeCollectable = 0.0f;
+                timeStill = 0.0f;
+                state = State.Atop;
+                foreach (Collider c in colliders)
+                {
+                    c.enabled = false;
+                }
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.enabled = true;
+                }
+
+                hs.pushHat(gameObject);
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Collider other = collision.collider;
+        if (other.CompareTag("Player"))
+        {
+            HatStack hs = other.gameObject.GetComponentInChildren<HatStack>();
+
+            if (hs != null && state == State.Launched)
+            {
+                rb.isKinematic = true;
+                rb.useGravity = false;
+
+
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
