@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5910859542294774586}
-  - component: {fileID: 8753836550595478238}
-  m_Layer: 0
+  - component: {fileID: 3775283758888766987}
+  - component: {fileID: 569624985657696042}
+  - component: {fileID: -7003852380119759532}
+  m_Layer: 3
   m_Name: Cacti_1_3
-  m_TagString: Untagged
+  m_TagString: Throwable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,13 +32,14 @@ Transform:
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2066669357490961438}
   - {fileID: 3148233680553353033}
   - {fileID: 887226630707967895}
   - {fileID: 5355502603891887007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8753836550595478238
-BoxCollider:
+--- !u!64 &3775283758888766987
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53,9 +56,50 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.997063, y: 11.690425, z: 5.3308535}
-  m_Center: {x: -0.10284759, y: 5.3452115, z: -0.14653401}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3439924855094316328, guid: 1fa2f1ff6c95e40da96bcda38fa6c6ce, type: 3}
+--- !u!114 &569624985657696042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434596872010406272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b043c54fb89e2141bc8f455d223477c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatReq: 3
+--- !u!54 &-7003852380119759532
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434596872010406272}
+  serializedVersion: 4
+  m_Mass: 2.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6904285562020460220
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +111,7 @@ GameObject:
   - component: {fileID: 3148233680553353033}
   - component: {fileID: 799588121468244437}
   - component: {fileID: 1449038254068259897}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cactus_3_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +194,7 @@ GameObject:
   - component: {fileID: 5355502603891887007}
   - component: {fileID: 1069668114215367963}
   - component: {fileID: 5185709151922770927}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Petals_Cactus_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +277,7 @@ GameObject:
   - component: {fileID: 887226630707967895}
   - component: {fileID: 7353708569435775642}
   - component: {fileID: 1586227604904454154}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cactus_3_TG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,3 +349,65 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1633585170875856905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5910859542294774586}
+    m_Modifications:
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7429852117798258130, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+      propertyPath: m_Name
+      value: ThrowTrail
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+--- !u!4 &2066669357490961438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 722231643645428759, guid: 3f64752e0fe6ef040817fa7ba474fb56, type: 3}
+  m_PrefabInstance: {fileID: 1633585170875856905}
+  m_PrefabAsset: {fileID: 0}

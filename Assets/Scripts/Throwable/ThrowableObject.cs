@@ -147,7 +147,7 @@ public class ThrowableObject : MonoBehaviour
 
                 if (trail != null) { trail.enabled = false; }
             }
-        } else if (state == State.Thrown) { 
+        } else if (state == State.Thrown || state == State.Prop) { 
                 rb.useGravity = true;
         }
     }
