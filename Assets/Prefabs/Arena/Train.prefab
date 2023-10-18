@@ -45,7 +45,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2367587275423439029, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 94.46
+      value: 94.3
       objectReference: {fileID: 0}
     - target: {fileID: 2367587275423439029, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_LocalPosition.y
@@ -87,7 +87,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainTrack (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -149,7 +150,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainTrack (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -231,7 +233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2367587275423439029, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 74
+      value: 73.52
       objectReference: {fileID: 0}
     - target: {fileID: 2367587275423439029, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_LocalPosition.y
@@ -273,7 +275,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainTrack
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
