@@ -22,6 +22,7 @@ public class ThrowableObject : MonoBehaviour
     private float objMass;
     private float distAway;
     private float holderDist;
+    private TrailRenderer trail;
 
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
@@ -53,10 +54,16 @@ public class ThrowableObject : MonoBehaviour
 
     public void throwObject(Vector3 dir, float throwingSpeed)
     {
+        rb.position = new Vector3(rb.position.x, target.position.y, rb.position.z);
         rb.mass = objMass;
-        rb.useGravity = true;
+        rb.useGravity = false;
         rb.velocity = (dir * throwingSpeed); // Adjust the throw force as needed.
         state = State.Thrown;
+
+        if (trail != null)
+        {
+            trail.enabled = true;
+        }
     }
 
     public void dropObject()
@@ -80,6 +87,12 @@ public class ThrowableObject : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        trail = GetComponentInChildren<TrailRenderer>();
+
+        if (trail != null)
+        {
+            trail.enabled = false;
+        }
 
         // makes the object be futher away for larger objects
         distAway = 0;
@@ -112,6 +125,8 @@ public class ThrowableObject : MonoBehaviour
                 {
                     state = State.Prop;
                     target = null;
+                    rb.useGravity = true;
+                if (trail != null) { trail.enabled = false; }
                 }
 
                 break;
@@ -128,7 +143,12 @@ public class ThrowableObject : MonoBehaviour
                 state = State.Prop;
                 collision.gameObject.GetComponent<PlayerController>().takeDamage();
                 target = null;
+                rb.useGravity = true;
+
+                if (trail != null) { trail.enabled = false; }
             }
+        } else if (state == State.Thrown) { 
+                rb.useGravity = true;
         }
     }
 }
