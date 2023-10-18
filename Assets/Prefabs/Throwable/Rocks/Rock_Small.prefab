@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2542147283234683267}
   - component: {fileID: -5431276311604459370}
   - component: {fileID: 6263262672848597120}
+  - component: {fileID: -7577033354392010153}
   m_Layer: 3
   m_Name: Rock_Small
   m_TagString: Throwable
@@ -143,6 +144,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -792660944072588704, guid: 532b8860f87984abdbe61e0e24038a14, type: 3}
+--- !u!54 &-7577033354392010153
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495503052833950081}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &5324680935989737570
 PrefabInstance:
   m_ObjectHideFlags: 0
