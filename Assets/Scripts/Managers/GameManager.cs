@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        if (SceneManager.GetActiveScene().name == "DemoArena")
+        if (SceneManager.GetActiveScene().name == "NewMap")
         {
             if (isPlayerAlive.Count(x => x) <= 1)
             {
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void SwitchScene()
     {
-        SceneManager.LoadScene("DemoArena");
+        SceneManager.LoadScene("NewMap");
     }
 
     private void ManageHats()

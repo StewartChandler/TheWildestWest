@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9103615326929808973}
   - component: {fileID: 9014247672760901437}
   - component: {fileID: -6974055061433156287}
+  - component: {fileID: -2350284172736901651}
   m_Layer: 3
   m_Name: Rock_Medium
   m_TagString: Throwable
@@ -121,6 +122,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -9084074378594782185, guid: 001d0cc722c8c4ac4bc785521f221da0, type: 3}
+--- !u!54 &-2350284172736901651
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137469471800177535}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6273175618568340520
 PrefabInstance:
   m_ObjectHideFlags: 0
