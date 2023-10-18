@@ -72,6 +72,7 @@ public class ThrowableObject : MonoBehaviour
         rb.useGravity = true;
         state = State.Prop;
         target = null;
+        if (trail != null) { trail.enabled = false; }
     }
 
     public void pickupObject(Transform holder, float holderRadius)
@@ -81,6 +82,7 @@ public class ThrowableObject : MonoBehaviour
         objMass = rb.mass;
         rb.mass = 0;
         rb.useGravity = false;
+        if (trail != null) { trail.enabled = false; }
     }
 
     // Start is called before the first frame update
