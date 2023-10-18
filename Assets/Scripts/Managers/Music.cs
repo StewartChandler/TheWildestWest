@@ -11,13 +11,14 @@ public class Music : MonoBehaviour
     {
         DontDestroyOnLoad(transform.gameObject);
         _audioSource = GetComponent<AudioSource>();
-        currentScene = SceneManager.GetActiveScene();
     }
 
     private void Update()
     {
         // delete object when curr scene = "DemoArena"
-        if (currentScene.name == "DemoArena")
+        currentScene = SceneManager.GetActiveScene();
+        Debug.Log(currentScene.name);
+        if (currentScene.name != "StartScene" && currentScene.name != "PlayerSelect")
         {
             Destroy(gameObject);
         }
