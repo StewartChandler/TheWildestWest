@@ -16,11 +16,7 @@ public class HatStack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < startingNumHats; i++)
-        {
-            // Debug.Log("adding hat");
-            addHat();
-        }
+        resetHats();
         currentScene = SceneManager.GetActiveScene();
 
     }
@@ -57,6 +53,23 @@ public class HatStack : MonoBehaviour
 
         hatObj.transform.SetParent(null, true);
         hatObj.GetComponent<Hat>().launch();
+    }
+
+    public void popAllHats()
+    {
+        while (hats.Count > 0)
+        {
+            popHat();
+        }
+    }
+
+    public void resetHats()
+    {
+        for (int i = 0; i < startingNumHats; i++)
+        {
+            // Debug.Log("adding hat");
+            addHat();
+        }
     }
 
     public int getNumHats()

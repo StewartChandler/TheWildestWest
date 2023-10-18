@@ -8,6 +8,7 @@ TagManager:
   - Throwable
   - Bullet
   - Enemy
+  - Hat
   layers:
   - Default
   - TransparentFX

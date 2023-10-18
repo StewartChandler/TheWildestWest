@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
+    public GameManager gameManager;
 
     Scene currentScene;
 
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // calculate distance away
         Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
@@ -116,8 +118,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // TODO: u ded
+            KillPlayer();
         }
     }
 
+    public void KillPlayer()
+    {
+        PlayerInput selfInput = GetComponent<PlayerInput>();
+        if (selfInput != null)
+        {
+            gameManager.isPlayerAlive[selfInput.playerIndex] = false;
+        }
+        selfInput.DeactivateInput();
+    }
 }

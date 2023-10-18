@@ -29,8 +29,8 @@ public class CameraMovement : MonoBehaviour
         // Camera up down, back forward (zoom) distance
         float maxDistance = CalculateMaxPlayerDistance();
 
-        float upOffset = Mathf.Lerp(16f, 26f, maxDistance / 55f); // v1 = v2 * 0.8
-        float backOffset = Mathf.Lerp(-25.6f, -32f, maxDistance / 55f); // v1 = v2 * 0.8
+        float upOffset = Mathf.Lerp(16f, 26f, maxDistance / 70f); // v1 = v2 * 0.8
+        float backOffset = Mathf.Lerp(-25.6f, -32f, maxDistance / 70f); // v1 = v2 * 0.8
 
         targetPosition.y += upOffset - 20;
         targetPosition.z += backOffset + 25;
