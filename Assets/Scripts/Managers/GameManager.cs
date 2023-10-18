@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentScene.name == "PlayerSelect")
         {
-            if (numPlayers >= 2 && numPlayers == playersReady)
+            if (numPlayers >= 1 && numPlayers == playersReady)
             {
                 Debug.Log("Starting Game");
                 _onGameStart.Invoke();

@@ -5,13 +5,13 @@ using UnityEngine;
 public class HatSpawner : MonoBehaviour
 {
     public GameObject[] objectPrefabs; // Array to hold the 5 different object prefabs
-    private float spawnInterval = 1.0f;
-    private float spawnRadius = 14.0f;
+    private float spawnInterval = 0.6f;
+    private float spawnRadius = 20.0f;
     private float despawnTime = 20.0f;
 
     private float nextSpawnTime;
 
-    private float randomSpawnVariance = 0.5f;
+    private float randomSpawnVariance = 0.25f;
 
     private void Start()
     {
