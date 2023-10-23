@@ -26,10 +26,10 @@ public class PlayerSelect : MonoBehaviour
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         SetPlayerPositionAndColor(playerInput.transform);
-        if (!isScaling)
-        {
-            StartCoroutine(ScaleObject(playerInput.transform));
-        }
+        // if (!isScaling)
+        // {
+        //     StartCoroutine(ScaleObject(playerInput.transform));
+        // }
         playerInputs[numPlayers - 1] = playerInput;
         playerInput.name = "Player" + numPlayers;
         gameManager.numPlayers = numPlayers;

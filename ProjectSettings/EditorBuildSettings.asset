@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Gym.unity
     guid: c766338bbb0244015a09de01cab72009
   - enabled: 1
-    path: Assets/Scenes/NewMap.unity
+    path: Assets/Scenes/NewMap/NewMap.unity
     guid: 0ed603734393a44e485570b7398805b4
   m_configObjects: {}

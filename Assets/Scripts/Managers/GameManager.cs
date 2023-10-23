@@ -9,8 +9,8 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public PlayerInput[] players = new PlayerInput[4];
-    public bool[] isPlayerAlive = {false, false, false, false};
-    public int[] playerScores = {0, 0, 0, 0};
+    public bool[] isPlayerAlive = { false, false, false, false };
+    public int[] playerScores = { 0, 0, 0, 0 };
     public int playersReady = 0;
     public int numPlayers = 0;
     private static GameManager instance;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         // refresh currentScene on scene change
         if (currentScene.name == "PlayerSelect")
         {
-            if (numPlayers >= 1 && numPlayers == playersReady)
+            if (numPlayers >= 2 && numPlayers == playersReady)
             {
                 for (int i = 0; i < playersReady; i++)
                 {
@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
                     // activate playerinput and reset the scene
                     foreach (PlayerInput playerInput in playerInputs)
                     {
+                        // move each player to their respective spawn point
+                        CharacterController characterController = playerInput.GetComponent<CharacterController>();
+                        characterController.enabled = false;
+                        playerInput.transform.position = playerSpawns[playerInput.playerIndex].position;
+                        characterController.enabled = true;
                         playerInput.ActivateInput();
                     }
                     SwitchScene();
@@ -133,19 +138,10 @@ public class GameManager : MonoBehaviour
         // Add logic to start the game here
         // Load your game scene or perform any necessary initialization.
         currentScene = SceneManager.GetActiveScene();
-        Debug.Log(currentScene.name);
 
-        // // Find the playerSpawns object in the scene
-        playerSpawns = GameObject.Find("Spawn Points").GetComponentsInChildren<Transform>();
-        Debug.Log(playerSpawns.Length);
 
         if (numPlayers == 0 || numPlayers == 1)
         {
-            // Instantiate player input for Player 1 (KeyboardRight)
-            var player1 = Instantiate(playerPrefab, playerSpawns[1].position, playerSpawns[1].rotation, gameObject.transform);
-            player1.GetComponent<PlayerInput>().SwitchCurrentControlScheme("KeyboardRight", Keyboard.current);
-            players[0] = player1.GetComponent<PlayerInput>();
-            player1.name = "Player1";
 
             // Instantiate player input for Player 2 (KeyboardLeft)
             var player2 = Instantiate(playerPrefab, playerSpawns[2].position, playerSpawns[2].rotation, gameObject.transform);
@@ -159,7 +155,10 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < numPlayers; i++)
             {
                 Debug.Log("CHANGING POISITON");
+                CharacterController characterController = players[i].GetComponent<CharacterController>();
+                characterController.enabled = false;
                 players[i].transform.position = playerSpawns[i].position;
+                characterController.enabled = true;
             }
         }
 

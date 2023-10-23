@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private float playerSpeed = 13f;
     private float throwingSpeed = 30f;
-    private float gravityValue = -9.81f;
     public float pickupRange = 5f;
     private ThrowableObject pickedObject;
     private float playerRadius;
@@ -21,7 +20,10 @@ public class PlayerController : MonoBehaviour
     public GameObject playerPrefab;
     public GameManager gameManager;
 
+    private float gravityValue = -9.81f;
+
     Scene currentScene;
+
 
     private void Start()
     {
@@ -38,10 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (currentScene.name != "PlayerSelect")
-        {
-            movementInput = context.ReadValue<Vector2>();
-        }
+        movementInput = context.ReadValue<Vector2>();
     }
 
     public void OnThrow(InputAction.CallbackContext context)
@@ -78,10 +77,34 @@ public class PlayerController : MonoBehaviour
             {
                 gameObject.transform.forward = move;
             }
+            if (controller.isGrounded)
+            {
+                // Reset the vertical velocity to 0 when grounded
+                playerVelocity.y = 0;
+            }
+            else
+            {
+                playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+                controller.Move(playerVelocity * Time.fixedDeltaTime);
+            }
 
-            playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-            controller.Move(playerVelocity * Time.fixedDeltaTime);
+        }
+        else
+        {
+            Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
 
+            if (move != Vector3.zero)
+            {
+                // Calculate the rotation angle based on the input.
+                float targetAngleX = Mathf.Atan(move.x) * Mathf.Rad2Deg;
+                float targetAngleZ = Mathf.Atan(move.z) * Mathf.Rad2Deg;
+
+                // Calculate the angular velocity
+                Vector3 angularVelocity = new Vector3(targetAngleZ, targetAngleX, 0f);
+
+                // Set the transform's rotational velocity
+                transform.Rotate(angularVelocity * Time.deltaTime * 10);
+            }
         }
     }
 
@@ -107,6 +130,7 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage()
     {
+        Debug.Log(hatStack.getNumHats());
         if (hatStack.getNumHats() > 0)
         {
             hatStack.popHat();
@@ -124,6 +148,11 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        if (hatStack.getNumHats() > 0)
+        {
+            hatStack.popAllHats();
+        }
+        Debug.Log("Player Died");
         PlayerInput selfInput = GetComponent<PlayerInput>();
         if (selfInput != null)
         {
