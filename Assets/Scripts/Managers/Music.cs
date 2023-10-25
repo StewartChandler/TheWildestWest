@@ -17,7 +17,6 @@ public class Music : MonoBehaviour
     {
         // delete object when curr scene = "DemoArena"
         currentScene = SceneManager.GetActiveScene();
-        Debug.Log(currentScene.name);
         if (currentScene.name != "StartScene" && currentScene.name != "PlayerSelect")
         {
             Destroy(gameObject);

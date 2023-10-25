@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private float playerSpeed = 13f;
     private float throwingSpeed = 30f;
-    private float gravityValue = -9.81f;
     public float pickupRange = 5f;
     private ThrowableObject pickedObject;
     private float playerRadius;
@@ -21,11 +20,15 @@ public class PlayerController : MonoBehaviour
     public GameObject playerPrefab;
     public GameManager gameManager;
 
+    private float gravityValue = -9.81f;
+
     Scene currentScene;
+
 
     private void Start()
     {
         currentScene = SceneManager.GetActiveScene();
+        Debug.Log(currentScene.name);
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -38,14 +41,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (currentScene.name != "PlayerSelect")
-        {
-            movementInput = context.ReadValue<Vector2>();
-        }
+        movementInput = context.ReadValue<Vector2>();
     }
 
     public void OnThrow(InputAction.CallbackContext context)
     {
+        currentScene = SceneManager.GetActiveScene();
         if (currentScene.name != "PlayerSelect")
         {
             if (context.performed)
@@ -78,35 +79,70 @@ public class PlayerController : MonoBehaviour
             {
                 gameObject.transform.forward = move;
             }
+            if (controller.isGrounded)
+            {
+                // Reset the vertical velocity to 0 when grounded
+                playerVelocity.y = 0;
+            }
+            else
+            {
+                playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+                controller.Move(playerVelocity * Time.fixedDeltaTime);
+            }
 
-            playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-            controller.Move(playerVelocity * Time.fixedDeltaTime);
+        }
+        else
+        {
+            Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
 
+            if (move != Vector3.zero)
+            {
+                // Calculate the rotation angle based on the input.
+                float targetAngleX = Mathf.Atan(move.x) * Mathf.Rad2Deg;
+                float targetAngleZ = Mathf.Atan(move.z) * Mathf.Rad2Deg;
+
+                // Calculate the angular velocity
+                Vector3 angularVelocity = new Vector3(targetAngleZ, targetAngleX, 0f);
+
+                // Set the transform's rotational velocity
+                transform.Rotate(angularVelocity * Time.deltaTime * 10);
+            }
         }
     }
 
     void PickUpClosestObject()
     {
-        ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
-        // Debug.Log(closestObj);
-
-        if (closestObj != null)
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "PlayerSelect")
         {
-            closestObj.pickupObject(transform, playerRadius);
-            pickedObject = closestObj;
+
+            ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
+            // Debug.Log(closestObj);
+
+            if (closestObj != null)
+            {
+                closestObj.pickupObject(transform, playerRadius);
+                pickedObject = closestObj;
+            }
         }
     }
     void ThrowObject()
     {
-        if (pickedObject != null)
+        currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name != "PlayerSelect")
         {
-            pickedObject.throwObject(transform.forward, throwingSpeed);
-            pickedObject = null;
+            if (pickedObject != null)
+            {
+                pickedObject.throwObject(transform.forward, throwingSpeed);
+                pickedObject = null;
+            }
         }
     }
 
     public void takeDamage()
     {
+        Debug.Log(hatStack.getNumHats());
         if (hatStack.getNumHats() > 0)
         {
             hatStack.popHat();
@@ -124,6 +160,11 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        if (hatStack.getNumHats() > 0)
+        {
+            hatStack.popAllHats();
+        }
+        Debug.Log("Player Died");
         PlayerInput selfInput = GetComponent<PlayerInput>();
         if (selfInput != null)
         {

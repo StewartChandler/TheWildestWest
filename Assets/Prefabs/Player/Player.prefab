@@ -492,6 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupRange: 5
   playerPrefab: {fileID: 1924358111559239543}
+  gameManager: {fileID: 0}
 --- !u!33 &8950099759588822593
 MeshFilter:
   m_ObjectHideFlags: 0
