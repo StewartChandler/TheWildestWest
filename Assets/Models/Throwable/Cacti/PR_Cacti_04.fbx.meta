@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7cce0ee7e7da743db953f588ec4b54f1
+guid: acfa7addb78e44e48b3f3e8fbb30ce3d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Cactus_6_group2_Cactus_5Mat
-    second: {fileID: 2100000, guid: 53be0171b37b54c578ba6f22767cad6b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: group2_Cactus_5_CenterMat
-    second: {fileID: 2100000, guid: 35367aa1af8664691b2b338159726735, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: group2_Cactus_5_PetalsMat
-    second: {fileID: 2100000, guid: ce5b30a679de543f8a4a30a16c4a81e8, type: 2}
+      name: standardSurface1
+    second: {fileID: 2100000, guid: ced259aad26874475af74d66dad5b86b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
