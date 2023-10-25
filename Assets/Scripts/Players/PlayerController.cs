@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         currentScene = SceneManager.GetActiveScene();
+        Debug.Log(currentScene.name);
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnThrow(InputAction.CallbackContext context)
     {
+        currentScene = SceneManager.GetActiveScene();
         if (currentScene.name != "PlayerSelect")
         {
             if (context.performed)
@@ -110,21 +112,31 @@ public class PlayerController : MonoBehaviour
 
     void PickUpClosestObject()
     {
-        ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
-        // Debug.Log(closestObj);
-
-        if (closestObj != null)
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "PlayerSelect")
         {
-            closestObj.pickupObject(transform, playerRadius);
-            pickedObject = closestObj;
+
+            ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
+            // Debug.Log(closestObj);
+
+            if (closestObj != null)
+            {
+                closestObj.pickupObject(transform, playerRadius);
+                pickedObject = closestObj;
+            }
         }
     }
     void ThrowObject()
     {
-        if (pickedObject != null)
+        currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name != "PlayerSelect")
         {
-            pickedObject.throwObject(transform.forward, throwingSpeed);
-            pickedObject = null;
+            if (pickedObject != null)
+            {
+                pickedObject.throwObject(transform.forward, throwingSpeed);
+                pickedObject = null;
+            }
         }
     }
 

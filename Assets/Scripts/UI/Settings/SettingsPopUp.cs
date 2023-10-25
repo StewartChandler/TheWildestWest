@@ -24,5 +24,10 @@ public class SettingPopUp : MonoBehaviour
         mainMenu.SetActive(true);     // Show the main menu
         settingsPanel.SetActive(false); // Hide the settings panel
 
+        // Clear selected object
+        EventSystem.current.SetSelectedGameObject(null);
+        // Set a new selected object
+        EventSystem.current.SetSelectedGameObject(firstSelectedMenu);
+
     }
 }
