@@ -17,7 +17,7 @@ public class Hat : MonoBehaviour
     private State state;
 
     private Vector3 pos;
-    private Vector3 scale;
+    // private Vector3 scale;
 
     private float timeStill = 0.0f;
     private float timeCollectable = 0.0f;
@@ -98,7 +98,7 @@ public class Hat : MonoBehaviour
                     if (timeStill > 0.05f)
                     {
                         pos = transform.localPosition;
-                        scale = transform.localScale;
+                        // scale = transform.localScale;
 
                         state = State.Collectable;
 
@@ -125,7 +125,7 @@ public class Hat : MonoBehaviour
                 const float transitionTime = 1.0f;
                 float t = timeCollectable / transitionTime;
 
-                float scalingFactor = Mathf.SmoothStep(1.0f, 0.7f, t);
+                // float scalingFactor = Mathf.SmoothStep(1.0f, 0.7f, t);
                 float heightFactor = Mathf.SmoothStep(0.0f, 1.0f, t);
 
                 float height = 0.5f + 0.3f * Mathf.Sin(timeCollectable / Mathf.PI * 0.5f);
@@ -133,7 +133,7 @@ public class Hat : MonoBehaviour
                 float rotationSpeed = 72.0f * Mathf.Min(1.0f, t);
 
                 transform.localEulerAngles += new Vector3(0.0f, rotationSpeed * Time.fixedDeltaTime, 0.0f);
-                transform.localScale = scale * scalingFactor;
+                // transform.localScale = scale * scalingFactor;
                 transform.localPosition = pos + new Vector3(0.0f, heightFactor * height, 0.0f);
 
                 if (timeCollectable > 3.0f)
@@ -159,7 +159,7 @@ public class Hat : MonoBehaviour
 
             if (hs != null && state == State.Collectable)
             {
-                transform.localScale = scale;
+                // transform.localScale = scale;
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
