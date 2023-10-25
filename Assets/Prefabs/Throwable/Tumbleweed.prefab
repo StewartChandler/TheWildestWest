@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8392800194631519492}
   - component: {fileID: 5258256925399839449}
   - component: {fileID: 5570795367833123615}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tumbleweed
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -147,9 +147,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: -3989052519149005667, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2363808780578934438, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
       propertyPath: m_Name
       value: PR_Tumbleweed_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163597500978438365, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -209,9 +225,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3989052519149005667, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2363808780578934438, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
       propertyPath: m_Name
       value: PR_Tumbleweed_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163597500978438365, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -271,9 +303,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3989052519149005667, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2363808780578934438, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
       propertyPath: m_Name
       value: PR_Tumbleweed_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163597500978438365, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -333,9 +381,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: -3989052519149005667, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2363808780578934438, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
       propertyPath: m_Name
       value: PR_Tumbleweed_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163597500978438365, guid: 667b411eec6504ced84a7b8f5a6a298b, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

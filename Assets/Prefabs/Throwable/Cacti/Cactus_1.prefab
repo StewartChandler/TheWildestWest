@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4461194973390638881}
   - component: {fileID: 8668069559479093665}
   - component: {fileID: 3636411392112590221}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cactus_1
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -125,6 +125,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ba2ed7d829ec4d50af7de912ffec455, type: 3}
       propertyPath: m_Name
       value: PR_Cacti_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ba2ed7d829ec4d50af7de912ffec455, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ba2ed7d829ec4d50af7de912ffec455, type: 3}
+      propertyPath: m_TagString
+      value: Throwable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -34,6 +34,10 @@ public class ThrowableObject : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             ThrowableObject tObj = collider.gameObject.GetComponent<ThrowableObject>();
+            if (tObj == null)
+            {
+                tObj = collider.gameObject.GetComponentInParent<ThrowableObject>();
+            }
             if (tObj == null || tObj.state == State.Held) {
                 continue;
             }
@@ -41,7 +45,7 @@ public class ThrowableObject : MonoBehaviour
             float distance = Vector3.Distance(collider.ClosestPoint(point), point);
             if (distance < closestDistance)
             {
-                if (tObj.hatReq <= numHats + 1)
+                if (true /*tObj.hatReq <= numHats + 1*/)
                 {
                     closestThrowable = tObj;
                     closestDistance = distance;
@@ -148,6 +152,8 @@ public class ThrowableObject : MonoBehaviour
                 rb.useGravity = true;
 
                 if (trail != null) { trail.enabled = false; }
+            } else { 
+                rb.useGravity = true;
             }
         } else if (state == State.Thrown || state == State.Prop) { 
                 rb.useGravity = true;
