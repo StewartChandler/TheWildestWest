@@ -242,6 +242,7 @@ Transform:
   - {fileID: 959859025070986837}
   - {fileID: 562750108}
   - {fileID: 298871378}
+  - {fileID: 1922720695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &452576091
@@ -1448,6 +1449,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1922720694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1922720695}
+  - component: {fileID: 1922720696}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1922720695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922720694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 452576090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922720696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922720694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6e7d954eab10c4ca8b4232d2a80e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Throw1
+    clip: {fileID: 8300000, guid: 9145bff9059744440916cf507518aa94, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.762
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Throw2
+    clip: {fileID: 8300000, guid: 775b6de3819aee84a978cf7bdd28ef5f, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.16
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PickUp1
+    clip: {fileID: 8300000, guid: fdbbb9cf2bbfe4d4da695c60267a9f9a, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.592
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BarrelPickUp1
+    clip: {fileID: 8300000, guid: 617297b4a32a52144b6ee7eca085e3ab, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.688
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BarrelPickUp2
+    clip: {fileID: 8300000, guid: 5487394b35dfd5a4ea661306e4bdbdbe, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.677
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HatCollect1
+    clip: {fileID: 8300000, guid: b533539b4e652314092a01d3ff2f6b43, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HatCollect2
+    clip: {fileID: 8300000, guid: 320c1deaacfbf0647a29e836819a6832, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hit1
+    clip: {fileID: 8300000, guid: d8d2fa7dbbefb47439ce4d52f4c30beb, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.76
+    pitch: 0.6
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1943242415
 GameObject:
   m_ObjectHideFlags: 0
