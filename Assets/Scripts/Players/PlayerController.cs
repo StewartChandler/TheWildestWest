@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
                 // Set the transform's rotational velocity
                 transform.Rotate(angularVelocity * Time.deltaTime * 10);
             }
+
         }
     }
 
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
             if (closestObj != null)
             {
                 closestObj.pickupObject(transform, playerRadius);
+                playPickUpSound(closestObj);
                 pickedObject = closestObj;
             }
         }
@@ -134,6 +136,14 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
+                if (Random.Range(0, 2) == 0)
+                {
+                    AudioManager.instance.Play("Throw1");
+                }
+                else
+                {
+                    AudioManager.instance.Play("Throw2");
+                }
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
             }
@@ -170,6 +180,23 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.isPlayerAlive[selfInput.playerIndex] = false;
         }
+
         selfInput.DeactivateInput();
+    }
+
+    private void playPickUpSound(ThrowableObject closestObj)
+    {
+        Debug.Log(closestObj.transform.parent.name);
+        if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
+        {
+            if (Random.Range(0, 2) == 0)
+            {
+                AudioManager.instance.Play("BarrelPickUp1");
+            }
+            else
+            {
+                AudioManager.instance.Play("BarrelPickUp2");
+            }
+        }
     }
 }
