@@ -87,6 +87,7 @@ public class ThrowableObject : MonoBehaviour
         rb.mass = 0;
         rb.useGravity = false;
         if (trail != null) { trail.enabled = false; }
+        Debug.Log(distAway);
     }
 
     // Start is called before the first frame update
@@ -104,7 +105,11 @@ public class ThrowableObject : MonoBehaviour
         distAway = 0;
         foreach (Collider collider in GetComponents<Collider>())
         {
-            distAway = Mathf.Max(distAway, 0.5f * Vector3.Magnitude(collider.bounds.size));
+            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
+        }
+        foreach (Collider collider in GetComponentsInChildren<Collider>())
+        {
+            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
         }
     }
 
