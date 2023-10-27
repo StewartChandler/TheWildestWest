@@ -24,6 +24,7 @@ public class ThrowableObject : MonoBehaviour
     private float holderDist;
     private float yOffset;
     private TrailRenderer trail;
+    private float throwtime;
 
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
@@ -59,11 +60,20 @@ public class ThrowableObject : MonoBehaviour
 
     public void throwObject(Vector3 dir, float throwingSpeed)
     {
+        // not working properly rn whatever, will fix later
+        /*Vector2 newPos = new Vector2(rb.position.x - target.position.x, rb.position.z - target.position.z);
+        float farness = holderDist + distAway + 2.0f;
+        float scale = Mathf.Max(1, farness / newPos.magnitude);
+        newPos = newPos * scale + new Vector2(target.position.x, target.position.z);
+
+        rb.position = new Vector3(newPos.x, target.position.y + 0.5f + yOffset, newPos.y);/**/
+
         rb.position = new Vector3(rb.position.x, target.position.y + yOffset, rb.position.z);
         rb.mass = objMass;
         rb.useGravity = false;
         rb.velocity = (dir * throwingSpeed); // Adjust the throw force as needed.
         state = State.Thrown;
+        throwtime = 0;
 
         if (trail != null)
         {
@@ -103,6 +113,7 @@ public class ThrowableObject : MonoBehaviour
         }
 
         // makes the object be futher away for larger objects
+        // dist away should be 2-dimensional, only a problem with railroad tracks for now though
         distAway = 0;
         yOffset = 0;
         foreach (Collider collider in GetComponents<Collider>())
@@ -141,9 +152,20 @@ public class ThrowableObject : MonoBehaviour
                     state = State.Prop;
                     target = null;
                     rb.useGravity = true;
-                if (trail != null) { trail.enabled = false; }
+                    if (trail != null) { trail.enabled = false; }
+                    break;
                 }
 
+                throwtime += Time.fixedDeltaTime;
+
+                if (trail != null)
+                {
+                    // ajdust trail scale based on speed
+                    trail.widthMultiplier = Mathf.SmoothStep(0f, 1f, rb.velocity.magnitude / 15f);
+
+                    // remove trail after some time
+                    if (throwtime >= 20f) { trail.enabled = false; }
+                }
                 break;
         }
     }
