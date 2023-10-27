@@ -22,6 +22,7 @@ public class ThrowableObject : MonoBehaviour
     private float objMass;
     private float distAway;
     private float holderDist;
+    private float yOffset;
     private TrailRenderer trail;
 
 
@@ -58,7 +59,7 @@ public class ThrowableObject : MonoBehaviour
 
     public void throwObject(Vector3 dir, float throwingSpeed)
     {
-        rb.position = new Vector3(rb.position.x, target.position.y, rb.position.z);
+        rb.position = new Vector3(rb.position.x, target.position.y + yOffset, rb.position.z);
         rb.mass = objMass;
         rb.useGravity = false;
         rb.velocity = (dir * throwingSpeed); // Adjust the throw force as needed.
@@ -103,13 +104,16 @@ public class ThrowableObject : MonoBehaviour
 
         // makes the object be futher away for larger objects
         distAway = 0;
+        yOffset = 0;
         foreach (Collider collider in GetComponents<Collider>())
         {
             distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
+            yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
         foreach (Collider collider in GetComponentsInChildren<Collider>())
         {
             distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
+            yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
     }
 
@@ -123,7 +127,7 @@ public class ThrowableObject : MonoBehaviour
                 float farness = holderDist + distAway + 2.0f;
 
                 // Calculate the desired position based on player's position and forward direction.
-                Vector3 desiredPosition = target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * pickUpOffset.y;
+                Vector3 desiredPosition = target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
 
                 // Lerp the object's position to the desired position for smooth movement.
                 transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.fixedDeltaTime * 10f);
