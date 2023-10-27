@@ -87,7 +87,7 @@ public class ThrowableObject : MonoBehaviour
         rb.mass = 0;
         rb.useGravity = false;
         if (trail != null) { trail.enabled = false; }
-        Debug.Log(distAway);
+        // Debug.Log(distAway);
     }
 
     // Start is called before the first frame update
