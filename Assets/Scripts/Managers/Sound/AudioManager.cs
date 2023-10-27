@@ -31,10 +31,18 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
-
-    public void Play(string sound)
+    /**
+        Takes an array of strings and plays a random sound from the array
+    */
+    public void Play(params string[] sound)
     {
-        Sound s = Array.Find(sounds, item => item.name == sound);
+        // get the length of the array
+        int length = sound.Length;
+        // get a random index
+        int index = UnityEngine.Random.Range(0, length);
+        // get the sound at the index
+        string randomSound = sound[index];
+        Sound s = Array.Find(sounds, item => item.name == randomSound);
         s.source.Play();
     }
     public void Stop(string sound)

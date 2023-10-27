@@ -136,14 +136,7 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
-                if (Random.Range(0, 2) == 0)
-                {
-                    AudioManager.instance.Play("Throw1");
-                }
-                else
-                {
-                    AudioManager.instance.Play("Throw2");
-                }
+                AudioManager.instance.Play("Throw1", "Throw2");
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
             }
@@ -152,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage()
     {
-        Debug.Log(hatStack.getNumHats());
+        AudioManager.instance.Play("Hit1");
         if (hatStack.getNumHats() > 0)
         {
             hatStack.popHat();
@@ -189,14 +182,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log(closestObj.transform.parent.name);
         if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
         {
-            if (Random.Range(0, 2) == 0)
-            {
-                AudioManager.instance.Play("BarrelPickUp1");
-            }
-            else
-            {
-                AudioManager.instance.Play("BarrelPickUp2");
-            }
+            AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
+        }
+        else
+        {
+            AudioManager.instance.Play("PickUp1");
         }
     }
 }

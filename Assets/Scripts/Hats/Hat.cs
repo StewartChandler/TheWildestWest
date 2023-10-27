@@ -207,15 +207,7 @@ public class Hat : MonoBehaviour
                 {
                     renderer.enabled = true;
                 }
-                if (Random.Range(0, 2) == 0)
-                {
-                    AudioManager.instance.Play("HatCollect1");
-                }
-                else
-                {
-                    AudioManager.instance.Play("HatCollect2");
-                }
-
+                AudioManager.instance.Play("HatCollect1", "HatCollect2");
                 hs.pushHat(gameObject);
             }
         }

@@ -1508,6 +1508,13 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: PickUp1
+    clip: {fileID: 8300000, guid: fdbbb9cf2bbfe4d4da695c60267a9f9a, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.592
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: BarrelPickUp1
     clip: {fileID: 8300000, guid: 617297b4a32a52144b6ee7eca085e3ab, type: 3}
     mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
@@ -1534,6 +1541,13 @@ MonoBehaviour:
     mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
     volume: 1
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Hit1
+    clip: {fileID: 8300000, guid: d8d2fa7dbbefb47439ce4d52f4c30beb, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.76
+    pitch: 0.6
     loop: 0
     source: {fileID: 0}
 --- !u!1 &1943242415
