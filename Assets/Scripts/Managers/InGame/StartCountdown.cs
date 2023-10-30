@@ -5,7 +5,7 @@ using TMPro;
 
 public class StartCountdown : MonoBehaviour
 {
-    public float timeRemaining = 5;
+    public float timeRemaining = 2;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
 
@@ -28,12 +28,11 @@ public class StartCountdown : MonoBehaviour
             if (timeRemaining > 1)
             {
                 timeRemaining -= Time.unscaledDeltaTime; // Use unscaledDeltaTime to ignore time scale
-                float seconds = Mathf.FloorToInt(timeRemaining);
-                timeText.text = seconds.ToString();
+                timeText.text = "READY!";
             }
             else if (timeRemaining > 0)
             {
-                timeText.text = "GO!";
+                timeText.text = "FIGHT!";
                 timeRemaining -= Time.unscaledDeltaTime;
             }
             else
