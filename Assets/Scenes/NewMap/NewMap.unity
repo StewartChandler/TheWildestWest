@@ -5329,7 +5329,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1551989923
 MonoBehaviour:
@@ -5343,7 +5343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8668f210ef55314cad996ed9726e392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 4
+  timeRemaining: 2
   timerIsRunning: 0
   timeText: {fileID: 1551989924}
   inGameTimer: {fileID: 64956649}
@@ -5367,7 +5367,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: READY!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83bea019ea401490f9e2c6e1aa91802b, type: 2}
   m_sharedMaterial: {fileID: -4204302168127036520, guid: 83bea019ea401490f9e2c6e1aa91802b, type: 2}

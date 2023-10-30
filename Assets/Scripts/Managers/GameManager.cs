@@ -20,25 +20,37 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     [SerializeField] private UnityEvent _onGameStart;
 
+    public bool timerFinished = false;
+    FadeInOut fade;
+    private bool fadeing = true;
+
 
     private void Awake()
     {
         currentScene = SceneManager.GetActiveScene();
+        fade = FindObjectOfType<FadeInOut>();
+
     }
     private void Update()
     {
         // refresh currentScene on scene change
         if (currentScene.name == "PlayerSelect")
         {
-            if (numPlayers >= 2 && numPlayers == playersReady)
+            if (numPlayers >= 2 && numPlayers == playersReady && timerFinished)
             {
-                for (int i = 0; i < playersReady; i++)
+                if (fadeing)
                 {
-                    isPlayerAlive[i] = true;
+                    ChangeSceneRoutine();
                 }
-                Debug.Log("Starting Game");
-                _onGameStart.Invoke();
-
+                else
+                {
+                    for (int i = 0; i < playersReady; i++)
+                    {
+                        isPlayerAlive[i] = true;
+                    }
+                    Debug.Log("Starting Game");
+                    _onGameStart.Invoke();
+                }
             }
         }
         if (SceneManager.GetActiveScene().name == "NewMap")
@@ -93,6 +105,19 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ChangeSceneRoutine()
+    {
+        StartCoroutine(ChangeScene());
+    }
+
+    public IEnumerator ChangeScene()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(fade.TimeToFade);
+        fadeing = false;
+
     }
 
     public void SwitchScene()
