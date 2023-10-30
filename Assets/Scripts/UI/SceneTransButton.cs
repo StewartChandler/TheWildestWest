@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 public class SceneTransButton : MonoBehaviour
 {
-    public Button button;
     public string sceneName;
+    FadeInOut fade;
 
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(ChangeScene);
+        fade = FindObjectOfType<FadeInOut>();
     }
 
-    void ChangeScene()
+    public void ChangeSceneButton()
     {
+        StartCoroutine(ChangeScene());
+    }
+
+    public IEnumerator ChangeScene()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(fade.TimeToFade);
         SceneManager.LoadScene(sceneName);
     }
 }
