@@ -146,7 +146,8 @@ public class PlayerController : MonoBehaviour
     public void takeDamage()
     {
         AudioManager.instance.Play("Hit1");
-        if (hatStack.getNumHats() > 0)
+
+        if (hatStack.getNumHats() > 1)
         {
             hatStack.popHat();
             if (pickedObject != null)

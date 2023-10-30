@@ -44,7 +44,6 @@ public class CountdownTimer : MonoBehaviour
             }
             else
             {
-                Debug.Log("player select timer finished");
                 timeRemaining = 0;
                 timerIsRunning = false;
                 timeText.text = "";
