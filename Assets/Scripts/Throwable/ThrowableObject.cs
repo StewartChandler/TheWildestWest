@@ -72,7 +72,7 @@ public class ThrowableObject : MonoBehaviour
 
         // instead just throw from desired position
         Vector3 desiredPos = calcDesiredPos();
-        rb.position = desiredPos;
+        rb.position = new Vector3(desiredPos.x, 0.5f + yOffset, desiredPos.y);
 
         rb.mass = objMass;
         rb.useGravity = false;
