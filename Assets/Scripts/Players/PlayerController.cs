@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private ThrowableObject pickedObject;
     private float playerRadius;
     private float objMass;
+    public float invincibilityOnHit = 1f;
+    private float nextHit = 0.0f;
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
@@ -134,6 +136,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void DropObject()
+    {
+        if (pickedObject != null)
+        {
+            pickedObject = null;
+        }
+    }
+
     void ThrowObject()
     {
         currentScene = SceneManager.GetActiveScene();
@@ -151,21 +162,25 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage(Vector3 displ)
     {
+        if (Time.time > nextHit)
+        {
         Instantiate(hitEffect);
-        AudioManager.instance.Play("Hit1");
+            nextHit = Time.time + invincibilityOnHit;
+            AudioManager.instance.Play("Hit1");
 
-        if (hatStack.getNumHats() > 1)
-        {
-            hatStack.popHat(displ);
-            if (pickedObject != null)
+            if (hatStack.getNumHats() > 1)
             {
-                pickedObject.dropObject();
-                pickedObject = null;
+                hatStack.popHat(displ);
+                if (pickedObject != null)
+                {
+                    pickedObject.dropObject();
+                    pickedObject = null;
+                }
             }
-        }
-        else
-        {
-            KillPlayer();
+            else
+            {
+                KillPlayer();
+            }
         }
     }
 
