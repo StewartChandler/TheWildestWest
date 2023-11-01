@@ -58,17 +58,22 @@ public class ThrowableObject : MonoBehaviour
         return closestThrowable;
     }
 
+    Vector3 calcDesiredPos()
+    {
+
+        float farness = holderDist + distAway + 2.0f;
+
+        // Calculate the desired position based on player's position and forward direction.
+        return target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
+    }
+
     public void throwObject(Vector3 dir, float throwingSpeed)
     {
-        // not working properly rn whatever, will fix later
-        /*Vector2 newPos = new Vector2(rb.position.x - target.position.x, rb.position.z - target.position.z);
-        float farness = holderDist + distAway + 2.0f;
-        float scale = Mathf.Max(1, farness / newPos.magnitude);
-        newPos = newPos * scale + new Vector2(target.position.x, target.position.z);
 
-        rb.position = new Vector3(newPos.x, target.position.y + 0.5f + yOffset, newPos.y);/**/
+        // instead just throw from desired position
+        Vector3 desiredPos = calcDesiredPos();
+        rb.position = desiredPos;
 
-        rb.position = new Vector3(rb.position.x, target.position.y + yOffset, rb.position.z);
         rb.mass = objMass;
         rb.useGravity = false;
         rb.velocity = (dir * throwingSpeed); // Adjust the throw force as needed.
@@ -135,10 +140,8 @@ public class ThrowableObject : MonoBehaviour
             case State.Prop:
                 break;
             case State.Held:
-                float farness = holderDist + distAway + 2.0f;
-
                 // Calculate the desired position based on player's position and forward direction.
-                Vector3 desiredPosition = target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
+                Vector3 desiredPosition = calcDesiredPos();
 
                 // Lerp the object's position to the desired position for smooth movement.
                 transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.fixedDeltaTime * 10f);
