@@ -47,20 +47,20 @@ public class HatStack : MonoBehaviour
         hats.Push(hat);
     }
 
-    public void popHat()
+    public void popHat(Vector3 displ)
     {
         GameObject hatObj = hats.Pop();
 
         hatObj.transform.SetParent(null, true);
         // Print the parent of the hat object
-        hatObj.GetComponent<Hat>().launch();
+        hatObj.GetComponent<Hat>().launch(displ);
     }
 
     public void popAllHats()
     {
         while (hats.Count > 0)
         {
-            popHat();
+            popHat(Random.onUnitSphere);
         }
     }
 

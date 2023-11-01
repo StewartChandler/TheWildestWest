@@ -52,12 +52,16 @@ public class Hat : MonoBehaviour
         }
     }
 
-    public void launch()
+    public void launch(Vector3 displ)
     {
         rb.isKinematic = false;
-        rb.useGravity = true;
-        Vector3 dir = transform.rotation * Vector3.up;
-        rb.AddForce(500.0f * dir);
+        rb.useGravity = true; 
+        Vector3 dir = displ;
+        float dist = Vector3.Magnitude(dir);
+        dir *= 1/dist;
+        dist = Mathf.Max(dist, 1);
+        dir += Vector3.up;
+        rb.AddForce(25.0f * dist * dir);
         rb.angularVelocity = Random.onUnitSphere;
 
         foreach (Collider c in colliders)
