@@ -181,7 +181,7 @@ public class ThrowableObject : MonoBehaviour
             if (collision.gameObject != target.gameObject)
             {
                 state = State.Prop;
-                collision.gameObject.GetComponent<PlayerController>().takeDamage();
+                collision.gameObject.GetComponent<PlayerController>().takeDamage(target.position - collision.gameObject.transform.position);
                 target = null;
                 rb.useGravity = true;
 

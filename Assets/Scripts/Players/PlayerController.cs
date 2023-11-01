@@ -143,13 +143,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void takeDamage()
+    public void takeDamage(Vector3 pos)
     {
         AudioManager.instance.Play("Hit1");
 
         if (hatStack.getNumHats() > 1)
         {
-            hatStack.popHat();
+            hatStack.popHat(pos);
             if (pickedObject != null)
             {
                 pickedObject.dropObject();
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
 
     private void playPickUpSound(ThrowableObject closestObj)
     {
-        Debug.Log(closestObj.transform.parent.name);
+        // Debug.Log(closestObj.transform.parent.name);
         if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
         {
             AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
