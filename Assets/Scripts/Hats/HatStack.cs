@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HatStack : MonoBehaviour
 {
     [SerializeField]
+    private List<GameObject> hatVariants;
+
+    [SerializeField]
     private GameObject hatPrefab;
 
     private int startingNumHats = 3;
+    private int pIndex;
 
     private Stack<GameObject> hats = new Stack<GameObject>();
     Scene currentScene;
@@ -16,15 +21,25 @@ public class HatStack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        resetHats();
         currentScene = SceneManager.GetActiveScene();
 
+        // I hate this code lol
+        // PlayerInput[] playerInputs = FindObjectsOfType<PlayerInput>();
+
+    }
+
+    private void Awake()
+    {
+        PlayerInput player = GetComponentInParent<PlayerInput>();
+        pIndex = player.playerIndex;
+
+        resetHats();
     }
 
     private void addHat()
     {
         currentScene = SceneManager.GetActiveScene();
-        GameObject newHat = Instantiate(hatPrefab);
+        GameObject newHat = Instantiate(hatVariants[pIndex]);
         pushHat(newHat);
     }
 
@@ -37,7 +52,7 @@ public class HatStack : MonoBehaviour
         // }
         // else
         // {
-        hat.transform.position += new Vector3(0, 0.4f * (hats.Count + 1), 0);
+        hat.transform.position += new Vector3(0, 0.2f * (hats.Count + 1), 0);
         // }
         hat.transform.rotation = Quaternion.Euler(
             Random.Range(-15.0f, 15.0f),
