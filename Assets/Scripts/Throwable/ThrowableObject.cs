@@ -61,7 +61,7 @@ public class ThrowableObject : MonoBehaviour
     Vector3 calcDesiredPos()
     {
 
-        float farness = holderDist + distAway;
+        float farness = holderDist + distAway + 0.5f;
 
         // Calculate the desired position based on player's position and forward direction.
         return target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
