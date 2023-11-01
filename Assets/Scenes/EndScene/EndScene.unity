@@ -817,10 +817,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0560a89cc16dd534dab6443788d920bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 1677290660}
   fadein: 0
   fadeout: 0
-  TimeToFade: 0
+  TimeToFade: 0.25
 --- !u!1 &1677290656
 GameObject:
   m_ObjectHideFlags: 0

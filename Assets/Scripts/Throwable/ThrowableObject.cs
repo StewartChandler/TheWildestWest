@@ -17,7 +17,7 @@ public class ThrowableObject : MonoBehaviour
 
     private Transform target = null;
     private Rigidbody rb;
-    private Vector3 pickUpOffset = Vector3.Normalize(new Vector3(1.0f, 2f, 0.0f));
+    private Vector3 pickUpOffset = new Vector3(1.0f, 0.5f, 0.0f);
     private static int throwableMask = 8; // Throwable
     private float objMass;
     private float distAway;
@@ -61,7 +61,7 @@ public class ThrowableObject : MonoBehaviour
     Vector3 calcDesiredPos()
     {
 
-        float farness = holderDist + distAway + 2.0f;
+        float farness = holderDist + distAway;
 
         // Calculate the desired position based on player's position and forward direction.
         return target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
