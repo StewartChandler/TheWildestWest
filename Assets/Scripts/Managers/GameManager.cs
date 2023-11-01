@@ -161,6 +161,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EndRound()
+    {
+        GameObject playerManager = GameObject.Find("PlayerManager");
+        PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
+
+        // Iterate through each player, record the player with the msot hats, and kill everyone else
+        int maxPlayer = 0;
+        int maxHats = 0;
+        for (int i = 0; i < numPlayers; i++)
+        {
+            if (playerControllers[i].GetComponentInChildren<HatStack>().getNumHats() > maxHats)
+            {
+                maxPlayer = i;
+                maxHats = playerControllers[i].GetComponentInChildren<HatStack>().getNumHats();
+            }
+        }
+        for (int i = 0; i < numPlayers; i++)
+        {
+            if (i != maxPlayer)
+            {
+                playerControllers[i].GetComponent<PlayerController>().KillPlayer();
+            }
+        }
+    }
+
     public void StartGame()
     {
         // Add logic to start the game here

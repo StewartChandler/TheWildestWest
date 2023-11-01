@@ -7,10 +7,13 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 91;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
+
+    GameManager gameManager;
     private void Start()
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Update()
     {
@@ -36,8 +39,11 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
-                timeText.text = "NT lil bro";
-                timeText.color = Color.black;
+                gameManager.EndRound();
+                timeText.text = "Most Hats Wins!";
+                // timeText.text = "NT lil bro";
+                // timeText.color = Color.black;
+
             }
         }
     }
