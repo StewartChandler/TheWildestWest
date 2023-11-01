@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+
     private CharacterController controller;
     private HatStack hatStack;
     private Vector3 playerVelocity;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     Scene currentScene;
 
+    private GameObject hitEffect;
+
 
     private void Start()
     {
@@ -37,6 +40,9 @@ public class PlayerController : MonoBehaviour
         Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
         Vector2 psizexy = new Vector2(psize.x, psize.y);
         playerRadius = 0.5f * psizexy.magnitude;
+
+        // think this is bad performance wise
+        hitEffect = Resources.Load<GameObject>("vfx_graph_onhit");
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -143,13 +149,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void takeDamage(Vector3 pos)
+    public void takeDamage(Vector3 displ)
     {
+        Instantiate(hitEffect);
         AudioManager.instance.Play("Hit1");
 
         if (hatStack.getNumHats() > 1)
         {
-            hatStack.popHat(pos);
+            hatStack.popHat(displ);
             if (pickedObject != null)
             {
                 pickedObject.dropObject();
