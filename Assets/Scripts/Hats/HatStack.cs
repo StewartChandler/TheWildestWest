@@ -52,7 +52,7 @@ public class HatStack : MonoBehaviour
         // }
         // else
         // {
-        hat.transform.position += new Vector3(0, 0.2f * (hats.Count + 1), 0);
+        hat.transform.position += new Vector3(0, 0.3f * hats.Count, 0);
         // }
         hat.transform.rotation = Quaternion.Euler(
             Random.Range(-15.0f, 15.0f),
