@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class CameraMovement : MonoBehaviour
     private GameObject[] players;
     public float smoothSpeed = 5f; // Adjust this value to control the smoothness
 
+    private GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         players = GameObject.FindGameObjectsWithTag("Player");
         transform.rotation = Quaternion.Euler(45f, 0f, 0f);
     }
@@ -43,13 +47,25 @@ public class CameraMovement : MonoBehaviour
     Vector3 CalculateCameraTargetPosition()
     {
         Vector3 centerPosition = Vector3.zero;
+        int livePlayers = 0;
 
         foreach (GameObject p in players)
-        {
-            centerPosition += p.transform.position;
+        {   
+            PlayerInput playerInput = p.GetComponent<PlayerInput>();
+
+            if (gameManager.isPlayerAlive[playerInput.playerIndex])
+            {
+                centerPosition += p.transform.position;
+                livePlayers += 1;
+            }
         }
 
-        return centerPosition / players.Length;
+        if (livePlayers != 0)
+        {
+            return centerPosition / livePlayers;
+        }
+
+        return Offset;
     }
 
     float CalculateMaxPlayerDistance()
@@ -60,8 +76,11 @@ public class CameraMovement : MonoBehaviour
         {
             for (int j = i + 1; j < players.Length; j++)
             {
-                // don't calculate distance when one of the players position is below -8 (fallen off map?)
-                if (players[i].transform.position.z <= -8 || players[j].transform.position.z <= -8)
+                PlayerInput playerInput1 = players[i].GetComponent<PlayerInput>();
+                PlayerInput playerInput2 = players[j].GetComponent<PlayerInput>();
+
+                // don't calculate distance when one of the players aren't alive
+                if (gameManager.isPlayerAlive[playerInput1.playerIndex] || gameManager.isPlayerAlive[playerInput2.playerIndex])
                 {
                     continue;
                 }
