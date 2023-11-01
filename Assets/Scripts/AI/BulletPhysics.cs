@@ -44,7 +44,7 @@ public class BulletPhysics : MonoBehaviour
             PlayerController pc = collision.gameObject.GetComponentInChildren<PlayerController>();
             if (pc != null)
             {
-                pc.takeDamage();
+                pc.takeDamage(Vector3.up);
             }
         }
     }
