@@ -115,6 +115,9 @@ public class GameManager : MonoBehaviour
     public IEnumerator ChangeScene()
     {
         fade.FadeIn();
+        GameObject playerManager = GameObject.Find("PlayerManager");
+        PlayerInputManager inputManager = playerManager.GetComponent<PlayerInputManager>();
+        inputManager.DisableJoining();
         yield return new WaitForSeconds(fade.TimeToFade);
         fadeing = false;
 
@@ -184,9 +187,10 @@ public class GameManager : MonoBehaviour
                 characterController.enabled = false;
                 players[i].transform.position = playerSpawns[i].position;
                 characterController.enabled = true;
+                Debug.Log("DROPPING ITEMS");
+                PlayerController playerController = players[i].GetComponent<PlayerController>();
+                playerController.DropObject();
             }
         }
-
-
     }
 }
