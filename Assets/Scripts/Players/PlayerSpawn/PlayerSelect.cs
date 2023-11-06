@@ -23,6 +23,14 @@ public class PlayerSelect : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            gameManager.testStart = true;
+
+        }
+    }
     private void OnPlayerJoined(PlayerInput playerInput)
     {
         SetPlayerPositionAndColor(playerInput.transform);

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Transform[] playerSpawns = new Transform[4];
     public GameObject playerPrefab;
     [SerializeField] private UnityEvent _onGameStart;
+    public bool testStart = false;
 
     public bool timerFinished = false;
     FadeInOut fade;
@@ -36,6 +37,19 @@ public class GameManager : MonoBehaviour
         // refresh currentScene on scene change
         if (currentScene.name == "PlayerSelect")
         {
+            if (testStart)
+            {
+                // Instantiate player input for Player 2 (KeyboardLeft)
+                var player2 = Instantiate(playerPrefab, playerSpawns[2].position, playerSpawns[2].rotation, gameObject.transform);
+                player2.GetComponent<PlayerInput>().SwitchCurrentControlScheme("KeyboardLeft", Keyboard.current);
+                players[1] = player2.GetComponent<PlayerInput>();
+                player2.name = "Player2";
+                numPlayers = 2;
+                playersReady = 2;
+                timerFinished = true;
+                testStart = false;
+
+            }
             if (numPlayers >= 2 && numPlayers == playersReady && timerFinished)
             {
                 if (fadeing)
@@ -193,29 +207,18 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
 
 
-        if (numPlayers == 0 || numPlayers == 1)
+        // iterate through the players and set the spawn points
+        for (int i = 0; i < numPlayers; i++)
         {
+            Debug.Log("CHANGING POISITON");
+            CharacterController characterController = players[i].GetComponent<CharacterController>();
+            characterController.enabled = false;
+            players[i].transform.position = playerSpawns[i].position;
+            characterController.enabled = true;
+            Debug.Log("DROPPING ITEMS");
+            PlayerController playerController = players[i].GetComponent<PlayerController>();
+            playerController.DropObject();
+        }
 
-            // Instantiate player input for Player 2 (KeyboardLeft)
-            var player2 = Instantiate(playerPrefab, playerSpawns[2].position, playerSpawns[2].rotation, gameObject.transform);
-            player2.GetComponent<PlayerInput>().SwitchCurrentControlScheme("KeyboardLeft", Keyboard.current);
-            players[1] = player2.GetComponent<PlayerInput>();
-            player2.name = "Player2";
-        }
-        else
-        {
-            // iterate through the players and set the spawn points
-            for (int i = 0; i < numPlayers; i++)
-            {
-                Debug.Log("CHANGING POISITON");
-                CharacterController characterController = players[i].GetComponent<CharacterController>();
-                characterController.enabled = false;
-                players[i].transform.position = playerSpawns[i].position;
-                characterController.enabled = true;
-                Debug.Log("DROPPING ITEMS");
-                PlayerController playerController = players[i].GetComponent<PlayerController>();
-                playerController.DropObject();
-            }
-        }
     }
 }
