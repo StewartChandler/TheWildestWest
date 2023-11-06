@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
                 player2.GetComponent<PlayerInput>().SwitchCurrentControlScheme("KeyboardLeft", Keyboard.current);
                 players[1] = player2.GetComponent<PlayerInput>();
                 player2.name = "Player2";
-                numPlayers = 2;
-                playersReady = 2;
+                // numPlayers++;
+                playersReady++;
                 timerFinished = true;
                 testStart = false;
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour
     public GameManager gameManager;
 
     private float gravityValue = -9.81f;
+    private float vibrationIntensity = 1f;
+    private bool isVibrating = false;
+    private float vibrationDuration = 0.2f; // Adjust the duration as needed
+    private PlayerInput playerInput;
+
 
     Scene currentScene;
 
@@ -37,6 +43,8 @@ public class PlayerController : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        playerInput = GetComponent<PlayerInput>();
+
 
         // calculate distance away
         Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
@@ -164,7 +172,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time > nextHit)
         {
-        Instantiate(hitEffect);
+            Instantiate(hitEffect);
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
 
@@ -180,6 +188,36 @@ public class PlayerController : MonoBehaviour
             else
             {
                 KillPlayer();
+            }
+            StartVibration(vibrationIntensity, vibrationDuration);
+        }
+    }
+    private void StartVibration(float intensity, float duration)
+    {
+        if (playerInput != null)
+        {
+            Gamepad gamepad = playerInput.devices[0] as Gamepad;
+            if (gamepad != null)
+            {
+                gamepad.SetMotorSpeeds(intensity, intensity);
+                isVibrating = true;
+                StartCoroutine(StopVibrationAfterDuration(duration));
+            }
+        }
+    }
+
+    private IEnumerator StopVibrationAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        // Stop the vibration
+        if (playerInput != null)
+        {
+            Gamepad gamepad = playerInput.devices[0] as Gamepad;
+            if (gamepad != null)
+            {
+                gamepad.SetMotorSpeeds(0, 0);
+                isVibrating = false;
             }
         }
     }
