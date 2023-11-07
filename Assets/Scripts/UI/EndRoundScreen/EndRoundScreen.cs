@@ -22,7 +22,7 @@ public class EndRoundScreen : MonoBehaviour
             "POP OFF Player {0}!",
             "Holay Molay Player {0}!",
             "Player {0} Is Hitting The Griddy!",
-            "NO CAP Player 1 {0} Is Popping!",
+            "NO CAP Player {0} Is Popping!",
             "Player {0} Is Hitting The Nae Nae",
             "Calm Down Player {0}!",
             "SHEESH Player {0} Takes The Round!",
