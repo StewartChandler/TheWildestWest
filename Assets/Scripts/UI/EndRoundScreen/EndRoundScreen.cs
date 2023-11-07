@@ -41,7 +41,7 @@ public class EndRoundScreen : MonoBehaviour
         UpdateScores();
         UpdateMessage();
         ShowUI();
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.0f);
         HideUI();
 
         gameManager.ending = true;
