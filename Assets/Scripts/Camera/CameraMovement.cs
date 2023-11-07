@@ -26,22 +26,25 @@ public class CameraMovement : MonoBehaviour
     {
         //gameObject.transform.position = player.transform.position;
         //gameObject.transform.Translate(Offset);
+        if (gameManager.firstPass)
+        {
 
-        Vector3 targetPosition = CalculateCameraTargetPosition();
-        targetPosition += Offset;
+            Vector3 targetPosition = CalculateCameraTargetPosition();
+            targetPosition += Offset;
 
-        // Camera up down, back forward (zoom) distance
-        float maxDistance = CalculateMaxPlayerDistance();
+            // Camera up down, back forward (zoom) distance
+            float maxDistance = CalculateMaxPlayerDistance();
 
-        float upOffset = Mathf.Lerp(16f, 26f, maxDistance / 70f); // v1 = v2 * 0.8
-        float backOffset = Mathf.Lerp(-25.6f, -32f, maxDistance / 70f); // v1 = v2 * 0.8
+            float upOffset = Mathf.Lerp(16f, 26f, maxDistance / 70f); // v1 = v2 * 0.8
+            float backOffset = Mathf.Lerp(-25.6f, -32f, maxDistance / 70f); // v1 = v2 * 0.8
 
-        targetPosition.y += upOffset - 20;
-        targetPosition.z += backOffset + 25;
+            targetPosition.y += upOffset - 20;
+            targetPosition.z += backOffset + 25;
 
-        // Use Lerp to smoothly interpolate the camera's position
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
-        transform.position = smoothedPosition;
+            // Use Lerp to smoothly interpolate the camera's position
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+            transform.position = smoothedPosition;
+        }
     }
 
     Vector3 CalculateCameraTargetPosition()
@@ -50,7 +53,7 @@ public class CameraMovement : MonoBehaviour
         int livePlayers = 0;
 
         foreach (GameObject p in players)
-        {   
+        {
             PlayerInput playerInput = p.GetComponent<PlayerInput>();
 
             if (gameManager.isPlayerAlive[playerInput.playerIndex])

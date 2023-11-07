@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
     FadeInOut fade;
     private bool fadeing = true;
 
+    public EndRoundScreen endRoundScreen;
+    public bool firstPass = true;
+
+    public bool ending = false;
+    public int currWinner = 0;
+    bool someoneWon = false;
+
 
     private void Awake()
     {
@@ -46,7 +53,7 @@ public class GameManager : MonoBehaviour
                 player2.name = "Player2";
                 // numPlayers++;
                 playersReady++;
-                timerFinished = true;
+                // timerFinished = true;
                 testStart = false;
 
             }
@@ -71,55 +78,80 @@ public class GameManager : MonoBehaviour
         {
             if (isPlayerAlive.Count(x => x) <= 1)
             {
+
                 // add a point to the player(s) alive at end of round
-                bool someoneWon = false;
-                for (int i = 0; i < playersReady; i++)
+                if (firstPass)
                 {
-                    if (isPlayerAlive[i])
+                    firstPass = false;
+                    for (int i = 0; i < playersReady; i++)
                     {
-                        playerScores[i]++;
-                        // see if a player has won
-                        if (playerScores[i] >= 3)
+                        if (isPlayerAlive[i])
                         {
-                            someoneWon = true;
+                            playerScores[i]++;
+                            currWinner = i;
+                            // see if a player has won
+                            if (playerScores[i] >= 3)
+                            {
+                                someoneWon = true;
+                            }
                         }
+                    }
+                    Debug.Log(endRoundScreen);
+                    StartCoroutine(endRoundScreen.DisplayEndRoundUI());
+                }
+                // manage the hats
+
+                if (ending)
+                {
+                    Debug.Log("Ending");
+                    ending = false;
+                    firstPass = true;
+                    for (int i = 0; i < playersReady; i++)
+                    {
+                        if (!isPlayerAlive[i])
+                        {
+                            isPlayerAlive[i] = true;
+                        }
+                    }
+
+
+                    // if someone has won, go to the end screen, else reset the game arena
+                    GameObject playerManager = GameObject.Find("PlayerManager");
+                    PlayerInput[] playerInputs = playerManager.GetComponentsInChildren<PlayerInput>();
+                    if (!someoneWon)
+                    {
+
+
+                        // activate playerinput and reset the scene
+                        foreach (PlayerInput playerInput in playerInputs)
+                        {
+                            // move each player to their respective spawn point
+                            CharacterController characterController = playerInput.GetComponent<CharacterController>();
+                            characterController.enabled = false;
+                            playerInput.transform.position = playerSpawns[playerInput.playerIndex].position;
+                            playerInput.transform.rotation = playerSpawns[playerInput.playerIndex].rotation;
+                            characterController.enabled = true;
+                            playerInput.ActivateInput();
+                        }
+                        ManageHats();
+                        SwitchScene();
                     }
                     else
                     {
-                        isPlayerAlive[i] = true;
-                    }
-                }
-                // manage the hats
-                ManageHats();
 
-                // if someone has won, go to the end screen, else reset the game arena
-                GameObject playerManager = GameObject.Find("PlayerManager");
-                PlayerInput[] playerInputs = playerManager.GetComponentsInChildren<PlayerInput>();
-                if (!someoneWon)
-                {
-                    // activate playerinput and reset the scene
-                    foreach (PlayerInput playerInput in playerInputs)
-                    {
-                        // move each player to their respective spawn point
-                        CharacterController characterController = playerInput.GetComponent<CharacterController>();
-                        characterController.enabled = false;
-                        playerInput.transform.position = playerSpawns[playerInput.playerIndex].position;
-                        characterController.enabled = true;
-                        playerInput.ActivateInput();
+                        foreach (PlayerInput playerInput in playerInputs)
+                        {
+                            playerInput.DeactivateInput();
+                        }
+                        ManageHats();
+                        SceneManager.LoadScene("EndScene");
                     }
-                    SwitchScene();
-                }
-                else
-                {
-                    foreach (PlayerInput playerInput in playerInputs)
-                    {
-                        playerInput.DeactivateInput();
-                    }
-                    SceneManager.LoadScene("EndScene");
                 }
             }
         }
     }
+
+
 
     public void ChangeSceneRoutine()
     {

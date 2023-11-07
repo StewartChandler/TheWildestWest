@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentScene.name != "PlayerSelect")
+        if (currentScene.name != "PlayerSelect" && gameManager.firstPass == true)
         {
             Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
             float speedMul = 1.0f;
