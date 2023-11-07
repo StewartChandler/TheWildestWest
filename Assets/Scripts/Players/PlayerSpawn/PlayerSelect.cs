@@ -48,7 +48,8 @@ public class PlayerSelect : MonoBehaviour
     void SetPlayerPositionAndColor(Transform player)
     {
         // Set the player's position to 4 above the spawn platform
-        player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, 2f, 0f);
+        player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, 2.8f, 0f);
+        // player.localScale = new Vector3(1f, 1f, 1f);
 
         // Increment the number of players
         numPlayers++;

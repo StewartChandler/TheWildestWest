@@ -15,18 +15,18 @@ public class EndRoundScreen : MonoBehaviour
 
     public TextMeshProUGUI[] scores;
     public TextMeshProUGUI message;
-    public string[] messages = new string[]
-{
-    "Yeeeeeehaw Player {0} Takes The Dub!",
-    "Player {0} Is COOKING!",
-    "POP OFF Player {0}!",
-    "Holay Molay Player {0}!",
-    "Player {0} Is Hitting The Griddy!",
-    "NO CAP Player 1 {0} Is Popping!",
-    "Player {0} Is Hitting The Nae Nae",
-    "Calm down Player {0}!",
-    "SHEESH Player {0} Takes The Round!",
-};
+    private string[] messages = new string[]
+        {
+            "Yeeeeeehaw Player {0} Takes The Dub!",
+            "Player {0} Is COOKING!",
+            "POP OFF Player {0}!",
+            "Holay Molay Player {0}!",
+            "Player {0} Is Hitting The Griddy!",
+            "NO CAP Player 1 {0} Is Popping!",
+            "Player {0} Is Hitting The Nae Nae",
+            "Calm Down Player {0}!",
+            "SHEESH Player {0} Takes The Round!",
+        };
     void Start()
     {
         // get game manager
