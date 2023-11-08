@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public bool ending = false;
     public int currWinner = 0;
     bool someoneWon = false;
+    public bool isPaused = false;
 
 
     private void Awake()

@@ -115,6 +115,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 28f22a34-42ab-4f00-8740-f5a3efc88679
     m_ActionName: Player/Ready[/Keyboard/enter,/Keyboard/e,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3026373247252589846}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSettings
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 88682718-4baf-46b1-96e2-e10f4add1093
+    m_ActionName: Player/Settings[/Keyboard/backslash,/XInputControllerWindows/start,/XInputControllerWindows/select]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: KeyboardRight
   m_DefaultActionMap: Player
@@ -159,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupRange: 5
+  invincibilityOnHit: 1
   playerPrefab: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!33 &8950099759588822593
