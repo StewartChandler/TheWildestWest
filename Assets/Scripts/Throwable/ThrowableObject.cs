@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -56,6 +57,15 @@ public class ThrowableObject : MonoBehaviour
         }
 
         return closestThrowable;
+    }
+
+    public void resetState() {
+        state = State.Prop;
+        target = null;
+        rb.useGravity = true;
+        rb.mass = objMass;
+
+        if (trail != null) { trail.enabled = false; }
     }
 
     Vector3 calcDesiredPos()
@@ -183,6 +193,7 @@ public class ThrowableObject : MonoBehaviour
                 state = State.Prop;
                 collision.gameObject.GetComponent<PlayerController>().takeDamage(target.position - collision.gameObject.transform.position);
                 target = null;
+                rb.mass = objMass;
                 rb.useGravity = true;
 
                 if (trail != null) { trail.enabled = false; }
