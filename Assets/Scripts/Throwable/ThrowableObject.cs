@@ -27,6 +27,48 @@ public class ThrowableObject : MonoBehaviour
     private TrailRenderer trail;
     private float throwtime;
 
+    private Material highlightMaterial;
+    private Material originalMaterial;
+    private Renderer objectRenderer;
+
+    public void activateHighlight()
+    {
+        // to not be affected by tumbleweed for now
+        if (originalMaterial != null)
+        {
+            objectRenderer.material = highlightMaterial;
+        }
+    }
+
+    public void removeHighlight()
+    {
+        if (originalMaterial != null)
+        {
+            objectRenderer.material = originalMaterial;
+        }
+    }
+
+    public void setUpMaterials()
+    {
+        // TODO: REFACTOR THIS, since alot of the prefabs have different places where the 
+        // highlightMaterial = Resources.Load<Material>("Assets/Models/Throwable/Throwable/Highlight.mat");
+
+        objectRenderer = GetComponent<Renderer>();
+
+        if (objectRenderer == null)
+        {
+            Transform objectTransform = GetComponent<Transform>();
+            objectRenderer = objectTransform.GetChild(0).GetComponent<Renderer>();
+        }
+        
+
+        if (objectRenderer != null)
+        {
+            originalMaterial = objectRenderer.material;
+            return;
+        }
+        
+    }
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
         Collider[] colliders = Physics.OverlapSphere(point, range, throwableMask);
@@ -121,6 +163,8 @@ public class ThrowableObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         trail = GetComponentInChildren<TrailRenderer>();
+
+        setUpMaterials();
 
         if (trail != null)
         {

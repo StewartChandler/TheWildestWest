@@ -18,6 +18,10 @@ public class PlayerSelect : MonoBehaviour
     private Vector3 targetScale = new Vector3(0.8f, 0.8f, 0.8f);
     private GameManager gameManager;
     private PlayerInput[] playerInputs = new PlayerInput[4];
+    private Color[] playerColors = { new Color(255f / 255f, 0f / 255f, 0f / 255f),
+                                     new Color(0f / 255f, 255f / 255f, 0f / 255f),
+                                     new Color(0f / 255f, 0f / 255f, 255f / 255f),
+                                     new Color(127f / 255f, 127f / 255f, 255 / 255f)};
 
     private void Start()
     {
@@ -50,6 +54,12 @@ public class PlayerSelect : MonoBehaviour
         // Set the player's position to 4 above the spawn platform
         player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, 2.8f, 0f);
         // player.localScale = new Vector3(1f, 1f, 1f);
+
+        // Set the player's direction indicator color
+        Renderer indicatorTop = player.Find("DirectionIndicatorTop").GetComponent<Renderer>();
+        Renderer indicatorBottom = player.Find("DirectionIndicatorBottom").GetComponent<Renderer>();
+        indicatorTop.material.color = playerColors[numPlayers];
+        indicatorBottom.material.color = playerColors[numPlayers];
 
         // Increment the number of players
         numPlayers++;

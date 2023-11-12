@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private float vibrationDuration = 0.2f; // Adjust the duration as needed
     private PlayerInput playerInput;
 
+    private ThrowableObject prevHighlightedObject;
+
 
     Scene currentScene;
 
@@ -106,6 +108,16 @@ public class PlayerController : MonoBehaviour
                 controller.Move(playerVelocity * Time.fixedDeltaTime);
             }
 
+
+            // Hihglight objecrs
+            ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
+            closestObj.activateHighlight();
+
+            if (prevHighlightedObject != null && prevHighlightedObject != closestObj)
+            {
+                prevHighlightedObject.removeHighlight();
+            }
+            prevHighlightedObject = closestObj;
         }
         else
         {
