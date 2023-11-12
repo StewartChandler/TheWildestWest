@@ -64,6 +64,8 @@ public class Hat : MonoBehaviour
         rb.AddForce(25.0f * dist * dir);
         rb.angularVelocity = Random.onUnitSphere;
 
+        transform.localScale = Vector3.one;
+
         foreach (Collider c in colliders)
         {
             c.isTrigger = false;
