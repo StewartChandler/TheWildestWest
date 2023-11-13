@@ -31,12 +31,13 @@ public class ThrowableObject : MonoBehaviour
     private Material originalMaterial;
     private Renderer objectRenderer;
 
-    public void activateHighlight()
+    public void activateHighlight(Color playerColor)
     {
         // to not be affected by tumbleweed for now
         if (originalMaterial != null)
         {
             objectRenderer.material = highlightMaterial;
+            objectRenderer.material.color = playerColor;
         }
     }
 
