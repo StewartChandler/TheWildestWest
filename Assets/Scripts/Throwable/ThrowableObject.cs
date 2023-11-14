@@ -26,9 +26,9 @@ public class ThrowableObject : MonoBehaviour
     private float yOffset;
     private TrailRenderer trail;
     private float throwtime;
-    private bool respawn = true;
+    public bool respawn = true;
     private Vector3 spawnPos;
-    private Vector3 spawnOffset = new Vector3(0.0f, 15.0f);
+    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
         Collider[] colliders = Physics.OverlapSphere(point, range, throwableMask);
@@ -199,6 +199,7 @@ public class ThrowableObject : MonoBehaviour
             {
                 resetState();
                 transform.position = spawnPos;
+                rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
             } else
             {
                 Destroy(gameObject);

@@ -11,6 +11,8 @@ TagManager:
   - Hat
   - ItemRespawnPlane
   - DeathZone
+  - Train
+  - Hazard
   layers:
   - Default
   - TransparentFX
