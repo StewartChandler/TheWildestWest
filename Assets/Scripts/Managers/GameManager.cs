@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public PlayerInput[] players = new PlayerInput[4];
     public bool[] isPlayerAlive = { false, false, false, false };
     public int[] playerScores = { 0, 0, 0, 0 };
+    public Color[] playerColors = { new Color(255f / 255f, 0f / 255f, 0f / 255f),
+                                     new Color(78f / 255f, 245f / 255f, 214f / 255f),
+                                     new Color(0f / 255f, 0f / 255f, 255f / 255f),
+                                     new Color(167f / 255f, 58f / 255f, 214 / 255f)};
     public int playersReady = 0;
     public int numPlayers = 0;
     private static GameManager instance;
@@ -178,6 +182,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(fade.TimeToFade);
         fadeing = false;
 
+    }
+
+    public int GetPlayerIndexFromInput(PlayerInput playerInput)
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (playerInput == players[i])
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public void SwitchScene()

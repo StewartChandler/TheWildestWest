@@ -51,6 +51,12 @@ public class PlayerSelect : MonoBehaviour
         player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, 2.8f, 0f);
         // player.localScale = new Vector3(1f, 1f, 1f);
 
+        // Set the player's direction indicator color
+        Renderer indicatorTop = player.Find("DirectionIndicatorTop").GetComponent<Renderer>();
+        Renderer indicatorBottom = player.Find("DirectionIndicatorBottom").GetComponent<Renderer>();
+        indicatorTop.material.color = gameManager.playerColors[numPlayers];
+        indicatorBottom.material.color = gameManager.playerColors[numPlayers];
+
         // Increment the number of players
         numPlayers++;
     }

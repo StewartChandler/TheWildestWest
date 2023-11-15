@@ -26,6 +26,51 @@ public class ThrowableObject : MonoBehaviour
     private float yOffset;
     private TrailRenderer trail;
     private float throwtime;
+
+    private Material highlightMaterial;
+    private Material originalMaterial;
+    private Renderer objectRenderer;
+
+    public void activateHighlight(Color playerColor)
+    {
+        // to not be affected by tumbleweed for now
+        if (originalMaterial != null)
+        {
+            objectRenderer.material = highlightMaterial;
+            objectRenderer.material.color = playerColor;
+        }
+    }
+
+    public void removeHighlight()
+    {
+        if (originalMaterial != null)
+        {
+            objectRenderer.material = originalMaterial;
+        }
+    }
+
+    public void setUpMaterials()
+    {
+        // TODO: REFACTOR THIS, since alot of the prefabs have different places where the 
+        // highlightMaterial = Resources.Load<Material>("Assets/Models/Throwable/Throwable/Highlight.mat");
+
+        objectRenderer = GetComponent<Renderer>();
+
+        if (objectRenderer == null)
+        {
+            Transform objectTransform = GetComponent<Transform>();
+            objectRenderer = objectTransform.GetChild(0).GetComponent<Renderer>();
+        }
+        
+
+        if (objectRenderer != null)
+        {
+            originalMaterial = objectRenderer.material;
+            return;
+        }
+        
+    }
+
     public bool respawn = true;
     private Vector3 spawnPos;
     private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
@@ -127,6 +172,8 @@ public class ThrowableObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         trail = GetComponentInChildren<TrailRenderer>();
+
+        setUpMaterials();
 
         if (trail != null)
         {

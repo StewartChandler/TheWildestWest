@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private bool isVibrating = false;
     private float vibrationDuration = 0.2f; // Adjust the duration as needed
     private PlayerInput playerInput;
+    private Color playerColor;
+
+    private ThrowableObject prevHighlightedObject;
 
     private float timeTilActive = 0f;
     private State state = State.Active;
@@ -62,6 +65,17 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerInput = GetComponent<PlayerInput>();
 
+        // get color of the player
+
+        int playerIndex = gameManager.GetPlayerIndexFromInput(playerInput);
+
+        if (playerIndex != -1)
+        {
+            playerColor = gameManager.playerColors[playerIndex];
+        } else
+        {
+            playerColor = new Color(0, 0, 0);
+        }
 
         // calculate distance away
         Vector3 psize = gameObject.GetComponent<Collider>().bounds.size;
@@ -152,6 +166,9 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
+
+            // Hihglight objecrs
+            HighlightClosestObject();
         }
         else
         {
@@ -189,6 +206,23 @@ public class PlayerController : MonoBehaviour
                 pickedObject = closestObj;
             }
         }
+    }
+
+    void HighlightClosestObject()
+    {
+        ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
+
+        if (closestObj != null)
+        {
+            closestObj.activateHighlight(playerColor);
+        }
+
+
+        if (prevHighlightedObject != null && prevHighlightedObject != closestObj)
+        {
+            prevHighlightedObject.removeHighlight();
+        }
+        prevHighlightedObject = closestObj;
     }
 
     public void DropObject()
@@ -241,6 +275,7 @@ public class PlayerController : MonoBehaviour
             StartVibration(vibrationIntensity, vibrationDuration);
         }
     }
+
     private void StartVibration(float intensity, float duration)
     {
         if (playerInput != null)

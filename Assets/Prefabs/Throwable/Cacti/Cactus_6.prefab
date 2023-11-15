@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2920161435306944276}
   - component: {fileID: 1085711777893110997}
   - component: {fileID: 765899014872447007}
+  - component: {fileID: 2055131654216950762}
   m_Layer: 3
   m_Name: Cactus_6
   m_TagString: Throwable
@@ -74,6 +75,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &2055131654216950762
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3329845521675277582}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &2811103017721089686
 PrefabInstance:
   m_ObjectHideFlags: 0
