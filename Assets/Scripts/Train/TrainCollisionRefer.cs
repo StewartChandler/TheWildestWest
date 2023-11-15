@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrainCollisionRefer : MonoBehaviour
 {
-    void OnTriggerEnter(Collision collision)
+    void OnColliderEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
