@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     bool someoneWon = false;
     public bool isPaused = false;
 
+    private bool trainCalled = false;
+
 
     private void Awake()
     {
@@ -77,6 +79,14 @@ public class GameManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "NewMap")
         {
+            if (!trainCalled)
+            {
+                GameObject train = GameObject.FindGameObjectWithTag("Train");
+                TrainLogic trainLogic = train.GetComponentInChildren<TrainLogic>();
+                trainLogic.InvokeRepeating("TrainEvent", 5.0f, 20.0f);
+                trainCalled = true;
+            }
+
             if (isPlayerAlive.Count(x => x) <= 1)
             {
 
@@ -173,6 +183,7 @@ public class GameManager : MonoBehaviour
     public void SwitchScene()
     {
         SceneManager.LoadScene("NewMap");
+        trainCalled = false;
     }
 
     private void ManageHats()

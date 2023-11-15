@@ -26,7 +26,9 @@ public class ThrowableObject : MonoBehaviour
     private float yOffset;
     private TrailRenderer trail;
     private float throwtime;
-
+    public bool respawn = true;
+    private Vector3 spawnPos;
+    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
         Collider[] colliders = Physics.OverlapSphere(point, range, throwableMask);
@@ -145,6 +147,8 @@ public class ThrowableObject : MonoBehaviour
             distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
             yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
+
+        spawnPos = transform.position + spawnOffset;
     }
 
     void FixedUpdate()
@@ -190,7 +194,21 @@ public class ThrowableObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collisionObject = collision.gameObject;
-        if (state == State.Thrown && collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "DeathZone")
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        } else if (collision.gameObject.tag == "ItemRespawnPlane")
+        {
+            if (respawn == true)
+            {
+                resetState();
+                transform.position = spawnPos;
+                rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+            } else
+            {
+                Destroy(gameObject);
+            }
+        } else if (state == State.Thrown && collision.gameObject.tag == "Player")
         {
             if (collision.gameObject != target.gameObject)
             {

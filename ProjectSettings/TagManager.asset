@@ -9,6 +9,10 @@ TagManager:
   - Bullet
   - Enemy
   - Hat
+  - ItemRespawnPlane
+  - DeathZone
+  - Train
+  - Hazard
   layers:
   - Default
   - TransparentFX
