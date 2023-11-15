@@ -35,6 +35,7 @@ public class ThrowableObject : MonoBehaviour
 
         float closestDistance = float.MaxValue;
         ThrowableObject closestThrowable = null;
+        bool closestIsThrown = false;
 
         foreach (Collider collider in colliders)
         {
@@ -47,13 +48,16 @@ public class ThrowableObject : MonoBehaviour
                 continue;
             }
 
+            bool tObjIsThrown = tObj.state == State.Thrown;
+
             float distance = Vector3.Distance(collider.ClosestPoint(point), point);
-            if (distance < closestDistance)
+            if ((distance < closestDistance && tObjIsThrown == closestIsThrown) || (!closestIsThrown && tObjIsThrown))
             {
                 if (true /*tObj.hatReq <= numHats + 1*/)
                 {
                     closestThrowable = tObj;
                     closestDistance = distance;
+                    closestIsThrown = tObjIsThrown;
                 }
             }
         }
@@ -84,7 +88,7 @@ public class ThrowableObject : MonoBehaviour
 
         // instead just throw from desired position
         Vector3 desiredPos = calcDesiredPos();
-        rb.position = new Vector3(desiredPos.x, 0.5f + yOffset, desiredPos.z);
+        rb.position = new Vector3(desiredPos.x, 1.5f + yOffset, desiredPos.z);
 
         rb.mass = objMass;
         rb.useGravity = false;
