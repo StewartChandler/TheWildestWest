@@ -33,10 +33,27 @@ public class PlayerController : MonoBehaviour
 
     private ThrowableObject prevHighlightedObject;
 
+    private float timeTilActive = 0f;
+    private State state = State.Active;
+
+    private const float STUNTIME = 0.5f;
+    private const float PICKUPANIMLENGTH = 0.3f;
+
+    private enum State { 
+        Active,
+        HitStun,
+        PickupAnim,
+    };
+
 
     Scene currentScene;
 
     private GameObject hitEffect;
+
+    private void makeActive() { 
+        state = State.Active;
+        timeTilActive = 0.0f;
+    }
 
 
     private void Start()
@@ -79,11 +96,13 @@ public class PlayerController : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         if (currentScene.name != "PlayerSelect")
         {
-            if (context.performed)
+            if (context.performed && state == State.Active)
             {
                 if (pickedObject == null)
                 {
-                    PickUpClosestObject();
+                    state = State.PickupAnim;
+                    timeTilActive = PICKUPANIMLENGTH;
+
                 }
                 else
                 {
@@ -97,27 +116,54 @@ public class PlayerController : MonoBehaviour
     {
         if (currentScene.name != "PlayerSelect" && gameManager.firstPass == true)
         {
-            Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-            float speedMul = 1.0f;
-            if (pickedObject != null)
+            switch (state)
             {
-                speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
-            }
-            controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
+                case State.Active:
+                    Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+                    float speedMul = 1.0f;
+                    if (pickedObject != null)
+                    {
+                        speedMul = Mathf.Pow(1.25f, 1.0f - Mathf.Max(objMass, 1.0f));
+                    }
+                    controller.Move(move * Time.fixedDeltaTime * playerSpeed * speedMul);
 
-            if (move != Vector3.zero)
-            {
-                gameObject.transform.forward = move;
-            }
-            if (controller.isGrounded)
-            {
-                // Reset the vertical velocity to 0 when grounded
-                playerVelocity.y = 0;
-            }
-            else
-            {
-                playerVelocity.y += gravityValue * Time.fixedDeltaTime;
-                controller.Move(playerVelocity * Time.fixedDeltaTime);
+                    if (move != Vector3.zero)
+                    {
+                        gameObject.transform.forward = move;
+                    }
+                    if (controller.isGrounded)
+                    {
+                        // Reset the vertical velocity to 0 when grounded
+                        playerVelocity.y = 0;
+                    }
+                    else
+                    {
+                        playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+                        controller.Move(playerVelocity * Time.fixedDeltaTime);
+                    }
+                    break;
+                case State.HitStun:
+                    timeTilActive -= Time.fixedDeltaTime;
+                    if (timeTilActive < 0f) {
+                        makeActive();
+                    }
+                    break;
+                case State.PickupAnim:
+                    // coresponds to 6 frames
+                    const float PICKUPTIME = PICKUPANIMLENGTH - 0.1f;
+                    // then active for 3 frames
+                    const float PICKUPENDTIME = PICKUPTIME - 0.05f;
+                    timeTilActive -= Time.fixedDeltaTime;
+                    if (timeTilActive <= PICKUPTIME && timeTilActive > PICKUPENDTIME && pickedObject == null)
+                    {
+                        PickUpClosestObject();
+                    }
+
+                    if (timeTilActive < 0f)
+                    {
+                        makeActive();
+                    }
+                    break;
             }
 
 
@@ -209,6 +255,9 @@ public class PlayerController : MonoBehaviour
             Instantiate(hitEffect);
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
+
+            state = State.HitStun;
+            timeTilActive = STUNTIME;
 
             if (hatStack.getNumHats() > 1)
             {

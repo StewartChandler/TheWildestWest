@@ -71,11 +71,16 @@ public class ThrowableObject : MonoBehaviour
         
     }
 
+    public bool respawn = true;
+    private Vector3 spawnPos;
+    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
+
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
         Collider[] colliders = Physics.OverlapSphere(point, range, throwableMask);
 
         float closestDistance = float.MaxValue;
         ThrowableObject closestThrowable = null;
+        bool closestIsThrown = false;
 
         foreach (Collider collider in colliders)
         {
@@ -88,13 +93,16 @@ public class ThrowableObject : MonoBehaviour
                 continue;
             }
 
+            bool tObjIsThrown = tObj.state == State.Thrown;
+
             float distance = Vector3.Distance(collider.ClosestPoint(point), point);
-            if (distance < closestDistance)
+            if ((distance < closestDistance && tObjIsThrown == closestIsThrown) || (!closestIsThrown && tObjIsThrown))
             {
                 if (true /*tObj.hatReq <= numHats + 1*/)
                 {
                     closestThrowable = tObj;
                     closestDistance = distance;
+                    closestIsThrown = tObjIsThrown;
                 }
             }
         }
@@ -125,7 +133,7 @@ public class ThrowableObject : MonoBehaviour
 
         // instead just throw from desired position
         Vector3 desiredPos = calcDesiredPos();
-        rb.position = new Vector3(desiredPos.x, 0.5f + yOffset, desiredPos.z);
+        rb.position = new Vector3(desiredPos.x, 1.5f + yOffset, desiredPos.z);
 
         rb.mass = objMass;
         rb.useGravity = false;
@@ -186,6 +194,8 @@ public class ThrowableObject : MonoBehaviour
             distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
             yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
+
+        spawnPos = transform.position + spawnOffset;
     }
 
     void FixedUpdate()
@@ -231,7 +241,21 @@ public class ThrowableObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject collisionObject = collision.gameObject;
-        if (state == State.Thrown && collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "DeathZone")
+        {
+            Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        } else if (collision.gameObject.tag == "ItemRespawnPlane")
+        {
+            if (respawn == true)
+            {
+                resetState();
+                transform.position = spawnPos;
+                rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+            } else
+            {
+                Destroy(gameObject);
+            }
+        } else if (state == State.Thrown && collision.gameObject.tag == "Player")
         {
             if (collision.gameObject != target.gameObject)
             {

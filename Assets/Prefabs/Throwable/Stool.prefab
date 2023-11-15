@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hatReq: 2
+  respawn: 1
 --- !u!1001 &3569264646752451363
 PrefabInstance:
   m_ObjectHideFlags: 0
