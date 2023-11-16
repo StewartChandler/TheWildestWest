@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class ThrowableObject : MonoBehaviour
 {
-    public enum State {
+    public enum State
+    {
         Prop = 0,
         Held = 1,
         Thrown = 2,
@@ -14,18 +15,18 @@ public class ThrowableObject : MonoBehaviour
 
     [SerializeField]
     private float hatReq;
-    public State state { get; private set; }  = State.Prop;
+    public State state { get; private set; } = State.Prop;
 
-    private Transform target = null;
-    private Rigidbody rb;
+    protected Transform target = null;
+    protected Rigidbody rb;
     private Vector3 pickUpOffset = new Vector3(1.0f, 0.5f, 0.0f);
     private static int throwableMask = 8; // Throwable
     private float objMass;
     private float distAway;
     private float holderDist;
     private float yOffset;
-    private TrailRenderer trail;
-    private float throwtime;
+    protected TrailRenderer trail;
+    protected float throwtime;
 
     private Material highlightMaterial;
     private Material originalMaterial;
@@ -61,21 +62,22 @@ public class ThrowableObject : MonoBehaviour
             Transform objectTransform = GetComponent<Transform>();
             objectRenderer = objectTransform.GetChild(0).GetComponent<Renderer>();
         }
-        
+
 
         if (objectRenderer != null)
         {
             originalMaterial = objectRenderer.material;
             return;
         }
-        
+
     }
 
     public bool respawn = true;
-    private Vector3 spawnPos;
+    protected Vector3 spawnPos;
     private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
 
-    public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range) {
+    public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range)
+    {
         Collider[] colliders = Physics.OverlapSphere(point, range, throwableMask);
 
         float closestDistance = float.MaxValue;
@@ -89,7 +91,8 @@ public class ThrowableObject : MonoBehaviour
             {
                 tObj = collider.gameObject.GetComponentInParent<ThrowableObject>();
             }
-            if (tObj == null || tObj.state == State.Held) {
+            if (tObj == null || tObj.state == State.Held)
+            {
                 continue;
             }
 
@@ -110,7 +113,8 @@ public class ThrowableObject : MonoBehaviour
         return closestThrowable;
     }
 
-    public void resetState() {
+    public virtual void resetState()
+    {
         state = State.Prop;
         target = null;
         rb.useGravity = true;
@@ -128,7 +132,7 @@ public class ThrowableObject : MonoBehaviour
         return target.position + farness * (target.forward * pickUpOffset.z + target.right * pickUpOffset.x) + target.up * (pickUpOffset.y + yOffset);
     }
 
-    public void throwObject(Vector3 dir, float throwingSpeed)
+    public virtual void throwObject(Vector3 dir, float throwingSpeed)
     {
 
         // instead just throw from desired position
@@ -238,24 +242,27 @@ public class ThrowableObject : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         GameObject collisionObject = collision.gameObject;
         if (collision.gameObject.tag == "DeathZone")
         {
             Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
-        } else if (collision.gameObject.tag == "ItemRespawnPlane")
+        }
+        else if (collision.gameObject.tag == "ItemRespawnPlane")
         {
             if (respawn == true)
             {
                 resetState();
                 transform.position = spawnPos;
                 rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
-            } else
+            }
+            else
             {
                 Destroy(gameObject);
             }
-        } else if (state == State.Thrown && collision.gameObject.tag == "Player")
+        }
+        else if (state == State.Thrown && collision.gameObject.tag == "Player")
         {
             if (collision.gameObject != target.gameObject)
             {
@@ -266,11 +273,15 @@ public class ThrowableObject : MonoBehaviour
                 rb.useGravity = true;
 
                 if (trail != null) { trail.enabled = false; }
-            } else { 
+            }
+            else
+            {
                 rb.useGravity = true;
             }
-        } else if (state == State.Thrown || state == State.Prop) { 
-                rb.useGravity = true;
+        }
+        else if (state == State.Thrown || state == State.Prop)
+        {
+            rb.useGravity = true;
         }
     }
 }

@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
     private const float STUNTIME = 0.5f;
     private const float PICKUPANIMLENGTH = 0.3f;
 
-    private enum State { 
+    private enum State
+    {
         Active,
         HitStun,
         PickupAnim,
@@ -50,7 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private GameObject hitEffect;
 
-    private void makeActive() { 
+    private void makeActive()
+    {
         state = State.Active;
         timeTilActive = 0.0f;
     }
@@ -72,7 +74,8 @@ public class PlayerController : MonoBehaviour
         if (playerIndex != -1)
         {
             playerColor = gameManager.playerColors[playerIndex];
-        } else
+        }
+        else
         {
             playerColor = new Color(0, 0, 0);
         }
@@ -144,7 +147,8 @@ public class PlayerController : MonoBehaviour
                     break;
                 case State.HitStun:
                     timeTilActive -= Time.fixedDeltaTime;
-                    if (timeTilActive < 0f) {
+                    if (timeTilActive < 0f)
+                    {
                         makeActive();
                     }
                     break;
@@ -274,6 +278,18 @@ public class PlayerController : MonoBehaviour
             }
             StartVibration(vibrationIntensity, vibrationDuration);
         }
+    }
+
+    public void freezePlayer(float freezeDuration)
+    {
+        StartCoroutine(FreezePlayer(freezeDuration));
+    }
+
+    private IEnumerator FreezePlayer(float freezeDuration)
+    {
+        playerSpeed = 0f;
+        yield return new WaitForSeconds(freezeDuration);
+        playerSpeed = playerSpeed;
     }
 
     private void StartVibration(float intensity, float duration)
