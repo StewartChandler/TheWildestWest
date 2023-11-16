@@ -37,12 +37,14 @@ public class PlayerController : MonoBehaviour
     private State state = State.Active;
 
     private const float STUNTIME = 0.5f;
+    private const float FROZENTIME = 2.0f;
     private const float PICKUPANIMLENGTH = 0.3f;
 
     private enum State
     {
         Active,
         HitStun,
+        Frozen,
         PickupAnim,
     };
 
@@ -152,6 +154,13 @@ public class PlayerController : MonoBehaviour
                         makeActive();
                     }
                     break;
+                case State.Frozen:
+                    timeTilActive -= Time.fixedDeltaTime;
+                    if (timeTilActive < 0f)
+                    {
+                        makeActive();
+                    }
+                    break;
                 case State.PickupAnim:
                     // coresponds to 6 frames
                     const float PICKUPTIME = PICKUPANIMLENGTH - 0.1f;
@@ -252,7 +261,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void takeDamage(Vector3 displ)
+    public void takeDamage(Vector3 displ, bool frozen = false)
     {
         if (Time.time > nextHit)
         {
@@ -260,8 +269,16 @@ public class PlayerController : MonoBehaviour
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
 
-            state = State.HitStun;
-            timeTilActive = STUNTIME;
+            if (frozen)
+            {
+                state = State.Frozen;
+                timeTilActive = FROZENTIME;
+            }
+            else
+            {
+                state = State.HitStun;
+                timeTilActive = STUNTIME;
+            }
 
             if (hatStack.getNumHats() > 1)
             {
@@ -280,17 +297,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void freezePlayer(float freezeDuration)
-    {
-        StartCoroutine(FreezePlayer(freezeDuration));
-    }
-
-    private IEnumerator FreezePlayer(float freezeDuration)
-    {
-        playerSpeed = 0f;
-        yield return new WaitForSeconds(freezeDuration);
-        playerSpeed = playerSpeed;
-    }
 
     private void StartVibration(float intensity, float duration)
     {

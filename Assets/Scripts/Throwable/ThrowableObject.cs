@@ -15,13 +15,13 @@ public class ThrowableObject : MonoBehaviour
 
     [SerializeField]
     private float hatReq;
-    public State state { get; private set; } = State.Prop;
+    public State state { get; protected set; } = State.Prop;
 
     protected Transform target = null;
     protected Rigidbody rb;
     private Vector3 pickUpOffset = new Vector3(1.0f, 0.5f, 0.0f);
     private static int throwableMask = 8; // Throwable
-    private float objMass;
+    protected float objMass;
     private float distAway;
     private float holderDist;
     private float yOffset;
