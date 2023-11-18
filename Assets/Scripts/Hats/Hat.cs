@@ -55,10 +55,10 @@ public class Hat : MonoBehaviour
     public void launch(Vector3 displ)
     {
         rb.isKinematic = false;
-        rb.useGravity = true; 
+        rb.useGravity = true;
         Vector3 dir = displ;
         float dist = Vector3.Magnitude(dir);
-        dir *= 1/dist;
+        dir *= 1 / dist;
         dist = Mathf.Max(dist, 1);
         dir += Vector3.up;
         rb.AddForce(25.0f * dist * dir);
@@ -157,47 +157,30 @@ public class Hat : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (other.CompareTag("Player"))
-        {
-            HatStack hs = other.gameObject.GetComponentInChildren<HatStack>();
-
-            if (hs != null && state == State.Collectable)
-            {
-                // transform.localScale = scale;
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-
-                timeCollectable = 0.0f;
-                timeStill = 0.0f;
-                state = State.Atop;
-                foreach (Collider c in colliders)
-                {
-                    c.enabled = false;
-                }
-                foreach (Renderer renderer in renderers)
-                {
-                    renderer.enabled = true;
-                }
-
-                hs.pushHat(gameObject);
-            }
-        }
+        PickUpHat(collider);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Collider other = collision.collider;
+        Collider collider = collision.collider;
+        PickUpHat(collider);
+    }
+
+    private void PickUpHat(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
             HatStack hs = other.gameObject.GetComponentInChildren<HatStack>();
 
-            if (hs != null && state == State.Launched)
+            if (hs != null && (state == State.Collectable || state == State.Launched))
             {
-                rb.isKinematic = true;
-                rb.useGravity = false;
-
+                if (state == State.Launched)
+                {
+                    rb.isKinematic = true;
+                    rb.useGravity = false;
+                }
 
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
@@ -205,14 +188,17 @@ public class Hat : MonoBehaviour
                 timeCollectable = 0.0f;
                 timeStill = 0.0f;
                 state = State.Atop;
+
                 foreach (Collider c in colliders)
                 {
                     c.enabled = false;
                 }
+
                 foreach (Renderer renderer in renderers)
                 {
                     renderer.enabled = true;
                 }
+
                 AudioManager.instance.Play("HatCollect1", "HatCollect2");
                 hs.pushHat(gameObject);
             }
