@@ -44,7 +44,7 @@ public class PlayerReadyUp : MonoBehaviour
 
     private void Update()
     {
-        if (currentScene.name == "PlayerSelect")
+        if (currentScene.name == "PlayerSelect" || currentScene.name == "PlayerSelectMap")
         {
             if (isRotatingNotReady)
             {
@@ -79,7 +79,7 @@ public class PlayerReadyUp : MonoBehaviour
     {
         if (context.performed)
         {
-            if (currentScene.name == "PlayerSelect")
+            if (currentScene.name == "PlayerSelect" || currentScene.name == "PlayerSelectMap")
             {
                 ready = !ready;
                 if (!ready)

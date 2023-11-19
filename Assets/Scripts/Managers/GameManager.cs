@@ -48,8 +48,13 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        // destroy game manager if in Start Scene
+        if (currentScene.name == "StartScene")
+        {
+            Destroy(gameObject);
+        }
         // refresh currentScene on scene change
-        if (currentScene.name == "PlayerSelect")
+        if (currentScene.name == "PlayerSelect" || currentScene.name == "PlayerSelectMap")
         {
             if (testStart)
             {
@@ -59,7 +64,7 @@ public class GameManager : MonoBehaviour
                 players[1] = player2.GetComponent<PlayerInput>();
                 player2.name = "Player2";
                 // numPlayers++;
-                playersReady++;
+                // playersReady++;
                 // timerFinished = true;
                 testStart = false;
 
