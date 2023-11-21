@@ -231,13 +231,16 @@ public class ThrowableObject : MonoBehaviour
 
                 throwtime += Time.fixedDeltaTime;
 
+                // after some time since thrown re-enable gravity
+                if (throwtime >= 3f) { rb.useGravity = true; }
+
                 if (trail != null)
                 {
                     // ajdust trail scale based on speed
                     trail.widthMultiplier = Mathf.SmoothStep(0f, 1f, rb.velocity.magnitude / 15f);
 
-                    // remove trail after some time
-                    if (throwtime >= 20f) { trail.enabled = false; }
+                    // remove thrown state after 10s if not done already
+                    if (throwtime >= 10f) { resetState(); }
                 }
                 break;
         }
