@@ -148,6 +148,7 @@ public class ThrowableObject : MonoBehaviour
         if (trail != null)
         {
             trail.enabled = true;
+            trail.Clear();
         }
     }
 
