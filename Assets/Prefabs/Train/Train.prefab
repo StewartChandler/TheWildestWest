@@ -80,6 +80,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8557940520586738275, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
+    - target: {fileID: -8086721945016786779, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: -6526170443244742916, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -96,6 +104,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: -4938538111654927058, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: -4233793493281519340, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -112,6 +124,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: -3862013884827236743, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: -2563633697282725194, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -120,6 +136,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: -2165180041336337720, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: 145053380627444522, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -128,6 +148,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: 236598330783749946, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
+    - target: {fileID: 710811499883966845, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: 919132149155446097, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Name
       value: PR_Train
@@ -156,6 +184,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: 4569884827674979455, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     - target: {fileID: 5845375464428368027, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -164,6 +196,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Hazard
       objectReference: {fileID: 0}
+    - target: {fileID: 5926714233439917278, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbd74210fb3d4a042aeb73220c7c3107, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
