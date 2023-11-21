@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7390459508726080211}
   - component: {fileID: 8764536652729747074}
   - component: {fileID: 5319000279505785153}
+  - component: {fileID: 7658705087626634320}
   m_Layer: 0
   m_Name: vfx_graph_onhit
   m_TagString: Untagged
@@ -110,4 +111,16 @@ VFXRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
+--- !u!114 &7658705087626634320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380147816101408213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336f7d51ff15f1d40ab578c2d8d1d280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

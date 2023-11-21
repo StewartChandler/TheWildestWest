@@ -89,6 +89,10 @@ public class PlayerController : MonoBehaviour
 
         // think this is bad performance wise
         hitEffect = Resources.Load<GameObject>("vfx_graph_onhit");
+        if (hitEffect == null )
+        {
+            Debug.Log("could not load hit effect");
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -265,7 +269,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time > nextHit)
         {
-            Instantiate(hitEffect);
+            Instantiate(hitEffect, transform.position, Quaternion.identity, null);
+            transform.forward = displ; // turn to face where you got hit from
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
 
