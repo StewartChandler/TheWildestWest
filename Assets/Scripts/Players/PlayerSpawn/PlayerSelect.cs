@@ -19,6 +19,9 @@ public class PlayerSelect : MonoBehaviour
     private GameManager gameManager;
     private PlayerInput[] playerInputs = new PlayerInput[4];
 
+    public Transform[] playerUIs = new Transform[4];
+    public Transform[] playerCubes = new Transform[4];
+
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -43,12 +46,22 @@ public class PlayerSelect : MonoBehaviour
         gameManager.numPlayers = numPlayers;
         gameManager.players = playerInputs;
         playerInput.transform.parent = transform;
+
+        // set the ui elements to active
+        playerUIs[numPlayers - 1].gameObject.SetActive(true);
+
+        // set the cube to the correct color
+        playerCubes[numPlayers - 1].GetComponent<Renderer>().material.color = gameManager.playerColors[numPlayers - 1];
     }
 
     void SetPlayerPositionAndColor(Transform player)
     {
+        CharacterController controller = player.GetComponent<CharacterController>();
         // Set the player's position to 4 above the spawn platform
-        player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, 2.8f, 0f);
+        controller.enabled = false;
+        player.position = spawnPlatforms[numPlayers].transform.position + new Vector3(0f, -3f, -2f);
+        player.rotation = spawnPlatforms[numPlayers].transform.rotation * Quaternion.Euler(0f, 180f, 0f);
+        controller.enabled = true;
         // player.localScale = new Vector3(1f, 1f, 1f);
 
         // Set the player's direction indicator color

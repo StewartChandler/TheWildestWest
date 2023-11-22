@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Managers : MonoBehaviour
 {
     private static Managers instance;
 
     private void Awake()
     {
+
         // Check if an instance of the Managers script already exists
         if (instance != null)
         {
@@ -21,6 +22,14 @@ public class Managers : MonoBehaviour
             // {
             //     DontDestroyOnLoad(child.gameObject);
             // }
+        }
+    }
+    private void Update()
+    {
+        // destroy if start scene
+        if (SceneManager.GetActiveScene().name == "StartScene")
+        {
+            Destroy(gameObject);
         }
     }
 }

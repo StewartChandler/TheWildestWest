@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Hat : MonoBehaviour
 {
@@ -198,6 +199,10 @@ public class Hat : MonoBehaviour
                 {
                     renderer.enabled = true;
                 }
+
+
+                PlayerInput pi = other.gameObject.GetComponent<PlayerInput>();
+                StatsManager.instance.HatPickedUp(pi.playerIndex);
 
                 AudioManager.instance.Play("HatCollect1", "HatCollect2");
                 hs.pushHat(gameObject);

@@ -7,7 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
+    private Animator animator;
     private CharacterController controller;
     private HatStack hatStack;
     private Vector3 playerVelocity;
@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponentInChildren<Animator>();
 
         // get color of the player
 
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
     public void OnThrow(InputAction.CallbackContext context)
     {
         currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name != "PlayerSelect")
+        if (currentScene.name != "PlayerSelect" && (currentScene.name != "PlayerSelectMap" || context.control.name != "buttonSouth"))
         {
             if (context.performed && state == State.Active)
             {
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentScene.name != "PlayerSelect" && gameManager.firstPass == true)
+        if (currentScene.name != "PlayerSelect" && gameManager.endScreen == false && gameManager.firstPass == true)
         {
             switch (state)
             {
@@ -135,7 +136,13 @@ public class PlayerController : MonoBehaviour
                     if (move != Vector3.zero)
                     {
                         gameObject.transform.forward = move;
+                        animator.SetBool("isMoving", true);
                     }
+                    else
+                    {
+                        animator.SetBool("isMoving", false);
+                    }
+
                     if (controller.isGrounded)
                     {
                         // Reset the vertical velocity to 0 when grounded
@@ -254,6 +261,9 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
+                PlayerInput selfInput = GetComponent<PlayerInput>();
+                StatsManager.instance.ItemThrown(selfInput.playerIndex);
+
                 AudioManager.instance.Play("Throw1", "Throw2");
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
@@ -268,6 +278,9 @@ public class PlayerController : MonoBehaviour
             Instantiate(hitEffect);
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
+
+            PlayerInput selfInput = GetComponent<PlayerInput>();
+            StatsManager.instance.HatLost(selfInput.playerIndex);
 
             if (frozen)
             {
@@ -341,6 +354,7 @@ public class PlayerController : MonoBehaviour
             gameManager.isPlayerAlive[selfInput.playerIndex] = false;
         }
 
+        gameObject.tag = "Untagged";
         selfInput.DeactivateInput();
     }
 
