@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Resources;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -29,24 +30,23 @@ public class ThrowableObject : MonoBehaviour
     protected float throwtime;
 
     private Material highlightMaterial;
-    private Material originalMaterial;
-    private Renderer objectRenderer;
+    private List<Material> originalMaterial = new List<Material>();
+    private List<Renderer> objectRenderer = new List<Renderer>();
 
     public void activateHighlight(Color playerColor)
     {
-        // to not be affected by tumbleweed for now
-        if (originalMaterial != null)
+        foreach (var item in objectRenderer)
         {
-            objectRenderer.material = highlightMaterial;
-            objectRenderer.material.color = playerColor;
+            item.material = highlightMaterial;
+            item.material.color = playerColor;
         }
     }
 
     public void removeHighlight()
     {
-        if (originalMaterial != null)
+        for(int i = 0; i < objectRenderer.Count; i++)
         {
-            objectRenderer.material = originalMaterial;
+            objectRenderer[i].material = originalMaterial[i];
         }
     }
 
@@ -54,20 +54,19 @@ public class ThrowableObject : MonoBehaviour
     {
         // TODO: REFACTOR THIS, since alot of the prefabs have different places where the 
         // highlightMaterial = Resources.Load<Material>("Assets/Models/Throwable/Throwable/Highlight.mat");
-
-        objectRenderer = GetComponent<Renderer>();
-
-        if (objectRenderer == null)
+        var rend = GetComponent<Renderer>();
+        if (rend != null)
         {
-            Transform objectTransform = GetComponent<Transform>();
-            objectRenderer = objectTransform.GetChild(0).GetComponent<Renderer>();
+            objectRenderer.Add(rend);
+        }
+        foreach (var item in GetComponentsInChildren<Renderer>())
+        {
+            objectRenderer.Add(item);
         }
 
-
-        if (objectRenderer != null)
+        foreach (var item in objectRenderer)
         {
-            originalMaterial = objectRenderer.material;
-            return;
+            originalMaterial.Add(item.material);
         }
 
     }

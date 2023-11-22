@@ -51,6 +51,8 @@ public class Hat : MonoBehaviour
                 renderer.enabled = false;
             }
         }
+
+        transform.localScale = 1.5f * Vector3.one;
     }
 
     public void launch(Vector3 displ)
@@ -206,6 +208,8 @@ public class Hat : MonoBehaviour
 
                 AudioManager.instance.Play("HatCollect1", "HatCollect2");
                 hs.pushHat(gameObject);
+
+                transform.localScale = 1.5f * Vector3.one;
             }
         }
     }
