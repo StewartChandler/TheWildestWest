@@ -1759,7 +1759,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1924358111559239543, guid: ff8313031066c441296f0eacdbe9a73a, type: 3}
+  m_PlayerPrefab: {fileID: 4032383885008583682, guid: 52f3dd0ce2ef045c8be065765e6d7198, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -4019,6 +4019,11 @@ MonoBehaviour:
   - {fileID: 0}
   isPlayerAlive: 00000000
   playerScores: 00000000000000000000000000000000
+  playerColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.30588236, g: 0.9607843, b: 0.8392157, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.654902, g: 0.22745098, b: 0.8392157, a: 1}
   playersReady: 0
   numPlayers: 0
   playerSpawns:
@@ -4026,7 +4031,7 @@ MonoBehaviour:
   - {fileID: 1045232101}
   - {fileID: 1965950362}
   - {fileID: 1714494460}
-  playerPrefab: {fileID: 1924358111559239543, guid: ff8313031066c441296f0eacdbe9a73a, type: 3}
+  playerPrefab: {fileID: 4032383885008583682, guid: 52f3dd0ce2ef045c8be065765e6d7198, type: 3}
   _onGameStart:
     m_PersistentCalls:
       m_Calls:
