@@ -2245,6 +2245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa09cc0c7d805e48b2b95bc0b17df4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsThrown: 00000000000000000000000000000000
+  hatsLost: 00000000000000000000000000000000
+  hatsPickedUp: 00000000000000000000000000000000
+  timesFallen: 00000000000000000000000000000000
 --- !u!1001 &858838051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4440,7 +4444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1338030050
 RectTransform:
   m_ObjectHideFlags: 0
