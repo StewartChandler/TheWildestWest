@@ -52,6 +52,7 @@ public class PlayerSelect : MonoBehaviour
 
         // set the cube to the correct color
         playerCubes[numPlayers - 1].GetComponent<Renderer>().material.color = gameManager.playerColors[numPlayers - 1];
+        gameManager.isPlayerAlive[numPlayers - 1] = true;
     }
 
     void SetPlayerPositionAndColor(Transform player)

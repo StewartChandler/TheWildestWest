@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Linq;
-
+using UnityEngine.EventSystems;
 
 
 public class EndGameUI : MonoBehaviour
@@ -32,6 +32,8 @@ public class EndGameUI : MonoBehaviour
     public Transform HatsLostStats;
     public TextMeshProUGUI[] Falls = new TextMeshProUGUI[4];
     public Transform FallsStats;
+    public Transform MainMenuButton;
+    public GameObject SelectedButton;
     public TextMeshProUGUI message;
     private string[] messages = new string[]
         {
@@ -112,6 +114,7 @@ public class EndGameUI : MonoBehaviour
         yield return new WaitForSeconds(1f);
         displayFalls();
         yield return new WaitForSeconds(1f);
+        displayMainMenu();
 
     }
 
@@ -152,26 +155,33 @@ public class EndGameUI : MonoBehaviour
     {
         for (int i = 0; i < gameManager.playerScores.Length; i++)
         {
-            if (positions[i] == 1)
+            if (i >= gameManager.numPlayers)
             {
-                scores[i].fontSize = 0.8f;
-                scores[i].color = gold;
-                scores[i].text = messages[0];
+                scores[i].text = "";
             }
-            else if (positions[i] == 2)
+            else
             {
-                scores[i].fontSize = 0.8f;
-                scores[i].text = messages[1];
-            }
-            else if (positions[i] == 3)
-            {
-                scores[i].fontSize = 0.8f;
-                scores[i].text = messages[2];
-            }
-            else if (positions[i] == 4)
-            {
-                scores[i].fontSize = 0.8f;
-                scores[i].text = messages[3];
+                if (positions[i] == 1)
+                {
+                    scores[i].fontSize = 0.8f;
+                    scores[i].color = gold;
+                    scores[i].text = messages[0];
+                }
+                else if (positions[i] == 2)
+                {
+                    scores[i].fontSize = 0.8f;
+                    scores[i].text = messages[1];
+                }
+                else if (positions[i] == 3)
+                {
+                    scores[i].fontSize = 0.8f;
+                    scores[i].text = messages[2];
+                }
+                else if (positions[i] == 4)
+                {
+                    scores[i].fontSize = 0.8f;
+                    scores[i].text = messages[3];
+                }
             }
         }
     }
@@ -335,6 +345,12 @@ public class EndGameUI : MonoBehaviour
     {
         FallsStats.gameObject.SetActive(true);
     }
+    void displayMainMenu()
+    {
+        MainMenuButton.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(SelectedButton);
 
+    }
 
 }
