@@ -53,7 +53,11 @@ public class ThrowableObject : MonoBehaviour
     public void setUpMaterials()
     {
         // TODO: REFACTOR THIS, since alot of the prefabs have different places where the 
-        // highlightMaterial = Resources.Load<Material>("Assets/Models/Throwable/Throwable/Highlight.mat");
+        highlightMaterial = Resources.Load<Material>("Highlight");
+        if (highlightMaterial == null)
+        {
+            Debug.Log("mat is null");
+        }
         var rend = GetComponent<Renderer>();
         if (rend != null)
         {
