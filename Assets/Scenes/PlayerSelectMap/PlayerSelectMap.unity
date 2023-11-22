@@ -2531,7 +2531,7 @@ MonoBehaviour:
   - {fileID: 871092163}
   - {fileID: 936301566}
   - {fileID: 922442748}
-  playerPrefab: {fileID: 1924358111559239543, guid: ff8313031066c441296f0eacdbe9a73a, type: 3}
+  playerPrefab: {fileID: 8414138836347217123, guid: 690385c3eddb84fc09e0bac5ba84cd18, type: 3}
   _onGameStart:
     m_PersistentCalls:
       m_Calls:
@@ -5536,7 +5536,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1924358111559239543, guid: ff8313031066c441296f0eacdbe9a73a, type: 3}
+  m_PlayerPrefab: {fileID: 8414138836347217123, guid: 690385c3eddb84fc09e0bac5ba84cd18, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1

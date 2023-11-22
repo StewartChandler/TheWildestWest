@@ -7,7 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
+    private Animator animator;
     private CharacterController controller;
     private HatStack hatStack;
     private Vector3 playerVelocity;
@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
         hatStack = gameObject.GetComponentInChildren<HatStack>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponentInChildren<Animator>();
 
         // get color of the player
 
@@ -139,7 +140,13 @@ public class PlayerController : MonoBehaviour
                     if (move != Vector3.zero)
                     {
                         gameObject.transform.forward = move;
+                        animator.SetBool("isMoving", true);
                     }
+                    else
+                    {
+                        animator.SetBool("isMoving", false);
+                    }
+
                     if (controller.isGrounded)
                     {
                         // Reset the vertical velocity to 0 when grounded
