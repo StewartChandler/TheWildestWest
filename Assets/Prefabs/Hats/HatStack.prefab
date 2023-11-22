@@ -44,4 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7dc6df63be40540a926efda61e55e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hatVariants:
+  - {fileID: 8922124087734298650, guid: 53bca339494814aca8947ee9c6dd764a, type: 3}
+  - {fileID: 1250118824648347612, guid: 22f23c08e142943cc809385627089198, type: 3}
+  - {fileID: 7282945151500117595, guid: 6171e24fa823b4eebbfd25208e56e569, type: 3}
+  - {fileID: 198080467473084544, guid: 0ced3e081f409475fae3778a026488a8, type: 3}
   hatPrefab: {fileID: 333716460448437345, guid: c92bec915e4e21842be335d6e51ed48d, type: 3}

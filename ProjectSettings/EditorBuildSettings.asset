@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EndScene/EndScene.unity
     guid: 507b737ba9841c84c88bacf236ea9a2a
   - enabled: 1
-    path: Assets/Scenes/PlayerSelect/PlayerSelect.unity
+    path: Assets/Scenes/OldPlayerSelect/PlayerSelect.unity
     guid: ce55a1a4b7466e741a68a9251382752a
   - enabled: 1
     path: Assets/Scenes/Gym.unity
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NewMap/NewMap.unity
     guid: 0ed603734393a44e485570b7398805b4
+  - enabled: 1
+    path: Assets/Scenes/PlayerSelectMap/PlayerSelectMap.unity
+    guid: 14b57d595e8d14d74884bde89b99c29a
   m_configObjects: {}

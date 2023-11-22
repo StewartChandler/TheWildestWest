@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0879a5a24d8ac2d4692c749a99a6a5df, type: 2}
     - target: {fileID: 919132149155446097, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}
       propertyPath: m_Name
       value: PR_Candle_T
@@ -242,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hatReq: 1
+  respawn: 1
 --- !u!4 &8654037277671297253 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bcc7f1d3a5b1b9e48b30d9539fcbbc92, type: 3}

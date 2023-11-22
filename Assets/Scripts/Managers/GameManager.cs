@@ -24,10 +24,11 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     [SerializeField] private UnityEvent _onGameStart;
     public bool testStart = false;
-
+    public bool firstGame = true;
     public bool timerFinished = false;
     FadeInOut fade;
     private bool fadeing = true;
+    public bool endScreen = false;
 
     public EndRoundScreen endRoundScreen;
     public bool firstPass = true;
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     private bool trainCalled = false;
 
+    public int maxScore = 3;
+
 
     private void Awake()
     {
@@ -48,8 +51,13 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        // destroy game manager if in Start Scene
+        if (currentScene.name == "StartScene")
+        {
+            Destroy(gameObject);
+        }
         // refresh currentScene on scene change
-        if (currentScene.name == "PlayerSelect")
+        if (currentScene.name == "PlayerSelect" || currentScene.name == "PlayerSelectMap")
         {
             if (testStart)
             {
@@ -59,7 +67,7 @@ public class GameManager : MonoBehaviour
                 players[1] = player2.GetComponent<PlayerInput>();
                 player2.name = "Player2";
                 // numPlayers++;
-                playersReady++;
+                // playersReady++;
                 // timerFinished = true;
                 testStart = false;
 
@@ -105,7 +113,7 @@ public class GameManager : MonoBehaviour
                             playerScores[i]++;
                             currWinner = i;
                             // see if a player has won
-                            if (playerScores[i] >= 3)
+                            if (playerScores[i] >= maxScore)
                             {
                                 someoneWon = true;
                             }
@@ -147,18 +155,20 @@ public class GameManager : MonoBehaviour
                             playerInput.transform.rotation = playerSpawns[playerInput.playerIndex].rotation;
                             characterController.enabled = true;
                             playerInput.ActivateInput();
+
+                            // get player controller component
+                            PlayerController playerController = playerInput.GetComponent<PlayerController>();
+                            // set the tag to player
+                            playerController.gameObject.tag = "Player";
                         }
                         ManageHats();
+
                         SwitchScene();
                     }
                     else
                     {
-
-                        foreach (PlayerInput playerInput in playerInputs)
-                        {
-                            playerInput.DeactivateInput();
-                        }
                         ManageHats();
+                        endScreen = true;
                         SceneManager.LoadScene("EndScene");
                     }
                 }

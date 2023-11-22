@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4165802046492718394, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51465ce2305ecb54f9c3b0d670ac5f98, type: 2}
     - target: {fileID: -375948767903499520, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -96,10 +100,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Throwable
       objectReference: {fileID: 0}
+    - target: {fileID: 2477769560433516992, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51465ce2305ecb54f9c3b0d670ac5f98, type: 2}
     - target: {fileID: 2915857958487323435, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3802263837092037000, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51465ce2305ecb54f9c3b0d670ac5f98, type: 2}
     - target: {fileID: 4197164099581948646, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -108,6 +120,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4626242652139505188, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51465ce2305ecb54f9c3b0d670ac5f98, type: 2}
+    - target: {fileID: 5814379141485116463, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 51465ce2305ecb54f9c3b0d670ac5f98, type: 2}
     - target: {fileID: 8674884706559380031, guid: 008028cebf6e3084fb4eac2c951e199e, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -296,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hatReq: 3
+  respawn: 1
 --- !u!1001 &4978103550284789716
 PrefabInstance:
   m_ObjectHideFlags: 0
