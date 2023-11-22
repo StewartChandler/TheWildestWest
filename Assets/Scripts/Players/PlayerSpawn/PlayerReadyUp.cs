@@ -121,7 +121,7 @@ public class PlayerReadyUp : MonoBehaviour
                 closestDistance = curDistance;
             }
         }
-        // return the transform of closeststatrtplatform
+        // return the transform of closeststartplatform
         Debug.Log(closestStartPlatform);
         return closestStartPlatform.transform;
     }
