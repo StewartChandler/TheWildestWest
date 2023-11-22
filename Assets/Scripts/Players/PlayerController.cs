@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
     public void OnThrow(InputAction.CallbackContext context)
     {
         currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name != "PlayerSelect")
+        if (currentScene.name != "PlayerSelect" && (currentScene.name != "PlayerSelectMap" || context.control.name != "buttonSouth"))
         {
             if (context.performed && state == State.Active)
             {
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentScene.name != "PlayerSelect" && gameManager.firstPass == true)
+        if (currentScene.name != "PlayerSelect" && gameManager.endScreen == false && gameManager.firstPass == true)
         {
             switch (state)
             {
@@ -258,6 +258,9 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
+                PlayerInput selfInput = GetComponent<PlayerInput>();
+                StatsManager.instance.ItemThrown(selfInput.playerIndex);
+
                 AudioManager.instance.Play("Throw1", "Throw2");
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
@@ -273,6 +276,9 @@ public class PlayerController : MonoBehaviour
             transform.forward = displ; // turn to face where you got hit from
             nextHit = Time.time + invincibilityOnHit;
             AudioManager.instance.Play("Hit1");
+
+            PlayerInput selfInput = GetComponent<PlayerInput>();
+            StatsManager.instance.HatLost(selfInput.playerIndex);
 
             if (frozen)
             {
@@ -346,6 +352,7 @@ public class PlayerController : MonoBehaviour
             gameManager.isPlayerAlive[selfInput.playerIndex] = false;
         }
 
+        gameObject.tag = "Untagged";
         selfInput.DeactivateInput();
     }
 

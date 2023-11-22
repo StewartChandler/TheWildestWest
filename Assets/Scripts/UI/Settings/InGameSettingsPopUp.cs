@@ -53,14 +53,27 @@ public class InGameSettingsPopUp : MonoBehaviour
                 GameObject playerManager = GameObject.Find("PlayerManager");
 
                 PlayerInput[] playerInputs = playerManager.GetComponentsInChildren<PlayerInput>();
-
-                foreach (PlayerInput playerInput in playerInputs)
+                for (int i = 0; i < playerInputs.Length; i++)
                 {
-                    playerInput.ActivateInput();
+                    if (gameManager.isPlayerAlive[i] == true)
+                    {
+                        playerInputs[i].ActivateInput();
+                    }
                 }
             }
 
         }
+    }
+
+    // Method to return to main menu
+    public void OnMainMenu()
+    {
+        // set game to unpaused
+        gameManager.isPaused = false;
+        // unpause game
+        Time.timeScale = 1;
+        // Load the main menu scene
+        SceneManager.LoadScene("StartScene");
     }
 
     // Update is called once per frame

@@ -5,17 +5,24 @@ using TMPro;
 
 public class StartCountdown : MonoBehaviour
 {
-    public float timeRemaining = 2;
+    private float timeRemaining = 2;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
 
     private bool gamePaused = false;
     public TextMeshProUGUI inGameTimer;
+    private GameManager gameManager;
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         // Pause the game
         Time.timeScale = 0;
+        if (gameManager.firstGame == true)
+        {
+            timeRemaining = 4;
+        }
 
         // Starts the timer automatically
         timerIsRunning = true;
@@ -25,6 +32,11 @@ public class StartCountdown : MonoBehaviour
     {
         if (timerIsRunning)
         {
+            if (timeRemaining > 2)
+            {
+                timeRemaining -= Time.unscaledDeltaTime; // Use unscaledDeltaTime to ignore time scale
+                timeText.text = string.Format("First to {0} points wins!", gameManager.maxScore);
+            }
             if (timeRemaining > 1)
             {
                 timeRemaining -= Time.unscaledDeltaTime; // Use unscaledDeltaTime to ignore time scale
