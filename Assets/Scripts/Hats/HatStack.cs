@@ -46,14 +46,7 @@ public class HatStack : MonoBehaviour
     public void pushHat(GameObject hat)
     {
         hat.transform.SetParent(transform, false);
-        // if (currentScene.name == "PlayerSelect")
-        // {
-        //     hat.transform.position += new Vector3(0, 0.006f * hats.Count, 0);
-        // }
-        // else
-        // {
         hat.transform.position += new Vector3(0, 0.3f * (hats.Count + 1), 0);
-        // }
         hat.transform.rotation = Quaternion.Euler(
             Random.Range(-15.0f, 15.0f),
             Random.Range(-15.0f, 15.0f),
