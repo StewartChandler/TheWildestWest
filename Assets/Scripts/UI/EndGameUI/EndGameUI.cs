@@ -73,25 +73,25 @@ public class EndGameUI : MonoBehaviour
     */
     public IEnumerator DisplayEndGameUI()
     {
-        // Phase 1: Display characters and Game Over message
-        // Wait 3 seconds
-        DisplayCharacters();
-        UpdateMessage("Game Over. Counting Scores...", Color.white);
-        yield return new WaitForSeconds(3f);
+        // // Phase 1: Display characters and Game Over message
+        // // Wait 3 seconds
+        // DisplayCharacters();
+        // UpdateMessage("Game Over. Counting Scores...", Color.white);
+        // yield return new WaitForSeconds(3f);
 
-        // Phase 2: Count the scores and make the characters grow
-        // Wait 1.2 seconds in between each count
-        while (currScoreCount < gameManager.maxScore)
-        {
-            CountScore();
-            yield return new WaitForSeconds(1.2f);
-        }
+        // // Phase 2: Count the scores and make the characters grow
+        // // Wait 1.2 seconds in between each count
+        // while (currScoreCount < gameManager.maxScore)
+        // {
+        //     CountScore();
+        //     yield return new WaitForSeconds(1.2f);
+        // }
 
-        // Phase 3: Display the winner
-        // Wait 3 seconds
-        UpdateMessage("Player " + (winnerIndex + 1) + " Wins!", gold);
-        placeMessages();
-        yield return new WaitForSeconds(3f);
+        // // Phase 3: Display the winner
+        // // Wait 3 seconds
+        // UpdateMessage("Player " + (winnerIndex + 1) + " Wins!", gold);
+        // placeMessages();
+        // yield return new WaitForSeconds(3f);
 
         // Phase 5: Remove curr UI
         deletePlayerManager();

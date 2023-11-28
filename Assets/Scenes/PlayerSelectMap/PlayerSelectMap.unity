@@ -1661,6 +1661,7 @@ GameObject:
   - component: {fileID: 585594254}
   - component: {fileID: 585594253}
   - component: {fileID: 585594256}
+  - component: {fileID: 585594256}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2640,6 +2641,7 @@ MonoBehaviour:
   - {r: 0.654902, g: 0.22745098, b: 0.8392157, a: 1}
   playersReady: 0
   numPlayers: 0
+  currRound: 1
   playerSpawns:
   - {fileID: 1994179174}
   - {fileID: 871092163}
@@ -2706,6 +2708,7 @@ MonoBehaviour:
   ending: 0
   currWinner: 0
   isPaused: 0
+  timeRanOut: 0
   maxScore: 3
 --- !u!1 &916350260
 GameObject:
