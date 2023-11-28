@@ -3057,12 +3057,16 @@ PrefabInstance:
       value: Rock_Medium (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6877478902496349929, guid: 1f33dc7088bea45898d565dff93c08c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877478902496349929, guid: 1f33dc7088bea45898d565dff93c08c0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6877478902496349929, guid: 1f33dc7088bea45898d565dff93c08c0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.1000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6877478902496349929, guid: 1f33dc7088bea45898d565dff93c08c0, type: 3}
       propertyPath: m_LocalPosition.x
