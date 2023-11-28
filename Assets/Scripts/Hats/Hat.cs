@@ -8,6 +8,8 @@ public class Hat : MonoBehaviour
 {
     private Rigidbody rb;
 
+    private static float scalingFactor = 1.5f;
+
     private enum State
     {
         Atop,
@@ -52,7 +54,7 @@ public class Hat : MonoBehaviour
             }
         }
 
-        transform.localScale = 1.5f * Vector3.one;
+        transform.localScale = scalingFactor * Vector3.one;
     }
 
     public void launch(Vector3 displ)
@@ -67,7 +69,7 @@ public class Hat : MonoBehaviour
         rb.AddForce(25.0f * dist * dir);
         rb.angularVelocity = Random.onUnitSphere;
 
-        transform.localScale = Vector3.one;
+        transform.localScale = scalingFactor * Vector3.one;
 
         foreach (Collider c in colliders)
         {
@@ -209,7 +211,7 @@ public class Hat : MonoBehaviour
                 AudioManager.instance.Play("HatCollect1", "HatCollect2");
                 hs.pushHat(gameObject);
 
-                transform.localScale = 1.5f * Vector3.one;
+                transform.localScale = scalingFactor * Vector3.one;
             }
         }
     }
