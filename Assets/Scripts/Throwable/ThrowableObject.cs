@@ -122,6 +122,7 @@ public class ThrowableObject : MonoBehaviour
     {
         state = State.Prop;
         target = null;
+        rb.excludeLayers = defaultMask;
         rb.useGravity = true;
         rb.mass = objMass;
 
@@ -247,10 +248,10 @@ public class ThrowableObject : MonoBehaviour
                 {
                     // ajdust trail scale based on speed
                     trail.widthMultiplier = Mathf.SmoothStep(0f, 1f, rb.velocity.magnitude / 15f);
-
-                    // remove thrown state after 10s if not done already
-                    if (throwtime >= 10f) { resetState(); }
                 }
+
+                // remove thrown state after 10s if not done already
+                if (throwtime >= 10f) { resetState(); }
                 break;
         }
     }
