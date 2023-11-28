@@ -697,6 +697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 585594255}
     m_Modifications:
+    - target: {fileID: 1220000820956900999, guid: 979c7e8818fd66643812438b77dd4c15, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4588519338123290040, guid: 979c7e8818fd66643812438b77dd4c15, type: 3}
       propertyPath: m_Name
       value: OnTopCamera
@@ -2640,6 +2644,7 @@ MonoBehaviour:
   - {r: 0.654902, g: 0.22745098, b: 0.8392157, a: 1}
   playersReady: 0
   numPlayers: 0
+  currRound: 1
   playerSpawns:
   - {fileID: 1994179174}
   - {fileID: 871092163}
@@ -2706,6 +2711,7 @@ MonoBehaviour:
   ending: 0
   currWinner: 0
   isPaused: 0
+  timeRanOut: 0
   maxScore: 3
 --- !u!1 &916350260
 GameObject:

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
                                      new Color(167f / 255f, 58f / 255f, 214 / 255f)};
     public int playersReady = 0;
     public int numPlayers = 0;
+    public int currRound = 1;
     private static GameManager instance;
     // currentScene does not keep track of the actual current scene and should be refactored
     Scene currentScene;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
 
     private bool trainCalled = false;
+    public bool timeRanOut = false;
 
     public int maxScore = 3;
 
@@ -141,7 +143,7 @@ public class GameManager : MonoBehaviour
                     // if someone has won, go to the end screen, else reset the game arena
                     GameObject playerManager = GameObject.Find("PlayerManager");
                     PlayerInput[] playerInputs = playerManager.GetComponentsInChildren<PlayerInput>();
-                    if (!someoneWon)
+                    if (!someoneWon && currRound < 3)
                     {
 
 
@@ -162,7 +164,7 @@ public class GameManager : MonoBehaviour
                             playerController.gameObject.tag = "Player";
                         }
                         ManageHats();
-
+                        currRound++;
                         SwitchScene();
                     }
                     else
@@ -251,7 +253,7 @@ public class GameManager : MonoBehaviour
         GameObject playerManager = GameObject.Find("PlayerManager");
         PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
 
-        // Iterate through each player, record the player with the msot hats, and kill everyone else
+        // Iterate through each player, record the player with the most hats, and kill everyone else
         int maxPlayer = 0;
         int maxHats = 0;
         for (int i = 0; i < numPlayers; i++)

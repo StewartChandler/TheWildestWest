@@ -71,6 +71,8 @@ public class Hat : MonoBehaviour
 
         transform.localScale = scalingFactor * Vector3.one;
 
+        transform.position += Vector3.up * 0.2f;
+
         foreach (Collider c in colliders)
         {
             c.isTrigger = false;
