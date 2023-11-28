@@ -58,7 +58,9 @@ public class CameraMovement : MonoBehaviour
 
             if (gameManager.isPlayerAlive[playerInput.playerIndex])
             {
-                centerPosition += p.transform.position;
+                Vector3 positionToAdd = p.transform.position;
+                positionToAdd.y = 0;
+                centerPosition += positionToAdd;
                 livePlayers += 1;
             }
         }

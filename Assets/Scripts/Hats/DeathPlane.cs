@@ -31,7 +31,9 @@ public class DeathPlane : MonoBehaviour
                 PlayerInput playerInput = collision.gameObject.GetComponent<PlayerInput>();
                 StatsManager.instance.TimesFallen(playerInput.playerIndex);
 
-                playerController.KillPlayer();
+                // playerController.KillPlayer();
+                playerController.takeDamage(-0.4f * collision.transform.position + new Vector3(0f, 10f));
+                playerController.RespawnPlayer();
             }
         }
     }
