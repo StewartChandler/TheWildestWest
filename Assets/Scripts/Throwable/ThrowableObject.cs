@@ -20,8 +20,10 @@ public class ThrowableObject : MonoBehaviour
 
     protected Transform target = null;
     protected Rigidbody rb;
-    private Vector3 pickUpOffset = new Vector3(1.0f, 0.5f, 0.0f);
-    private static int throwableMask = 8; // Throwable
+    private Vector3 pickUpOffset = new Vector3(0.0f, 0.5f, 1.0f);
+    private static int throwableMask = 1 << 3; // Throwable Mask
+    private static int playerMask = 1 << 8; // Player Mask
+    private int defaultMask; // The initial excludeMask of rb.
     protected float objMass;
     private float distAway;
     private float holderDist;
@@ -144,6 +146,7 @@ public class ThrowableObject : MonoBehaviour
 
         rb.mass = objMass;
         rb.useGravity = false;
+        rb.excludeLayers = defaultMask;
         rb.velocity = (dir * throwingSpeed); // Adjust the throw force as needed.
         state = State.Thrown;
         throwtime = 0;
@@ -160,6 +163,7 @@ public class ThrowableObject : MonoBehaviour
         rb.mass = objMass;
         rb.useGravity = true;
         state = State.Prop;
+        rb.excludeLayers = defaultMask;
         target = null;
         if (trail != null) { trail.enabled = false; }
     }
@@ -170,19 +174,21 @@ public class ThrowableObject : MonoBehaviour
         state = State.Held;
         objMass = rb.mass;
         rb.mass = 0;
+        rb.excludeLayers = playerMask;
         rb.useGravity = false;
         if (trail != null) { trail.enabled = false; }
-        // Debug.Log(distAway);
+        Debug.Log(distAway);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        trail = GetComponentInChildren<TrailRenderer>();
+        defaultMask = rb.excludeLayers;
 
         setUpMaterials();
 
+        trail = GetComponentInChildren<TrailRenderer>();
         if (trail != null)
         {
             trail.enabled = false;
@@ -194,12 +200,12 @@ public class ThrowableObject : MonoBehaviour
         yOffset = 0;
         foreach (Collider collider in GetComponents<Collider>())
         {
-            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
+            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.z)).magnitude);
             yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
         foreach (Collider collider in GetComponentsInChildren<Collider>())
         {
-            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.y)).magnitude);
+            distAway = Mathf.Max(distAway, 0.5f * (new Vector2(collider.bounds.size.x, collider.bounds.size.z)).magnitude);
             yOffset = Mathf.Max(yOffset, collider.bounds.extents.y);
         }
 
