@@ -697,6 +697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 585594255}
     m_Modifications:
+    - target: {fileID: 1220000820956900999, guid: 979c7e8818fd66643812438b77dd4c15, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4588519338123290040, guid: 979c7e8818fd66643812438b77dd4c15, type: 3}
       propertyPath: m_Name
       value: OnTopCamera
@@ -1660,7 +1664,6 @@ GameObject:
   - component: {fileID: 585594255}
   - component: {fileID: 585594254}
   - component: {fileID: 585594253}
-  - component: {fileID: 585594256}
   - component: {fileID: 585594256}
   m_Layer: 0
   m_Name: Main Camera
