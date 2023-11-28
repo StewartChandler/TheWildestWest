@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1495770813977689381}
   - component: {fileID: 5817681853740923756}
   - component: {fileID: 1219689626229674541}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DirectionIndicatorTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 9023302546179009249}
   - component: {fileID: 7497826193825811851}
   - component: {fileID: 195943343119611002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DirectionIndicatorBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
