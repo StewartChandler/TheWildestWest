@@ -87,6 +87,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainTrack (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5112912249231462089, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788371573331527237, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
     m_RemovedGameObjects: []
@@ -149,6 +157,14 @@ PrefabInstance:
     - target: {fileID: 3139163669240807951, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_Name
       value: TrainTrack (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112912249231462089, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788371573331527237, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
@@ -274,6 +290,14 @@ PrefabInstance:
     - target: {fileID: 3139163669240807951, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
       propertyPath: m_Name
       value: TrainTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112912249231462089, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788371573331527237, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}
+      propertyPath: respawn
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8389171038221393407, guid: 730bc7135caf743a1ac16fe9affcca44, type: 3}

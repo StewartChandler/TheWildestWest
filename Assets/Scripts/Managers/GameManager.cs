@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour
         GameObject playerManager = GameObject.Find("PlayerManager");
         PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
 
-        // Iterate through each player, record the player with the msot hats, and kill everyone else
+        // Iterate through each player, record the player with the most hats, and kill everyone else
         int maxPlayer = 0;
         int maxHats = 0;
         for (int i = 0; i < numPlayers; i++)

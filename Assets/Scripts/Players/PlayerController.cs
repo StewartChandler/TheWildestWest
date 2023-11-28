@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private float objMass;
     public float invincibilityOnHit = 1f;
     private float nextHit = 0.0f;
+    private Vector3 respawnOffset = new Vector3(0, 30);
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;
@@ -298,7 +299,7 @@ public class PlayerController : MonoBehaviour
                 timeTilActive = STUNTIME;
             }
 
-            if (hatStack.getNumHats() > 1)
+            if (hatStack.getNumHats() > 0)
             {
                 hatStack.popHat(displ);
                 if (pickedObject != null)
@@ -307,10 +308,12 @@ public class PlayerController : MonoBehaviour
                     pickedObject = null;
                 }
             }
-            else
-            {
-                KillPlayer();
-            }
+            // This statement enables player death
+
+            // else
+            // {
+            //    KillPlayer();
+            // }
             StartVibration(vibrationIntensity, vibrationDuration);
         }
     }
@@ -361,6 +364,16 @@ public class PlayerController : MonoBehaviour
 
         gameObject.tag = "Untagged";
         selfInput.DeactivateInput();
+    }
+
+    public void RespawnPlayer()
+    {
+        PlayerInput selfInput = GetComponent<PlayerInput>();
+        CharacterController characterController = selfInput.GetComponent<CharacterController>();
+        characterController.enabled = false;
+        selfInput.transform.position = gameManager.playerSpawns[selfInput.playerIndex].position + respawnOffset;
+        selfInput.transform.rotation = gameManager.playerSpawns[selfInput.playerIndex].rotation;
+        characterController.enabled = true;
     }
 
     private void playPickUpSound(ThrowableObject closestObj)
