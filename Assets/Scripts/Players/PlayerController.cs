@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private float playerSpeed = 13f;
     private float throwingSpeed = 30f;
-    public float pickupRange = 5f;
+    public float pickupRange = 3f;
     private ThrowableObject pickedObject;
     private float playerRadius;
     private float objMass;
