@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
     private Vector3 offset = new Vector3(0, 20, -20);
-    public Vector3 offsetIncrease = new Vector3(0, 15, -15);
+    public Vector3 offsetIncrease = new Vector3(0, 10, -10);
     public GameObject player;
     private GameObject[] players;
     public float smoothSpeed = 5f; // Adjust this value to control the smoothness
@@ -35,7 +36,7 @@ public class CameraMovement : MonoBehaviour
             targetPosition += offset;
 
             // Camera up down, back forward (zoom) distance
-            float maxDistance = CalculateMaxPlayerDistance();
+            float maxDistance = CalculateMaxPlayerDistance(targetPosition);
             float distanceWeight = maxDistance / furthestDistance;
 
             targetPosition += offsetIncrease * distanceWeight;
@@ -72,27 +73,24 @@ public class CameraMovement : MonoBehaviour
         return offset;
     }
 
-    float CalculateMaxPlayerDistance()
+    float CalculateMaxPlayerDistance(Vector3 centerPosition)
     {
-        float maxDistance = 0f;
+        float xMaxFromCenter = 0f;
+        float zMaxFromCenter = 0f;
 
         for (int i = 0; i < players.Length; i++)
         {
-            for (int j = i + 1; j < players.Length; j++)
-            {
-                PlayerInput playerInput1 = players[i].GetComponent<PlayerInput>();
-                PlayerInput playerInput2 = players[j].GetComponent<PlayerInput>();
+            float x = Mathf.Abs(centerPosition.x - players[i].transform.position.x);
+            float z = Mathf.Abs(centerPosition.z - players[i].transform.position.z);
 
-                // don't calculate distance when one of the players aren't alive
-                if (!gameManager.isPlayerAlive[playerInput1.playerIndex] || !gameManager.isPlayerAlive[playerInput2.playerIndex])
-                {
-                    continue;
-                }
-
-                float playerDistance = Vector3.Distance(players[i].transform.position, players[j].transform.position);
-                maxDistance = Mathf.Max(maxDistance, playerDistance);
-            }
+            xMaxFromCenter = Mathf.Max(x, xMaxFromCenter);
+            zMaxFromCenter = Mathf.Max(z, zMaxFromCenter);
         }
+
+        Vector3 player1 = new Vector3(centerPosition.x - xMaxFromCenter, 0, centerPosition.z - zMaxFromCenter);
+        Vector3 player2 = new Vector3(centerPosition.x + xMaxFromCenter, 0, centerPosition.z + zMaxFromCenter);
+
+        float maxDistance = Vector3.Distance(player1, player2);
 
         return maxDistance;
     }
