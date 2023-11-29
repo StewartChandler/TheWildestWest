@@ -221,7 +221,6 @@ public class PlayerController : MonoBehaviour
         {
 
             ThrowableObject closestObj = ThrowableObject.getClosestAvailableObj(transform.position, hatStack.getNumHats(), pickupRange);
-            // Debug.Log(closestObj);
 
             if (closestObj != null)
             {

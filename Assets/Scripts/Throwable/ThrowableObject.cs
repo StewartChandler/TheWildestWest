@@ -87,9 +87,11 @@ public class ThrowableObject : MonoBehaviour
         ThrowableObject closestThrowable = null;
         bool closestIsThrown = false;
 
+
         foreach (Collider collider in colliders)
         {
             ThrowableObject tObj = collider.gameObject.GetComponent<ThrowableObject>();
+
             if (tObj == null)
             {
                 tObj = collider.gameObject.GetComponentInParent<ThrowableObject>();
