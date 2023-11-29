@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Vector3 Offset = new Vector3(0, 20, -25);
+    private Vector3 offset = new Vector3(0, 20, -20);
+    public Vector3 offsetIncrease = new Vector3(0, 15, -15);
     public GameObject player;
     private GameObject[] players;
     public float smoothSpeed = 5f; // Adjust this value to control the smoothness
+    public float furthestDistance = 70f;
 
     private GameManager gameManager;
 
@@ -18,7 +20,7 @@ public class CameraMovement : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         players = GameObject.FindGameObjectsWithTag("Player");
-        transform.rotation = Quaternion.Euler(45f, 0f, 0f);
+        transform.rotation = Quaternion.Euler(55f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -30,16 +32,13 @@ public class CameraMovement : MonoBehaviour
         {
 
             Vector3 targetPosition = CalculateCameraTargetPosition();
-            targetPosition += Offset;
+            targetPosition += offset;
 
             // Camera up down, back forward (zoom) distance
             float maxDistance = CalculateMaxPlayerDistance();
+            float distanceWeight = maxDistance / furthestDistance;
 
-            float upOffset = Mathf.Lerp(16f, 26f, maxDistance / 70f); // v1 = v2 * 0.8
-            float backOffset = Mathf.Lerp(-25.6f, -32f, maxDistance / 70f); // v1 = v2 * 0.8
-
-            targetPosition.y += upOffset - 20;
-            targetPosition.z += backOffset + 25;
+            targetPosition += offsetIncrease * distanceWeight;
 
             // Use Lerp to smoothly interpolate the camera's position
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
@@ -70,7 +69,7 @@ public class CameraMovement : MonoBehaviour
             return centerPosition / livePlayers;
         }
 
-        return Offset;
+        return offset;
     }
 
     float CalculateMaxPlayerDistance()
@@ -85,7 +84,7 @@ public class CameraMovement : MonoBehaviour
                 PlayerInput playerInput2 = players[j].GetComponent<PlayerInput>();
 
                 // don't calculate distance when one of the players aren't alive
-                if (gameManager.isPlayerAlive[playerInput1.playerIndex] || gameManager.isPlayerAlive[playerInput2.playerIndex])
+                if (!gameManager.isPlayerAlive[playerInput1.playerIndex] || !gameManager.isPlayerAlive[playerInput2.playerIndex])
                 {
                     continue;
                 }
