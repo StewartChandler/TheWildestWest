@@ -265,12 +265,14 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
+                animator.SetBool("isThrowing", true);
                 PlayerInput selfInput = GetComponent<PlayerInput>();
                 StatsManager.instance.ItemThrown(selfInput.playerIndex);
 
                 AudioManager.instance.Play("Throw1", "Throw2");
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
+                //animator.SetBool("isThrowing", false);
             }
         }
     }
