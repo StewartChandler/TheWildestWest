@@ -94,6 +94,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (14)
@@ -154,6 +158,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -218,6 +226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (3)
@@ -278,6 +290,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -342,6 +358,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (4)
@@ -402,6 +422,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -466,6 +490,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (11)
@@ -526,6 +554,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -590,6 +622,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (5)
@@ -650,6 +686,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -714,6 +754,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (9)
@@ -774,6 +818,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
@@ -838,6 +886,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (1)
@@ -900,6 +952,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_Name
       value: Bottle (13)
@@ -960,6 +1016,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227553785299015333, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144605784357663723, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
+      propertyPath: respawn
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281827066977460062, guid: a0561d2d80fba9c47ac572d436ea1aea, type: 3}
