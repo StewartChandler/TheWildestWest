@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour
     public bool[] isPlayerAlive = { false, false, false, false };
     public int[] playerScores = { 0, 0, 0, 0 };
     public Color[] playerColors = { new Color(220f / 255f, 78f / 255f, 50f / 255f),
-                                     new Color(86f / 255f, 110f / 255f, 61f / 255f),
-                                     new Color(114f / 255f, 16f / 255f, 117f / 255f),
-                                     new Color(256f / 255f, 256f / 255f, 256f / 255f)};
+                                    new Color(86f / 255f, 110f / 255f, 61f / 255f),
+                                    new Color(114f / 255f, 16f / 255f, 117f / 255f),
+                                    new Color(256f / 255f, 256f / 255f, 256f / 255f)};
+    public Material[] playerMaterials = new Material[4];
     public int playersReady = 0;
     public int numPlayers = 0;
     public int currRound = 1;
@@ -49,7 +50,12 @@ public class GameManager : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
         fade = FindObjectOfType<FadeInOut>();
-
+        playerMaterials[0] = Resources.Load<Material>("Player/PlayerRed");
+        playerMaterials[1] = Resources.Load<Material>("Player/PlayerGreen");
+        playerMaterials[2] = Resources.Load<Material>("Player/PlayerPurple");
+        playerMaterials[3] = Resources.Load<Material>("Player/PlayerWhite");
+        Debug.Log("HERE");
+        Debug.Log(Resources.Load<Material>("Player/PlayerGreen"));
     }
     private void Update()
     {

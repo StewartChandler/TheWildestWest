@@ -71,6 +71,26 @@ public class PlayerSelect : MonoBehaviour
         indicatorTop.material.color = gameManager.playerColors[numPlayers];
         indicatorBottom.material.color = gameManager.playerColors[numPlayers];
 
+        // Set the players material color
+        Transform innerPlayer = player.Find("Player");
+        if (innerPlayer != null)
+        {
+            Transform childTransform = innerPlayer.transform.Find("PR_Basemodel_01_V2:Body_grp");
+            if (childTransform != null)
+            {
+                GameObject innerInnerPlayer = childTransform.gameObject;
+
+                foreach (Transform child in innerInnerPlayer.transform)
+                {
+                    SkinnedMeshRenderer childRenderer = child.GetComponent<SkinnedMeshRenderer>();
+
+                    //if (!childRenderer) continue;
+                    Debug.Log(gameManager.playerMaterials[numPlayers] == null);
+                    childRenderer.material = gameManager.playerMaterials[numPlayers];
+                }
+            }
+        }
+
         // Increment the number of players
         numPlayers++;
     }
