@@ -389,6 +389,8 @@ MonoBehaviour:
   invincibilityOnHit: 1
   playerPrefab: {fileID: 0}
   gameManager: {fileID: 0}
+  playerIndicatorTop: {fileID: 3980644608515634007}
+  playerIndicatorBottom: {fileID: 5213273660904268060}
 --- !u!114 &389624825032899163
 MonoBehaviour:
   m_ObjectHideFlags: 0

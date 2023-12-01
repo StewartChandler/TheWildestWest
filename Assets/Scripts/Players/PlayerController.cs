@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         PickupAnim,
     };
 
+    public GameObject playerIndicatorTop;
+    public GameObject playerIndicatorBottom;
+
 
     Scene currentScene;
 
@@ -94,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
         // think this is bad performance wise
         hitEffect = Resources.Load<GameObject>("vfx_graph_onhit");
-        if (hitEffect == null )
+        if (hitEffect == null)
         {
             Debug.Log("could not load hit effect");
         }
@@ -201,6 +204,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+            animator.SetBool("isMoving", false);
 
             if (move != Vector3.zero)
             {
@@ -349,6 +353,26 @@ public class PlayerController : MonoBehaviour
                 isVibrating = false;
             }
         }
+    }
+
+    public void DisableIndicator()
+    {
+        playerIndicatorTop.SetActive(false);
+        playerIndicatorBottom.SetActive(false);
+    }
+
+    public void EnableIndicator()
+    {
+        playerIndicatorTop.SetActive(true);
+        playerIndicatorBottom.SetActive(true);
+
+        // get the int value of the later "ontop"
+        int ontopLayer = LayerMask.NameToLayer("ontop");
+
+        // apply the layer to the indicator
+        playerIndicatorTop.layer = ontopLayer;
+        playerIndicatorBottom.layer = ontopLayer;
+
     }
 
     public void KillPlayer()

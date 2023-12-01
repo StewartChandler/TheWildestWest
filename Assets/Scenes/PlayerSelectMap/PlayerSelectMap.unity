@@ -3631,11 +3631,18 @@ MonoBehaviour:
   - {fileID: 0}
   isPlayerAlive: 00000000
   playerScores: 00000000000000000000000000000000
+  playerHats: 00000000000000000000000000000000
+  playerRoundHats: 00000000000000000000000000000000
   playerColors:
   - {r: 0.8627451, g: 0.30588236, b: 0.19607843, a: 1}
   - {r: 0.3372549, g: 0.43137255, b: 0.23921569, a: 1}
   - {r: 0.44705883, g: 0.0627451, b: 0.45882353, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  playerMaterials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playersReady: 0
   numPlayers: 0
   currRound: 1
@@ -7149,7 +7156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1338030050
 RectTransform:
   m_ObjectHideFlags: 0
