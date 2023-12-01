@@ -264,6 +264,8 @@ MonoBehaviour:
   hatReq: 0
   respawn: 1
   explosionEffect: {fileID: 7554368337416794546, guid: 66bb59c5187304ce0b0f2d56ac0b20d0, type: 3}
+  explosionForce: 3000
+  explosionRadius: 10
 --- !u!4 &6704304004357628331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9a69e8ff1467540f9b1a4b7727dc4e87, type: 3}

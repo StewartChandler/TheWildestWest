@@ -74,6 +74,7 @@ public class InGameSettingsPopUp : MonoBehaviour
         Time.timeScale = 1;
         // Load the main menu scene
         SceneManager.LoadScene("StartScene");
+        AudioManager.instance.Stop("GameMusic");
     }
 
     // Update is called once per frame

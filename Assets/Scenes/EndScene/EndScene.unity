@@ -6720,7 +6720,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1214403059}
         m_TargetAssemblyTypeName: InGameSettingsPopUp, Assembly-CSharp
         m_MethodName: OnMainMenu
         m_Mode: 1
