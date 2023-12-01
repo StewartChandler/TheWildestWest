@@ -11,6 +11,7 @@ public class TrainLogic : MonoBehaviour
     private float trainSpeed = 20.0f;
     public GameObject[] trainLoot = new GameObject[2];
     private int[] eventThresholds = { 2, 1 };
+    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
 
     // Variables for managing movement
     private bool isMoving = false;
@@ -56,9 +57,10 @@ public class TrainLogic : MonoBehaviour
     {
         StartCoroutine(
             MoveToXPos(endingOffset, trainSpeed,
+            SpawnItems(
             Wait(2.0f,
             MoveToXPos(startingOffset, trainSpeed,
-            End()))));
+            End())))));
     }
 
     private void ReturnTrain()
@@ -91,6 +93,20 @@ public class TrainLogic : MonoBehaviour
     private IEnumerator End()
     {
         yield return 0;
+    }
+
+    private IEnumerator SpawnItems(IEnumerator next)
+    {
+
+        while (isMoving)
+        {
+            yield return null;
+        }
+
+        int spawnChosen = Random.Range(0, trainLoot.Length);
+        Instantiate(trainLoot[spawnChosen], transform.position + spawnOffset, Quaternion.identity);
+
+        StartCoroutine(next);
     }
 
     // Update function is what actually moves the train
