@@ -31,12 +31,53 @@ public class CameraMovement : MonoBehaviour
         //gameObject.transform.Translate(Offset);
         if (gameManager.firstPass)
         {
+            //find the two fake players
+            bool playerFound = false;
+            Vector3 bigPlayerPos = Vector3.zero;
+            Vector3 smallPlayerPos = Vector3.zero;
 
-            Vector3 targetPosition = CalculateCameraTargetPosition();
+            foreach (GameObject p in players)
+            {
+                PlayerInput playerInput = p.GetComponent<PlayerInput>();
+
+                if (gameManager.isPlayerAlive[playerInput.playerIndex])
+                {
+                    if (!playerFound)
+                    {
+                        bigPlayerPos = p.transform.position;
+                        smallPlayerPos = p.transform.position;
+                        playerFound = true;
+                    } else
+                    {
+                        if (p.transform.position.x < smallPlayerPos.x)
+                        {
+                            smallPlayerPos.x = p.transform.position.x;
+                        } else if (p.transform.position.x > bigPlayerPos.x)
+                        {
+                            bigPlayerPos.x = p.transform.position.x;
+                        }
+                        if (p.transform.position.z < smallPlayerPos.z)
+                        {
+                            smallPlayerPos.z = p.transform.position.z;
+                        } else if (p.transform.position.z > bigPlayerPos.z)
+                        {
+                            bigPlayerPos.z = p.transform.position.z;
+                        }
+                    }
+                }
+            }
+
+            // set the y components to 0
+            bigPlayerPos.y = 0;
+            smallPlayerPos.y = 0;
+
+            //Find the middle between the two player postions and add the offset to get the camera target position
+            Vector3 targetPosition = bigPlayerPos + smallPlayerPos;
+            targetPosition = targetPosition / 2;
             targetPosition += offset;
 
             // Camera up down, back forward (zoom) distance
-            float maxDistance = CalculateMaxPlayerDistance(targetPosition);
+            float maxDistance = Vector3.Distance(bigPlayerPos, smallPlayerPos);
             float distanceWeight = maxDistance / furthestDistance;
 
             targetPosition += offsetIncrease * distanceWeight;
@@ -50,6 +91,8 @@ public class CameraMovement : MonoBehaviour
     Vector3 CalculateCameraTargetPosition()
     {
         Vector3 centerPosition = Vector3.zero;
+
+
         int livePlayers = 0;
 
         foreach (GameObject p in players)
