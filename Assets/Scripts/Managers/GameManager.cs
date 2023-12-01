@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviour
     public PlayerInput[] players = new PlayerInput[4];
     public bool[] isPlayerAlive = { false, false, false, false };
     public int[] playerScores = { 0, 0, 0, 0 };
+    public int[] playerHats = { 0, 0, 0, 0 };
+    public int[] playerRoundHats = { 0, 0, 0, 0 };
     public Color[] playerColors = { new Color(220f / 255f, 78f / 255f, 50f / 255f),
-                                     new Color(86f / 255f, 110f / 255f, 61f / 255f),
-                                     new Color(114f / 255f, 16f / 255f, 117f / 255f),
-                                     new Color(256f / 255f, 256f / 255f, 256f / 255f)};
+                                    new Color(86f / 255f, 110f / 255f, 61f / 255f),
+                                    new Color(114f / 255f, 16f / 255f, 117f / 255f),
+                                    new Color(256f / 255f, 256f / 255f, 256f / 255f)};
+    public Material[] playerMaterials = new Material[4];
     public int playersReady = 0;
     public int numPlayers = 0;
     public int currRound = 1;
@@ -49,7 +52,12 @@ public class GameManager : MonoBehaviour
     {
         currentScene = SceneManager.GetActiveScene();
         fade = FindObjectOfType<FadeInOut>();
-
+        playerMaterials[0] = Resources.Load<Material>("Player/PlayerRed");
+        playerMaterials[1] = Resources.Load<Material>("Player/PlayerGreen");
+        playerMaterials[2] = Resources.Load<Material>("Player/PlayerPurple");
+        playerMaterials[3] = Resources.Load<Material>("Player/PlayerWhite");
+        Debug.Log("HERE");
+        Debug.Log(Resources.Load<Material>("Player/PlayerGreen"));
     }
     private void Update()
     {
@@ -113,7 +121,6 @@ public class GameManager : MonoBehaviour
                         if (isPlayerAlive[i])
                         {
                             playerScores[i]++;
-                            currWinner = i;
                             // see if a player has won
                             if (playerScores[i] >= maxScore)
                             {
@@ -128,7 +135,6 @@ public class GameManager : MonoBehaviour
 
                 if (ending)
                 {
-                    Debug.Log("Ending");
                     ending = false;
                     firstPass = true;
                     for (int i = 0; i < playersReady; i++)
@@ -165,11 +171,16 @@ public class GameManager : MonoBehaviour
                         }
                         ManageHats();
                         currRound++;
+                        PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
+                        // enable the player indicators
+                        foreach (PlayerController playerController in playerControllers)
+                        {
+                            playerController.EnableIndicator();
+                        }
                         SwitchScene();
                     }
                     else
                     {
-                        ManageHats();
                         endScreen = true;
                         SceneManager.LoadScene("EndScene");
                     }
@@ -253,25 +264,44 @@ public class GameManager : MonoBehaviour
         GameObject playerManager = GameObject.Find("PlayerManager");
         PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
 
-        // Iterate through each player, record the player with the most hats, and kill everyone else
-        int maxPlayer = 0;
+        // Record the number of hats
+        CountHats();
+
+        // Remove the player indicators
+        foreach (PlayerController playerController in playerControllers)
+        {
+            playerController.DisableIndicator();
+        }
+
+        // kill all players
+        for (int i = 0; i < numPlayers; i++)
+        {
+            playerControllers[i].GetComponent<PlayerController>().KillPlayer();
+
+        }
+    }
+
+    public void CountHats()
+    {
+        GameObject playerManager = GameObject.Find("PlayerManager");
+        PlayerController[] playerControllers = playerManager.GetComponentsInChildren<PlayerController>();
+
+        currWinner = 0;
         int maxHats = 0;
+
+        // Iterate through each player, record the player with the most hats, and kill everyone else
         for (int i = 0; i < numPlayers; i++)
         {
             if (playerControllers[i].GetComponentInChildren<HatStack>().getNumHats() > maxHats)
             {
-                maxPlayer = i;
                 maxHats = playerControllers[i].GetComponentInChildren<HatStack>().getNumHats();
+                currWinner = i;
             }
-        }
-        for (int i = 0; i < numPlayers; i++)
-        {
-            if (i != maxPlayer)
-            {
-                playerControllers[i].GetComponent<PlayerController>().KillPlayer();
-            }
+            playerRoundHats[i] = playerControllers[i].GetComponentInChildren<HatStack>().getNumHats();
+            playerHats[i] += playerControllers[i].GetComponentInChildren<HatStack>().getNumHats();
         }
     }
+
 
     public void StartGame()
     {
