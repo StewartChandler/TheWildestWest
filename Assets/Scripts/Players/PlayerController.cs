@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private float vibrationDuration = 0.2f; // Adjust the duration as needed
     private PlayerInput playerInput;
     private Color playerColor;
+    private Material playerMaterial;
 
     private ThrowableObject prevHighlightedObject;
 
@@ -78,10 +79,12 @@ public class PlayerController : MonoBehaviour
         if (playerIndex != -1)
         {
             playerColor = gameManager.playerColors[playerIndex];
+            playerMaterial = gameManager.playerMaterials[playerIndex];
         }
         else
         {
             playerColor = new Color(0, 0, 0);
+            playerMaterial = gameManager.playerMaterials[0];
         }
 
         // calculate distance away
