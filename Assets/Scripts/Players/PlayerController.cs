@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         PickupAnim,
     };
 
+    public GameObject playerIndicatorTop;
+    public GameObject playerIndicatorBottom;
+
 
     Scene currentScene;
 
@@ -94,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
         // think this is bad performance wise
         hitEffect = Resources.Load<GameObject>("vfx_graph_onhit");
-        if (hitEffect == null )
+        if (hitEffect == null)
         {
             Debug.Log("could not load hit effect");
         }
@@ -201,6 +204,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+            animator.SetBool("isMoving", false);
 
             if (move != Vector3.zero)
             {
@@ -285,7 +289,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(hitEffect, transform.position, Quaternion.identity, null);
             transform.forward = displ; // turn to face where you got hit from
             nextHit = Time.time + invincibilityOnHit;
-            AudioManager.instance.Play("Hit1");
+            AudioManager.instance.Play("Hit2");
 
             PlayerInput selfInput = GetComponent<PlayerInput>();
             StatsManager.instance.HatLost(selfInput.playerIndex);
@@ -351,6 +355,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void DisableIndicator()
+    {
+        playerIndicatorTop.SetActive(false);
+        playerIndicatorBottom.SetActive(false);
+    }
+
+    public void EnableIndicator()
+    {
+        playerIndicatorTop.SetActive(true);
+        playerIndicatorBottom.SetActive(true);
+
+        // get the int value of the later "ontop"
+        int ontopLayer = LayerMask.NameToLayer("ontop");
+
+        // apply the layer to the indicator
+        playerIndicatorTop.layer = ontopLayer;
+        playerIndicatorBottom.layer = ontopLayer;
+
+    }
+
     public void KillPlayer()
     {
         if (hatStack.getNumHats() > 0)
@@ -381,13 +405,13 @@ public class PlayerController : MonoBehaviour
     private void playPickUpSound(ThrowableObject closestObj)
     {
         // Debug.Log(closestObj.transform.parent.name);
-        if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
-        {
-            AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
-        }
-        else
-        {
-            AudioManager.instance.Play("PickUp1");
-        }
+        // if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
+        // {
+        //     AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
+        // }
+        // else
+        // {
+        AudioManager.instance.Play("PickUp1");
+        // }
     }
 }

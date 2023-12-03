@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hatReq: 0
-  respawn: 1
+  respawn: 0
   explosionEffect: {fileID: 7554368337416794546, guid: 66bb59c5187304ce0b0f2d56ac0b20d0, type: 3}
   explosionForce: 3000
   explosionRadius: 10

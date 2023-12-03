@@ -19,7 +19,7 @@ public class ExplosiveBarrel : ThrowableObject
         Explode();
 
         Instantiate(explosionEffect, position, rotation);
-
+        AudioManager.instance.Play("Explosion");
         BreakBarrel();
     }
 
@@ -32,7 +32,8 @@ public class ExplosiveBarrel : ThrowableObject
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
-        foreach (var obj in colliders) {
+        foreach (var obj in colliders)
+        {
 
             Rigidbody rb = obj.GetComponent<Rigidbody>();
 

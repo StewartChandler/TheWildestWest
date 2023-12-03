@@ -3631,11 +3631,18 @@ MonoBehaviour:
   - {fileID: 0}
   isPlayerAlive: 00000000
   playerScores: 00000000000000000000000000000000
+  playerHats: 00000000000000000000000000000000
+  playerRoundHats: 00000000000000000000000000000000
   playerColors:
   - {r: 0.8627451, g: 0.30588236, b: 0.19607843, a: 1}
   - {r: 0.3372549, g: 0.43137255, b: 0.23921569, a: 1}
   - {r: 0.44705883, g: 0.0627451, b: 0.45882353, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  playerMaterials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   playersReady: 0
   numPlayers: 0
   currRound: 1
@@ -5043,7 +5050,7 @@ MonoBehaviour:
   - name: PickUp1
     clip: {fileID: 8300000, guid: fdbbb9cf2bbfe4d4da695c60267a9f9a, type: 3}
     mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
-    volume: 0.592
+    volume: 0.45
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -5075,12 +5082,89 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: HatCollect3
+    clip: {fileID: 8300000, guid: d75aa595b44f24e4eaed5792cea875fc, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Hit1
     clip: {fileID: 8300000, guid: d8d2fa7dbbefb47439ce4d52f4c30beb, type: 3}
     mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
     volume: 0.76
     pitch: 0.6
     loop: 0
+    source: {fileID: 0}
+  - name: Hit2
+    clip: {fileID: 8300000, guid: 31e29acd10408e048a7fce5de16dd29d, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.283
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 980d80f090c5d104e94987b0af57a82b, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.489
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ReadyUp
+    clip: {fileID: 8300000, guid: 374da0d59a9b96a418c232ef09607763, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.348
+    pitch: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: TrainChugging
+    clip: {fileID: 8300000, guid: 77cd35f70974ccc419b7f5a7545b505d, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.075
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TrainHorn
+    clip: {fileID: 8300000, guid: d2a3434bd0821c64dacb5b97a7b79a99, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.467
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: TrainHorn2
+    clip: {fileID: 8300000, guid: bfa2cc73fc90e664c9def5c88d49a8ba, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 0.5
+    loop: 0
+    source: {fileID: 0}
+  - name: TrainHorn3
+    clip: {fileID: 8300000, guid: bfa2cc73fc90e664c9def5c88d49a8ba, type: 3}
+    mixer: {fileID: 8124548470355125479, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 0.2
+    loop: 0
+    source: {fileID: 0}
+  - name: Music1
+    clip: {fileID: 8300000, guid: b11f1ee058aadfa4cba59bfc75c0c084, type: 3}
+    mixer: {fileID: 6494789639506920443, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Music2
+    clip: {fileID: 8300000, guid: 640f6153b6da2e249a5ff3f73cd9b151, type: 3}
+    mixer: {fileID: 6494789639506920443, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Music3
+    clip: {fileID: 8300000, guid: d0d9c63b80706e7419c2648ce9750445, type: 3}
+    mixer: {fileID: 6494789639506920443, guid: 274d956d18e8445c89439756b2a935d7, type: 2}
+    volume: 0.698
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!1 &1051736562
 GameObject:
@@ -8999,6 +9083,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 640279671}
     m_Modifications:
+    - target: {fileID: 297089328446305024, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 297089328446305024, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 297089328446305024, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 297089328446305024, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 297089328446305024, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 639321967847809870, guid: 4ba22807c989040409358efeb43361f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6299992
@@ -9043,6 +9147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Instructions (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5289569071576561877, guid: 4ba22807c989040409358efeb43361f5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 190995cc937583c4da8b862095c8e22e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

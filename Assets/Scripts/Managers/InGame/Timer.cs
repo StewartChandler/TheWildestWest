@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class Timer : MonoBehaviour
 {
-    private float timeRemaining = 45;
+    private float timeRemaining = 51.5f;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
     public GameObject timerBorder;
@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     public GameObject bottomBorder;
 
     private float scale;
+    private bool endRoundSound = false;
 
     GameManager gameManager;
     private void Start()
@@ -51,6 +52,11 @@ public class Timer : MonoBehaviour
                     topBorder.transform.localScale = new Vector3(200, 1, scale);
                     bottomBorder.transform.localScale = new Vector3(200, 1, scale);
                 }
+                if (timeRemaining < 3.5 && endRoundSound == false)
+                {
+                    StartCoroutine(EndRoundBeep());
+                    endRoundSound = true;
+                }
             }
             else
             {
@@ -65,5 +71,19 @@ public class Timer : MonoBehaviour
 
             }
         }
+    }
+    private IEnumerator EndRoundBeep()
+    {
+        AudioManager.instance.Play("TrainHorn2");
+        yield return new WaitForSeconds(1f);
+        AudioManager.instance.Play("TrainHorn2");
+        yield return new WaitForSeconds(1f);
+        AudioManager.instance.Play("TrainHorn2");
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.Play("TrainHorn3");
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.Play("TrainHorn3");
+        yield return new WaitForSeconds(0.1f);
+        AudioManager.instance.Play("TrainHorn3");
     }
 }

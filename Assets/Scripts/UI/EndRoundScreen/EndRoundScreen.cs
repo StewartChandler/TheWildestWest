@@ -102,7 +102,7 @@ public class EndRoundScreen : MonoBehaviour
             {
                 scores[i].color = Color.white;
             }
-            scores[i].text = gameManager.playerScores[i].ToString();
+            scores[i].text = gameManager.playerRoundHats[i].ToString();
         }
     }
     void UpdateMessage()
