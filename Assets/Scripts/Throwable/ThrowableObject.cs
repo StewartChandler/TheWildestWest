@@ -79,7 +79,7 @@ public class ThrowableObject : MonoBehaviour
 
     public bool respawn = true;
     protected Vector3 spawnPos;
-    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
+    private Vector3 spawnOffset = new Vector3(0.0f, 30.0f);
 
     public static ThrowableObject getClosestAvailableObj(Vector3 point, int numHats, float range)
     {
