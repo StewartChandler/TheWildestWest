@@ -23,6 +23,14 @@ public class StartCountdown : MonoBehaviour
 
         // Starts the timer automatically
         timerIsRunning = true;
+
+        // play the sounds
+        StartCoroutine(playHorns());
+
+        // Stop the current music
+        AudioManager.instance.Stop("Music1");
+        // AudioManager.instance.Stop("Music2");
+
     }
 
     void Update()
@@ -54,7 +62,35 @@ public class StartCountdown : MonoBehaviour
                 timeText.text = "";
                 timeText.gameObject.SetActive(false);
                 inGameTimer.gameObject.SetActive(true);
+                // if (gameManager.currRound != 3)
+                // {
+                AudioManager.instance.Play("Music1");
+                // }
+                // else
+                // {
+                //     AudioManager.instance.Play("Music3");
+                // }
             }
         }
+    }
+    private IEnumerator playHorns()
+    {
+        // start the train chugging
+        AudioManager.instance.PlayForSeconds("TrainChugging", timeRemaining);
+        yield return new WaitForSecondsRealtime(0.26f);
+        AudioManager.instance.Play("TrainHorn2");
+        // wait until timeRemaining is 3
+        yield return new WaitForSecondsRealtime(1f);
+        // play the first horn
+        AudioManager.instance.Play("TrainHorn2");
+        // wait for 1 second
+        yield return new WaitForSecondsRealtime(1f);
+        // play the second horn
+        AudioManager.instance.Play("TrainHorn2");
+        // wait for 1 second
+        yield return new WaitForSecondsRealtime(1f);
+        // play the third horn
+        AudioManager.instance.Play("TrainHorn");
+
     }
 }

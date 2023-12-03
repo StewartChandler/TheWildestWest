@@ -52,4 +52,10 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    public void PlayForSeconds(string sound, float seconds)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        s.source.Play();
+        s.source.SetScheduledEndTime(AudioSettings.dspTime + seconds);
+    }
 }

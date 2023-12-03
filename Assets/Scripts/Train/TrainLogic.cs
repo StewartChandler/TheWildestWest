@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrainLogic : MonoBehaviour
 {
@@ -11,18 +12,23 @@ public class TrainLogic : MonoBehaviour
     private float trainSpeed = 20.0f;
     public GameObject[] trainLoot = new GameObject[2];
     private int[] eventThresholds = { 2, 1 };
-
+    public GameObject warningSign;
     // Variables for managing movement
     private bool isMoving = false;
     private float xValToMoveTo = -48.0f;
     private float currSpeed = 0.0f;
+    Scene currentScene;
 
     // Call this method to call a randomized train event
     // new events should be added to the train class as functions and thresholds should be added and adjusted
     public void TrainEvent()
     {
         int eventChosen = Random.Range(0, eventThresholds[0] + 1);
-
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "StartScene")
+        {
+            AudioManager.instance.Play("TrainChugging");
+        }
         if (eventChosen > eventThresholds[1])
         {
             TrainDeposit();
@@ -44,21 +50,23 @@ public class TrainLogic : MonoBehaviour
 
         // I am so sorry to whoever has to work with this that isn't me
         StartCoroutine(
+            FlashWarning(
             MoveToXPos(sneakyOffset, trainSpeed,
             Wait(0.5f,
             MoveToXPos(sneakyOffset - 3, trainSpeed / 12,
             MoveToXPos(startingOffset, trainSpeed,
-            End())))));
+            End()))))));
     }
 
     // This event is for when the train drops stuff on the field
     private void TrainDeposit()
     {
         StartCoroutine(
+            FlashWarning(
             MoveToXPos(endingOffset, trainSpeed,
             Wait(2.0f,
             MoveToXPos(startingOffset, trainSpeed,
-            End()))));
+            End())))));
     }
 
     private void ReturnTrain()
@@ -90,7 +98,32 @@ public class TrainLogic : MonoBehaviour
 
     private IEnumerator End()
     {
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "StartScene")
+        {
+            AudioManager.instance.Stop("TrainChugging");
+        }
         yield return 0;
+    }
+
+    // Funciton to flash the warning sign
+    private IEnumerator FlashWarning(IEnumerator next)
+    {
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name != "StartScene")
+        {
+
+            warningSign.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            warningSign.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            warningSign.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            warningSign.SetActive(false);
+            AudioManager.instance.Play("TrainHorn");
+        }
+        StartCoroutine(next);
+
     }
 
     // Update function is what actually moves the train

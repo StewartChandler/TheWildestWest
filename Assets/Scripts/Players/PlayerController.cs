@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(hitEffect, transform.position, Quaternion.identity, null);
             transform.forward = displ; // turn to face where you got hit from
             nextHit = Time.time + invincibilityOnHit;
-            AudioManager.instance.Play("Hit1");
+            AudioManager.instance.Play("Hit2");
 
             PlayerInput selfInput = GetComponent<PlayerInput>();
             StatsManager.instance.HatLost(selfInput.playerIndex);
@@ -405,13 +405,13 @@ public class PlayerController : MonoBehaviour
     private void playPickUpSound(ThrowableObject closestObj)
     {
         // Debug.Log(closestObj.transform.parent.name);
-        if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
-        {
-            AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
-        }
-        else
-        {
-            AudioManager.instance.Play("PickUp1");
-        }
+        // if (closestObj.transform.parent.name == "Barrel" || closestObj.transform.parent.parent.name == "Barrel")
+        // {
+        //     AudioManager.instance.Play("BarrelPickUp1", "BarrelPickUp2");
+        // }
+        // else
+        // {
+        AudioManager.instance.Play("PickUp1");
+        // }
     }
 }
