@@ -11,7 +11,7 @@ public class TrainLogic : MonoBehaviour
     private float trainSpeed = 20.0f;
     public GameObject[] trainLoot = new GameObject[2];
     private int[] eventThresholds = { 2, 1 };
-    private Vector3 spawnOffset = new Vector3(0.0f, 20.0f);
+    private Vector3 spawnOffset = new Vector3(0.0f, 30.0f);
 
     // Variables for managing movement
     private bool isMoving = false;

@@ -3244,10 +3244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04eee30e1521e8849b1f609efdf41099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetIncrease: {x: 0, y: 10, z: -10}
-  player: {fileID: 0}
-  smoothSpeed: 5
-  furthestDistance: 70
 --- !u!81 &373696209
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3315,14 +3311,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373696206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 21.9, z: -35.3}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 4, y: 34, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 373520219}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
 --- !u!114 &373696212
 MonoBehaviour:
   m_ObjectHideFlags: 0

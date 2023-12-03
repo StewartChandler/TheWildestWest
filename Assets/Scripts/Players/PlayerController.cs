@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float objMass;
     public float invincibilityOnHit = 1f;
     private float nextHit = 0.0f;
-    private Vector3 respawnOffset = new Vector3(0, 30);
+    private Vector3 respawnOffset = new Vector3(0, 35);
 
     private Vector2 movementInput = Vector2.zero;
     public GameObject playerPrefab;

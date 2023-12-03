@@ -6,12 +6,11 @@ using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
-    private Vector3 offset = new Vector3(0, 20, -20);
-    public Vector3 offsetIncrease = new Vector3(0, 10, -10);
-    public GameObject player;
+    private Vector3 offset = new Vector3(0, 18, -13);
+    private Vector3 offsetIncrease = new Vector3(0, 14, -14);
     private GameObject[] players;
-    public float smoothSpeed = 5f; // Adjust this value to control the smoothness
-    public float furthestDistance = 70f;
+    private float smoothSpeed = 5f; // Adjust this value to control the smoothness
+    private float furthestDistance = 40f;
 
     private GameManager gameManager;
 
@@ -29,7 +28,7 @@ public class CameraMovement : MonoBehaviour
     {
         //gameObject.transform.position = player.transform.position;
         //gameObject.transform.Translate(Offset);
-        if (gameManager.firstPass)
+        if (true) // gameManager.firstPass)
         {
             //find the two fake players
             bool playerFound = false;
@@ -78,6 +77,7 @@ public class CameraMovement : MonoBehaviour
 
             // Camera up down, back forward (zoom) distance
             float maxDistance = Vector3.Distance(bigPlayerPos, smallPlayerPos);
+            Debug.Log(maxDistance);
             float distanceWeight = maxDistance / furthestDistance;
 
             targetPosition += offsetIncrease * distanceWeight;
