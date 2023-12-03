@@ -900,6 +900,11 @@ MonoBehaviour:
   trainLoot:
   - {fileID: 4129689695668275096, guid: e1b6924c64f312848813b7b78d56573f, type: 3}
   - {fileID: 3424675796690537343, guid: 1ee08f215aa38fd41bcfe0bf3bb7ae87, type: 3}
+  - {fileID: 2130496233792991882, guid: eab6022bbdfbb6b44b79039cbb303671, type: 3}
+  - {fileID: 9136907896714356278, guid: 955852f5525d62c4292b616d000fe9ac, type: 3}
+  - {fileID: 2186604737786163104, guid: 8a52dda0494aad04096d5559a8c91321, type: 3}
+  - {fileID: 9056366822987603614, guid: d5d38bdf8e7af574eabb25fc33ec4130, type: 3}
+  warningSign: {fileID: 0}
 --- !u!1 &2489832634252786863 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1120677706282511819, guid: b5bb56c5f1ca8ab4fb0035fa90a7d981, type: 3}
