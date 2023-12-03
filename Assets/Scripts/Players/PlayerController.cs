@@ -187,11 +187,13 @@ public class PlayerController : MonoBehaviour
                     timeTilActive -= Time.fixedDeltaTime;
                     if (timeTilActive <= PICKUPTIME && timeTilActive > PICKUPENDTIME && pickedObject == null)
                     {
+                        animator.SetBool("isPickup", true);
                         PickUpClosestObject();
                     }
 
                     if (timeTilActive < 0f)
                     {
+                        animator.SetBool("isPickup", false);
                         makeActive();
                     }
                     break;
@@ -272,12 +274,14 @@ public class PlayerController : MonoBehaviour
         {
             if (pickedObject != null)
             {
+                animator.SetBool("isThrowing", true);
                 PlayerInput selfInput = GetComponent<PlayerInput>();
                 StatsManager.instance.ItemThrown(selfInput.playerIndex);
 
                 AudioManager.instance.Play("Throw1", "Throw2");
                 pickedObject.throwObject(transform.forward, throwingSpeed);
                 pickedObject = null;
+                animator.SetBool("isThrowing", false);
             }
         }
     }
