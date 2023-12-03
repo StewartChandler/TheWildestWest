@@ -210,7 +210,7 @@ public class Hat : MonoBehaviour
                 PlayerInput pi = other.gameObject.GetComponent<PlayerInput>();
                 StatsManager.instance.HatPickedUp(pi.playerIndex);
 
-                AudioManager.instance.Play("HatCollect1", "HatCollect2");
+                AudioManager.instance.Play("HatCollect3");
                 hs.pushHat(gameObject);
 
                 transform.localScale = scalingFactor * Vector3.one;

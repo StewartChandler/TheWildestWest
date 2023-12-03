@@ -13,9 +13,10 @@ public class EndGameUIDeath : MonoBehaviour
     private GameManager gameManager;
     private int currScoreCount = 0;
     private float initialScale = 0.5f;
-    private float scaleFactor = 0.0004f;
+    private float scaleFactor = 0.0002f;
     public Transform[] EndGameSpawnPoints;
     private GameObject playerManager;
+    private float scaleDuration = 1f;
 
     public TextMeshProUGUI[] scores;
     public Transform scoreParent;
@@ -74,8 +75,13 @@ public class EndGameUIDeath : MonoBehaviour
         statArrays[2] = StatsManager.instance.hatsPickedUp;
         statArrays[3] = StatsManager.instance.timesFallen;
 
+        // Music
+        AudioManager.instance.Stop("Music1");
+        AudioManager.instance.Play("Music3");
+
         // Start the show
         StartCoroutine(DisplayEndGameUIScore());
+
     }
 
     /* The order is going to be 
@@ -334,8 +340,24 @@ public class EndGameUIDeath : MonoBehaviour
     {
         for (int i = 0; i < gameManager.numPlayers; i++)
         {
-            playerInputs[i].transform.localScale = new Vector3(initialScale + scaleFactor * gameManager.playerScores[i], initialScale + scaleFactor * gameManager.playerScores[i], initialScale + scaleFactor * gameManager.playerScores[i]);
+            StartCoroutine(ScaleCharacter(playerInputs[i].transform, initialScale + scaleFactor * gameManager.playerScores[i]));
         }
+    }
+
+    private IEnumerator ScaleCharacter(Transform characterTransform, float targetScale)
+    {
+        Vector3 initialScale = characterTransform.localScale;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < scaleDuration)
+        {
+            characterTransform.localScale = Vector3.Lerp(initialScale, new Vector3(targetScale, targetScale, targetScale), elapsedTime / scaleDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure that the final scale is set correctly to avoid any small deviations
+        characterTransform.localScale = new Vector3(targetScale, targetScale, targetScale);
     }
 
     void deletePlayerManager()

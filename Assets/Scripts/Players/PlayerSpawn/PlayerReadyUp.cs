@@ -81,6 +81,7 @@ public class PlayerReadyUp : MonoBehaviour
         {
             if (currentScene.name == "PlayerSelect" || currentScene.name == "PlayerSelectMap")
             {
+                AudioManager.instance.Play("ReadyUp");
                 ready = !ready;
                 if (!ready)
                 {
