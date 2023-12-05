@@ -16,6 +16,7 @@ public class CameraMovement : MonoBehaviour
     private GameManager gameManager;
     private bool altCam = false;
 
+    public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,11 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C)) {
             altCam = !altCam;
+            if (altCam) {
+                canvas.SetActive(false);
+            } else { 
+                canvas.SetActive(true);
+            }
         }
 
         //gameObject.transform.position = player.transform.position;
@@ -39,8 +45,27 @@ public class CameraMovement : MonoBehaviour
             if (altCam)
             {
                 float cam_speed = 20.0f;
-                transform.position += Input.GetAxis("Horizontal") * cam_speed * Time.fixedDeltaTime * transform.right;
-                transform.position += Input.GetAxis("Vertical") * cam_speed * Time.fixedDeltaTime * transform.up;
+                float hori= 0.0f;
+                float vert = 0.0f;
+                if (Input.GetKey(KeyCode.W))
+                {
+                    vert += 1.0f;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    hori -= 1.0f;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    vert -= 1.0f;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    hori += 1.0f;
+                }
+
+                transform.position += hori * cam_speed * Time.fixedDeltaTime * transform.right;
+                transform.position += vert * cam_speed * Time.fixedDeltaTime * transform.up;
 
                 if (Input.GetMouseButton(1))
                 {
