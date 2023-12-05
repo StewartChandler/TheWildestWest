@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Runtime.CompilerServices;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CameraMovement : MonoBehaviour
     public float furthestDistance = 70f;
 
     private GameManager gameManager;
+    private bool altCam = false;
 
 
     // Start is called before the first frame update
@@ -27,23 +29,46 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.C)) {
+            altCam = !altCam;
+        }
+
         //gameObject.transform.position = player.transform.position;
         //gameObject.transform.Translate(Offset);
         if (gameManager.firstPass)
         {
 
-            Vector3 targetPosition = CalculateCameraTargetPosition();
-            targetPosition += offset;
+            if (altCam)
+            {
+                float cam_speed = 20.0f;
+                transform.position += Input.GetAxis("Horizontal") * cam_speed * Time.fixedDeltaTime * transform.right;
+                transform.position += Input.GetAxis("Vertical") * cam_speed * Time.fixedDeltaTime * transform.up;
 
-            // Camera up down, back forward (zoom) distance
-            float maxDistance = CalculateMaxPlayerDistance(targetPosition);
-            float distanceWeight = maxDistance / furthestDistance;
+                if (Input.GetMouseButton(1))
+                {
+                    float x = Input.GetAxis("Mouse X");
+                    var rot = Quaternion.AngleAxis(x * Time.fixedDeltaTime * 80.0f, Vector3.up);
+                    transform.Rotate(rot.eulerAngles, Space.World);
+                    Vector3 eulers = new Vector3(-Input.GetAxis("Mouse Y"), 0.0f, 0.0f);
+                    transform.Rotate(eulers * Time.fixedDeltaTime * 80.0f);
+                }
+                transform.position += transform.forward * Input.mouseScrollDelta.y * Time.fixedDeltaTime * 80.0f;
+            }
+            else
+            {
+                Vector3 targetPosition = CalculateCameraTargetPosition();
+                targetPosition += offset;
 
-            targetPosition += offsetIncrease * distanceWeight;
+                // Camera up down, back forward (zoom) distance
+                float maxDistance = CalculateMaxPlayerDistance(targetPosition);
+                float distanceWeight = maxDistance / furthestDistance;
 
-            // Use Lerp to smoothly interpolate the camera's position
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
-            transform.position = smoothedPosition;
+                targetPosition += offsetIncrease * distanceWeight;
+
+                // Use Lerp to smoothly interpolate the camera's position
+                Vector3 smoothedPosition = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.fixedDeltaTime);
+                transform.position = smoothedPosition;
+            }
         }
     }
 
