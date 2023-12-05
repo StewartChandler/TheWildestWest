@@ -171,7 +171,7 @@ public class ThrowableObject : MonoBehaviour
         if (trail != null) { trail.enabled = false; }
     }
 
-    public void pickupObject(Transform holder, float holderRadius)
+    public virtual void pickupObject(Transform holder, float holderRadius)
     {
         target = holder;
         state = State.Held;
@@ -215,6 +215,11 @@ public class ThrowableObject : MonoBehaviour
         spawnPos = transform.position + spawnOffset;
     }
 
+    public virtual void matchRotation()
+    {
+        transform.rotation = target.rotation;
+    }
+
     void FixedUpdate()
     {
         switch (state)
@@ -229,7 +234,8 @@ public class ThrowableObject : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.fixedDeltaTime * 10f);
 
                 // Match the rotation of the picked-up object to the player's rotation.
-                transform.rotation = target.rotation;
+                //transform.rotation = target.rotation;
+                matchRotation();
                 break;
             case State.Thrown:
                 if (rb.velocity.magnitude < 0.1f)
