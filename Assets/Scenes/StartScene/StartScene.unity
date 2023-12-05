@@ -1578,7 +1578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1374060a86a611c49a8a23243f8dd820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trainLoot: []
+  trainLoot:
+  - {fileID: 6912220115795418456, guid: f32ace3b898574f4eb8fcee35b0d0771, type: 3}
   warningSign: {fileID: 0}
 --- !u!1 &684543263
 GameObject:
