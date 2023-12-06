@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.outputAudioMixerGroup = s.mixer;
         }
+        Play("Music3");
     }
     /**
         Takes an array of strings and plays a random sound from the array
@@ -57,5 +58,13 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, item => item.name == sound);
         s.source.Play();
         s.source.SetScheduledEndTime(AudioSettings.dspTime + seconds);
+    }
+
+    public void StopAll()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.Stop();
+        }
     }
 }

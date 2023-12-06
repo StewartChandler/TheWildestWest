@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class EndRoundScreen : MonoBehaviour
@@ -15,6 +16,8 @@ public class EndRoundScreen : MonoBehaviour
 
     public TextMeshProUGUI[] scores;
     public TextMeshProUGUI message;
+    public GameObject HatMessage;
+    public GameObject NextRoundButton;
     private string[] messages = new string[]
         {
             "Yeeeeeehaw Player {0} Takes The Dub!",
@@ -44,13 +47,15 @@ public class EndRoundScreen : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         HideUI();
 
-        gameManager.ending = true;
     }
     // Hide the game obbject
     private void HideUI()
     {
         // Set the child with the name EndRoundScreen to unactive
-        endRoundScreen.SetActive(false);
+        HatMessage.SetActive(false);
+        NextRoundButton.SetActive(true);
+        // have event system select the next round button
+        EventSystem.current.SetSelectedGameObject(NextRoundButton);
     }
     private void ShowUI()
     {
@@ -92,8 +97,16 @@ public class EndRoundScreen : MonoBehaviour
     }
     void UpdateScores()
     {
-        for (int i = 0; i < scores.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
+            if (i < gameManager.numPlayers)
+            {
+                scores[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                scores[i].gameObject.SetActive(false);
+            }
             if (gameManager.currWinner == i)
             {
                 scores[i].color = Color.green;
@@ -111,5 +124,10 @@ public class EndRoundScreen : MonoBehaviour
         string winnerText = messages[randomIndex];
         winnerText = string.Format(winnerText, gameManager.currWinner + 1);
         message.text = winnerText;
+    }
+    public void OnNextRound()
+    {
+
+        gameManager.ending = true;
     }
 }

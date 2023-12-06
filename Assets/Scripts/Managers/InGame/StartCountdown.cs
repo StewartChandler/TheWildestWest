@@ -15,6 +15,7 @@ public class StartCountdown : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.instance.StopAll();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // Pause the game

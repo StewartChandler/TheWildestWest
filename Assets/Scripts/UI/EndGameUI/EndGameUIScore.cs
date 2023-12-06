@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine.EventSystems;
 
 
-public class EndGameUIDeath : MonoBehaviour
+public class EndGameUIScore : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameManager gameManager;
@@ -37,6 +37,8 @@ public class EndGameUIDeath : MonoBehaviour
     public Transform HatsLostStats;
     public TextMeshProUGUI[] Falls = new TextMeshProUGUI[4];
     public Transform FallsStats;
+    public TextMeshProUGUI[] Total = new TextMeshProUGUI[4];
+    public Transform TotalStats;
     public Transform MainMenuButton;
     public GameObject StatsButton;
     public TextMeshProUGUI message;
@@ -60,7 +62,15 @@ public class EndGameUIDeath : MonoBehaviour
         "Hats Picked Up",
         "Times Fallen"
     };
-
+    private int[] scoreBase = new int[4];
+    private int[] scoreThrown = new int[4];
+    private int[] scoreHatsGained = new int[4];
+    private int[] scoreHit = new int[4];
+    private int[] scoreFallen = new int[4];
+    private int[][] scoresArrays = new int[4][];
+    private bool onStats = true;
+    private bool allowSwitch = false;
+    public GameObject SwitchMessage;
     void Start()
     {
         Debug.Log("ENDGAMEUI START SCORE");
@@ -75,13 +85,30 @@ public class EndGameUIDeath : MonoBehaviour
         statArrays[2] = StatsManager.instance.hatsPickedUp;
         statArrays[3] = StatsManager.instance.timesFallen;
 
+        // Assign the scores array
+        scoresArrays[0] = scoreThrown;
+        scoresArrays[1] = scoreHit;
+        scoresArrays[2] = scoreHatsGained;
+        scoresArrays[3] = scoreFallen;
+
         // Music
-        AudioManager.instance.Stop("Music1");
-        AudioManager.instance.Play("Music3");
+        AudioManager.instance.StopAll();
+        AudioManager.instance.Play("Music4");
 
         // Start the show
         StartCoroutine(DisplayEndGameUIScore());
 
+    }
+    void Update()
+    {
+        if (allowSwitch)
+        {
+            // if button north is pressed
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            {
+                switchStatsButtonPressed();
+            }
+        }
     }
 
     /* The order is going to be 
@@ -115,11 +142,11 @@ public class EndGameUIDeath : MonoBehaviour
             UpdateMessage("Calculating " + statNames[i] + "!", Color.white);
             if (i == 1 || i == 3)
             {
-                countStat(statArrays[i], true);
+                countStat(statArrays[i], scoresArrays[i], true);
             }
             else
             {
-                countStat(statArrays[i]);
+                countStat(statArrays[i], scoresArrays[i]);
             }
             printScores();
             resizeCharacters();
@@ -165,8 +192,9 @@ public class EndGameUIDeath : MonoBehaviour
             else
             {
                 statsCurr[i].text = gameManager.playerHats[i].ToString();
-                scoresAdder[i].text = "+" + (gameManager.playerHats[i] * 100).ToString();
-                gameManager.playerScores[i] += gameManager.playerHats[i] * 100;
+                scoresAdder[i].text = "+" + (gameManager.playerHats[i] * 200).ToString();
+                gameManager.playerScores[i] += gameManager.playerHats[i] * 200;
+                scoreBase[i] = gameManager.playerHats[i] * 200;
             }
         }
     }
@@ -180,7 +208,7 @@ public class EndGameUIDeath : MonoBehaviour
         if there is a tie for 1st then all get 400 points
         if there is a tie for 2nd then all get 200 points
     */
-    private void countStat(int[] statsArray, bool reverse = false)
+    private void countStat(int[] statsArray, int[] scoresArray, bool reverse = false)
     {
 
         // ie in the case of times fallen off and hats lost, less is better
@@ -205,7 +233,11 @@ public class EndGameUIDeath : MonoBehaviour
         int[] position = calculatePosition(temp);
 
         // convert the position to points
-        int[] points = convertToPoint(position);
+        temp = convertToPoint(position);
+        for (int i = 0; i < 4; i++)
+        {
+            scoresArray[i] = temp[i];
+        }
 
         // add the points to the player scores
         for (int i = 0; i < gameManager.playerScores.Length; i++)
@@ -217,7 +249,7 @@ public class EndGameUIDeath : MonoBehaviour
             else
             {
                 statsCurr[i].text = statsArray[i].ToString();
-                gameManager.playerScores[i] += points[i];
+                gameManager.playerScores[i] += scoresArray[i];
             }
         }
 
@@ -230,7 +262,7 @@ public class EndGameUIDeath : MonoBehaviour
             }
             else
             {
-                scoresAdder[i].text = "+" + points[i].ToString();
+                scoresAdder[i].text = "+" + scoresArray[i].ToString();
             }
         }
     }
@@ -380,12 +412,12 @@ public class EndGameUIDeath : MonoBehaviour
             if (i < gameManager.numPlayers)
             {
                 PlayerNums[i].text = "P" + (i + 1);
-                printMinMax(FinalScores, gameManager.playerScores);
+                printMinMax(FinalScores, gameManager.playerHats);
                 printMinMax(Thrown, StatsManager.instance.itemsThrown);
                 printMinMax(HatsGained, StatsManager.instance.hatsPickedUp);
                 printMinMax(HatsLost, StatsManager.instance.hatsLost, true);
                 printMinMax(Falls, StatsManager.instance.timesFallen, true);
-
+                printMinMax(Total, gameManager.playerScores);
             }
             else
             {
@@ -425,6 +457,11 @@ public class EndGameUIDeath : MonoBehaviour
         int max = scoreArr.Max();
         for (int i = 0; i < 4; i++)
         {
+            if (i >= gameManager.numPlayers)
+            {
+                textArr[i].text = "";
+                continue;
+            }
             textArr[i].text = scoreArr[i].ToString();
             if (scoreArr[i] == min)
             {
@@ -478,6 +515,10 @@ public class EndGameUIDeath : MonoBehaviour
     {
         FallsStats.gameObject.SetActive(true);
     }
+    void displayTotal()
+    {
+        TotalStats.gameObject.SetActive(true);
+    }
     void displayMainMenu()
     {
         MainMenuButton.gameObject.SetActive(true);
@@ -496,9 +537,72 @@ public class EndGameUIDeath : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(StatsButton.gameObject);
     }
 
+    void displayStatsSwitch()
+    {
+        SwitchMessage.gameObject.SetActive(true);
+        allowSwitch = true;
+    }
+
     public void statsButtonPressed()
     {
         StartCoroutine(displayStatsCoroutine());
+    }
+
+    private void switchStatsButtonPressed()
+    {
+        if (onStats)
+        {
+            onStats = false;
+            for (int i = 0; i < 4; i++)
+            {
+                if (i < gameManager.numPlayers)
+                {
+                    PlayerNums[i].text = "P" + (i + 1);
+                    printMinMax(FinalScores, scoreBase);
+                    printMinMax(Thrown, scoreThrown);
+                    printMinMax(HatsGained, scoreHatsGained);
+                    printMinMax(HatsLost, scoreHit);
+                    printMinMax(Falls, scoreFallen);
+                    // printMinMax(Total, gameManager.playerScores);
+                }
+                else
+                {
+                    PlayerNums[i].text = "";
+                    FinalScores[i].text = "";
+                    Thrown[i].text = "";
+                    HatsGained[i].text = "";
+                    HatsLost[i].text = "";
+                    Falls[i].text = "";
+                }
+            }
+        }
+        else
+        {
+            onStats = true;
+            for (int i = 0; i < 4; i++)
+            {
+                if (i < gameManager.numPlayers)
+                {
+                    PlayerNums[i].text = "P" + (i + 1);
+                    printMinMax(FinalScores, gameManager.playerHats);
+                    printMinMax(Thrown, StatsManager.instance.itemsThrown);
+                    printMinMax(HatsGained, StatsManager.instance.hatsPickedUp);
+                    printMinMax(HatsLost, StatsManager.instance.hatsLost, true);
+                    printMinMax(Falls, StatsManager.instance.timesFallen, true);
+                    // printMinMax(Total, gameManager.playerScores);
+                }
+                else
+                {
+                    PlayerNums[i].text = "";
+                    FinalScores[i].text = "";
+                    Thrown[i].text = "";
+                    HatsGained[i].text = "";
+                    HatsLost[i].text = "";
+                    Falls[i].text = "";
+                }
+            }
+        }
+
     }
 
     public IEnumerator displayStatsCoroutine()
@@ -510,8 +614,8 @@ public class EndGameUIDeath : MonoBehaviour
         // disable the curr buttons
         StatsButton.gameObject.SetActive(false);
 
-        // Phase 6: Display the stats
-        UpdateMessage("Displaying Stats...", Color.white);
+        // Phase 6: Remove the stats
+        UpdateMessage("", Color.white);
         calculateScores();
         enableStats();
         yield return new WaitForSeconds(1f);
@@ -527,6 +631,9 @@ public class EndGameUIDeath : MonoBehaviour
         yield return new WaitForSeconds(1f);
         displayFalls();
         yield return new WaitForSeconds(1f);
+        displayTotal();
+        yield return new WaitForSeconds(1f);
+        displayStatsSwitch();
         displayMainMenu();
     }
 
