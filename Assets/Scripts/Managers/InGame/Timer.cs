@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class Timer : MonoBehaviour
 {
-    private float timeRemaining = 1f;
+    private float timeRemaining = 51.5f;
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
     public GameObject timerBorder;
