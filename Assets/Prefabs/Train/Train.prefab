@@ -904,6 +904,7 @@ MonoBehaviour:
   - {fileID: 9136907896714356278, guid: 955852f5525d62c4292b616d000fe9ac, type: 3}
   - {fileID: 2186604737786163104, guid: 8a52dda0494aad04096d5559a8c91321, type: 3}
   - {fileID: 9056366822987603614, guid: d5d38bdf8e7af574eabb25fc33ec4130, type: 3}
+  - {fileID: 6090011227526802231, guid: 30be5831d41a4fc48a3ac617d1a40f13, type: 3}
   warningSign: {fileID: 0}
 --- !u!1 &2489832634252786863 stripped
 GameObject:

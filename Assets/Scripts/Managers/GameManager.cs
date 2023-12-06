@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject train = GameObject.FindGameObjectWithTag("Train");
                 TrainLogic trainLogic = train.GetComponentInChildren<TrainLogic>();
-                trainLogic.InvokeRepeating("TrainEvent", 5.0f, 20.0f);
+                trainLogic.InvokeRepeating("TrainEvent", 5.0f, 18.0f);
                 trainCalled = true;
             }
 
