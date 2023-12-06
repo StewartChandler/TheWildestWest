@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class HatStack : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class HatStack : MonoBehaviour
 
     private int startingNumHats = 3;
     private int pIndex;
+    private Color colour;
 
     private Stack<GameObject> hats = new Stack<GameObject>();
     Scene currentScene;
@@ -31,7 +32,10 @@ public class HatStack : MonoBehaviour
     private void Awake()
     {
         PlayerInput player = GetComponentInParent<PlayerInput>();
-        pIndex = player.playerIndex;
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        pIndex = gameManager.GetPlayerIndexFromInput(player);
+
+        colour = gameManager.playerColors[pIndex];
 
         resetHats();
     }
@@ -52,6 +56,15 @@ public class HatStack : MonoBehaviour
             Random.Range(-15.0f, 15.0f),
             Random.Range(-15.0f, 15.0f)
         );
+        var hathat = hat.GetComponent<Hat>();
+        if (hathat == null)
+        {
+            Debug.Log("somehow not a hat?");
+        } else
+        {
+            Debug.Log(colour);
+            hathat.setHatColour(colour);
+        }
         hats.Push(hat);
     }
 
@@ -84,11 +97,5 @@ public class HatStack : MonoBehaviour
     public int getNumHats()
     {
         return hats.Count;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

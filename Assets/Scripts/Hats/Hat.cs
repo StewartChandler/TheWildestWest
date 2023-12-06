@@ -27,6 +27,7 @@ public class Hat : MonoBehaviour
 
     private Collider[] colliders;
     private Renderer[] renderers;
+    private Material hatOutline;
     Scene currentScene;
 
     // Start is called before the first frame update
@@ -55,6 +56,22 @@ public class Hat : MonoBehaviour
         }
 
         transform.localScale = scalingFactor * Vector3.one;
+
+        var mats = GetComponentInChildren<Renderer>().materials;
+        if (mats.Length >= 2)
+        {
+            hatOutline = mats[1]; 
+        }
+        hatOutline.SetFloat("_Outline_Thickness", 0.0025f);
+    }
+
+    public void setHatColour(Color c)
+    {
+        var mats = GetComponentInChildren<Renderer>().materials;
+        if (mats.Length >= 2)
+        {
+            mats[1].color = c;
+        }
     }
 
     public void launch(Vector3 displ)
@@ -79,13 +96,9 @@ public class Hat : MonoBehaviour
             c.enabled = true;
         }
 
+        hatOutline.SetFloat("_Outline_Thickness", 0.01f);
+
         state = State.Launched;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -214,6 +227,8 @@ public class Hat : MonoBehaviour
                 hs.pushHat(gameObject);
 
                 transform.localScale = scalingFactor * Vector3.one;
+
+                hatOutline.SetFloat("_Outline_Thickness", 0.0025f);
             }
         }
     }
