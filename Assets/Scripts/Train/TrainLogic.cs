@@ -10,7 +10,7 @@ public class TrainLogic : MonoBehaviour
     private float startingOffset = -48.0f;
     private float endingOffset = 8.0f;
     private float trainSpeed = 20.0f;
-    public GameObject[] trainLoot = new GameObject[6];
+    public GameObject[] trainLoot = new GameObject[7];
     private int[] eventThresholds = { 4, 1 };
     public GameObject warningSign;
     private Vector3 spawnOffset = new Vector3(0.0f, 30.0f);
